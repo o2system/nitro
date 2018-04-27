@@ -1,0 +1,14 @@
+{
+  "name": "Default",
+  "version": "1.0.0",
+  "license": "MIT",
+  "copyright": "Copyright (c) 2018, Teguh Rianto",
+  "description": "O2System Theme Default",
+  "created": "23-02-2017",
+  "authors": {
+    "name": "Teguh Rianto",
+    "email": "teguh@o2system.id",
+    "homepage": "http:\/\/www.o2system.id",
+    "role": "Web Designer"
+  }
+}

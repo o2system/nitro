@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{$meta->title}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{$assets->head}}
+</head>
+<body class="admin-ui fix-header fix-sidebar">
+    <form>
+        <div class="sidebar sidebar-customizer">
+            {{$partials->sidebar}}
+        </div>
+
+        <main class="main">
+            <div class="page-wrapper">
+                <div class="container-fluid pb-0">
+                    <div class="main-customize">
+                        <iframe src="{{domain_url()}}" width="100%" height="100%"></iframe>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </form>
+{{$assets->body}}
+</body>
+</html>

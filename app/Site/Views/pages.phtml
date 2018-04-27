@@ -1,0 +1,19 @@
+<div class="static-slider static-slider-type-1 subheader bg-primary" <?php echo (empty($page->image) ? '' : 'style="background-image:url('.$page->image.')"'); ?>>
+    <div class="container">
+        <!-- Row  -->
+        <div class="row justify-content-center align-items-center">
+
+            <div class="col-md-8 text-center" data-aos="fade-right" data-aos-duration="1200">
+                <h1 class="title text-light text-uppercase">
+                    <?php echo $page->header; ?>
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section>
+    <div class="container">
+        <?php echo $page->content; ?>
+    </div>
+</section>
