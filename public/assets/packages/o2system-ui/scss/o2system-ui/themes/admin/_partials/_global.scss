@@ -234,12 +234,13 @@ a {
 }
 
 .dropdown-item{
+    font-size: 0.8rem !important;
     i{
         width: 15px;
     }
     &:hover, &.active, &:active {
         background-color: $primary-color;
-        color: #fff;
+        color: #fff !important;
 
         .text-muted{
             color: $white !important;
@@ -259,15 +260,22 @@ select.form-control:not([size]):not([multiple]) {
 
 @media(max-width:1023px) {
    .main{
-        margin-left:60px;
         transition: 0.2s ease-in; 
     }
 }
 
-@media(min-width:768px) {
-    .mini-sidebar {
-        .main{
-            margin-left:60px;
+@media(max-width:990px){
+    .page-navbar {
+
+        .navbar-nav{
+            .nav-item{
+                &.active{
+                    &:after{
+                        bottom: 2px;
+                        height: 2px;
+                    }
+                }
+            }
         }
     }
 }

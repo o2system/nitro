@@ -16,6 +16,7 @@ namespace App\Controllers;
 
 use Cms\Http\AccessControl\Controllers\AuthorizedController;
 use O2System\Framework\Libraries\Ui\Contents\Link;
+use O2System\Filesystem\Handlers\Uploader;
 
 /**
  * Class Media
@@ -53,5 +54,30 @@ class Media extends AuthorizedController
         presenter()->theme->setLayout( 'add' );
         presenter()->page->setHeader( 'Add Media' );
         view( 'add-media' );
+    }
+
+    public function upload()
+    {
+        $upload = new Uploader();
+        $upload->process('file-image');
+
+        if ($upload->getErrors()) {
+            $errors = new Unordered();
+
+            foreach ($upload->getErrors() as $code => $error) {
+                $errors->createList($error);
+            }
+
+            session()->setFlash('error', 'Failed to upload image' . $errors);
+        } else {
+            $post->image = $upload->getUploadedFiles()->first();
+        }
+    }
+
+    public function modal()
+    {
+        unset($_SERVER[ 'HTTP_X_REQUESTED_WITH' ]);
+        presenter()->theme->setLayout('modal');
+        view('media', []);
     }
 }

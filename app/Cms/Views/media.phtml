@@ -36,85 +36,138 @@
                 </nav>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header d-flex flex-wrap">
-                        <div class="btn-group mr-2">
-                            <button type="button" class="btn btn-default"><i class="fas fa-image"></i> Add New</button>
-                            <button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Add via URL</a>
+        <form action="#" class="dropzone border-0 p-0" id="dropzone-form">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header d-flex flex-wrap">
+                            <div class="btn-group mr-2">
+                                <button type="button" class="btn btn-default fileinput-button dz-clickable"><i class="fas fa-image"></i> Add New</button>
+                                <button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Add via URL</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="btn-action">
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-edit">Edit</button>
-                            <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                            <div class="btn-action">
+                                <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-12">
-        		<div class="media-list">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="media-list-item">
-                                <input type="checkbox" name="" id="media1">
-                                <label for="media1">
-                                    <img src="assets/img/avatar.jpg">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="media-list-item">
-                                <input type="checkbox" name="" id="media2">
-                                <label for="media2">
-                                    <div class="media-item-file-details">
-                                        <div class="media-item-icon">
-                                            <i class="fas fa-file-powerpoint"></i>
+            <div class="row">
+                <div class="col-md-12">
+            		<div class="media-list">
+                        <div class="row" id="dropzone-previews">
+                            <div class="col-md-3 col-sm-6 dz-template" id="dropzone-preview">
+                                <div class="media-list-item uploading">
+                                    <div class="media-list-action d-flex">
+                                        <button type="button" class="btn btn-info btn-sm btn-edit mr-2" data-toggle="modal" data-target="#modal-edit">Edit</button>
+                                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                    <input type="checkbox" name="" id="">
+                                    <label for="">
+                                        <img data-dz-thumbnail>
+                                        <div class="media-item-file-details">
+                                            <div class="media-item-icon">
+                                                <i class="fas fa-file-powerpoint"></i>
+                                            </div>
+                                            <div class="media-item-file-name" data-dz-name></div>
+                                            <div class="media-item-file-extension"></div>
                                         </div>
-                                        <div class="media-item-file-name">
-                                            Presentasi yang dibuat makalah
-                                        </div>
-                                        <div class="media-item-file-extension">
-                                            PPTX
+                                    </label>
+
+                                    <div class="upload-progress">
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%" data-dz-uploadprogress></div>
                                         </div>
                                     </div>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="media-list-item uploading">
-                                <input type="checkbox" name="" id="media3">
-                                <label for="media3">
-                                    <img src="assets/img/scheme/scheme1.png">
-                                </label>
 
-                                <div class="upload-progress">
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                                    <div class="media-item-file-error">
+                                        <div class="media-item-icon-error">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                        </div>
+                                        <div class="media-item-file-name-error" data-dz-errormessage></div>
+                                        <div class="media-item-file-extension-error d-flex justify-content-center">
+                                            <button type="button" class="btn btn-outline-light btn-sm" data-dz-remove>
+                                                <i class="fas fa-trash"></i> Remove
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="media-list-item">
-                                <input type="checkbox" name="" id="media4">
-                                <label for="media4">
-                                    <img src="assets/img/cover.jpg">
-                                </label>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="media-list-item">
+                                    <div class="media-list-action d-flex">
+                                        <button type="button" class="btn btn-info btn-sm btn-edit mr-2" data-toggle="modal" data-target="#modal-edit">Edit</button>
+                                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                    <input type="checkbox" name="" id="media1">
+                                    <label for="media1">
+                                        <img src="assets/img/avatar.jpg">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="media-list-item">
+                                    <div class="media-list-action d-flex">
+                                        <button type="button" class="btn btn-info btn-sm btn-edit mr-2" data-toggle="modal" data-target="#modal-edit">Edit</button>
+                                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                    <input type="checkbox" name="" id="media2">
+                                    <label for="media2">
+                                        <div class="media-item-file-details">
+                                            <div class="media-item-icon">
+                                                <i class="fas fa-file-powerpoint"></i>
+                                            </div>
+                                            <div class="media-item-file-name">
+                                                Presentasi yang dibuat makalah
+                                            </div>
+                                            <div class="media-item-file-extension">
+                                                PPTX
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="media-list-item uploading">
+                                    <div class="media-list-action d-flex">
+                                        <button type="button" class="btn btn-info btn-sm btn-edit mr-2" data-toggle="modal" data-target="#modal-edit">Edit</button>
+                                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                    <input type="checkbox" name="" id="media3">
+                                    <label for="media3">
+                                        <img src="assets/img/scheme/scheme1.png">
+                                    </label>
+
+                                    <div class="upload-progress">
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="media-list-item">
+                                    <div class="media-list-action d-flex">
+                                        <button type="button" class="btn btn-info btn-sm btn-edit mr-2" data-toggle="modal" data-target="#modal-edit">Edit</button>
+                                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                    <input type="checkbox" name="" id="media4">
+                                    <label for="media4">
+                                        <img src="assets/img/cover.jpg">
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-        	    </div>
+            	    </div>
+                </div>
             </div>
-        </div>
-
+        </form>
 	    <div class="row">
             <div class="col-md-12">
                 <nav>

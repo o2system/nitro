@@ -14,15 +14,16 @@ namespace Site\Http\Presenter;
 
 // ------------------------------------------------------------------------
 
-use O2System\Psr\Patterns\AbstractVariableStoragePattern;
 use O2System\Spl\Datastructures\SplArrayObject;
 use O2System\Spl\Iterators\ArrayIterator;
+use O2System\Psr\Patterns\Structural\Repository\AbstractRepository;
 
 /**
  * Class Menus
+ *
  * @package Site\Http\Presenter
  */
-class Menus extends AbstractVariableStoragePattern
+class Menus extends AbstractRepository
 {
     /**
      * Menus::__construct

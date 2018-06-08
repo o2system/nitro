@@ -17,13 +17,14 @@ namespace Site\Http\Presenter;
 use O2System\Kernel\Http\Message\Uri;
 use O2System\Framework\Libraries\Ui\Components\Breadcrumb;
 use O2System\Framework\Libraries\Ui\Contents\Link;
-use O2System\Psr\Patterns\AbstractVariableStoragePattern;
+use O2System\Psr\Patterns\Structural\Repository\AbstractRepository;
 
 /**
  * Class Page
- * @package Site\Http\Presenter
+ *
+ * @package Cms\Datastructures
  */
-class Page extends AbstractVariableStoragePattern
+class Page extends AbstractRepository
 {
     /**
      * Page::__construct

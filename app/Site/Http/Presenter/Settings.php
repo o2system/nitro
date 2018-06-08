@@ -13,14 +13,15 @@
 namespace Site\Http\Presenter;
 
 // ------------------------------------------------------------------------
+
 use O2System\Kernel\Http\Message\Uri;
-use O2System\Psr\Patterns\AbstractVariableStoragePattern;
+use O2System\Psr\Patterns\Structural\Repository\AbstractRepository;
 
 /**
  * Class Settings
  * @package Site\Http\Presenter
  */
-class Settings extends AbstractVariableStoragePattern
+class Settings extends AbstractRepository
 {
     public function __construct()
     {

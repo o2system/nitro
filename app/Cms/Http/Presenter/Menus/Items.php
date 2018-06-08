@@ -15,13 +15,13 @@ namespace Cms\Http\Presenter\Menus;
 
 // ------------------------------------------------------------------------
 
-use O2System\Psr\Patterns\AbstractItemStoragePattern;
+use O2System\Psr\Patterns\Structural\Repository\AbstractRepository;
 
 /**
  * Class Items
  * @package Cms\Http\Presenter\Menus
  */
-class Items extends AbstractItemStoragePattern
+class Items extends AbstractRepository
 {
     public function render()
     {

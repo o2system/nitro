@@ -10,6 +10,7 @@
 	.card-body{
 		&.with-table{
 			padding: 0;
+			margin: -1px;
 
 			.table{
 				margin-bottom: 0;
@@ -318,15 +319,5 @@
 
 	.card-footer{
 		background-color: #fff;
-	}
-}
-
-.landing-ui{
-	.card{
-		margin-bottom: 0;
-
-		img{
-			width: 100%;
-		}
 	}
 }

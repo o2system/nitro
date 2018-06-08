@@ -26,7 +26,7 @@ $presenter->enabled = true;
  *
  * @var bool
  */
-$presenter->debugToolBar = true;
+$presenter->debugToolBar = false;
 
 /**
  * Presenter Theme
@@ -59,16 +59,17 @@ $presenter->assets = [
     'autoload' => [
         'head' => [
             'css'   => [  ],
-            'fonts' => [ 
+            'fonts' => [
                 'font-awesome',
                 'https://fonts.googleapis.com/css?family=Maven+Pro:400,700|Oxygen:400,700'
             ],
         ],
         'body' => [
             'js' => [
-                'jquery.js',
-                'jquery-migrate.js',
-                'o2system.js',
+                'jquery',
+                'jquery-migrate',
+                'o2system',
+                'media/modal'
             ],
         ],
         'packages' => [
@@ -78,7 +79,6 @@ $presenter->assets = [
                     'popper'
                 ]
             ],
-            'tinymce',
             'o2system-ui' => [
                 'themes' => ['multipurpose', 'admin'],
                 'plugins' => [

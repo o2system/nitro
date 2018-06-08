@@ -32,18 +32,21 @@ class Settings
 
     public function language($selected = 'en-US')
     {
-        $select = new Select(['name' => 'language', 'class' => 'select2']);
+        if(false !== ( $registry = language()->getRegistry())) {
+            $select = new Select(['name' => 'language', 'class' => 'select2']);
 
-        $registry = language()->getRegistry();
+            $options = [];
+            foreach ($registry as $key => $language) {
+                $properties = $language->getProperties();
+                $options[ $properties->name ] = $key;
+            }
 
-        foreach ($registry as $key => $language) {
-            $properties = $language->getProperties();
-            $options[ $properties->name ] = $key;
+            $select->createOptions($options, $selected);
+
+            return $select;
         }
 
-        $select->createOptions($options, $selected);
-
-        return $select;
+        return '';
     }
 
     public function format($selected = 'STANDARD')

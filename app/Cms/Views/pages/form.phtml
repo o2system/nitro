@@ -3,7 +3,7 @@
         <div class="form-group row mb-0">
             <div class="col-md-12">
                 <input type="hidden" name="id" value="<?php echo $page->id; ?>">
-                <input class="form-control editor-title" type="text" name="title" value="<?php echo $page->title; ?>" placeholder="Title" required>
+                <input class="form-control editor-title p-0" type="text" name="title" value="<?php echo $page->title; ?>" placeholder="Title" required>
             </div>
         </div>
         <div class="form-group row">
@@ -11,7 +11,7 @@
                 <div class="editor-slug">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text pr-0 text-muted">
+                            <span class="input-group-text px-0 text-muted">
                                 <i class="fas fa-link"></i>&nbsp;
                                 <?php echo $settings->address; ?>/
                             </span>
@@ -24,9 +24,7 @@
 
         <div class="form-group row">
             <div class="col-md-12">
-                <textarea name="content" class="form-control tinymce">
-                    <?php echo $page->content; ?>
-                </textarea>
+                <div name="content" class="tinymce-inline"><?php echo $page->content; ?></div>
             </div>
         </div>
     </div>
@@ -95,6 +93,7 @@
                 <div id="featured-image" class="collapse" role="tabpanel" aria-labelledby="settings-featured-image"
                      data-parent="#settings">
                     <div class="card-body">
+                        <button data-action="media-modal" class="btn btn-default" type="button">Browse</button>
                         <input type="file" name="file-image" class="dropify" data-height="150"
                                data-allowed-file-extensions="gif jpg png" data-default-file="<?php echo images_url($page->image); ?>"/>
                     </div>

@@ -16,14 +16,14 @@ namespace Cms\Http\Presenter;
 
 use Cms\Http\Presenter\Menus\Item;
 use Cms\Http\Presenter\Menus\Group;
-use O2System\Psr\Patterns\AbstractVariableStoragePattern;
+use O2System\Psr\Patterns\Structural\Repository\AbstractRepository;
 
 /**
  * Class Menus
  *
- * @package Cms\Datastructures
+ * @package Cms\Http\Presenter
  */
-class Menus extends AbstractVariableStoragePattern
+class Menus extends AbstractRepository
 {
     /**
      * Menus::__construct

@@ -26,7 +26,7 @@ $presenter->enabled = true;
  *
  * @var bool
  */
-$presenter->debugToolBar = true;
+$presenter->debugToolBar = false;
 
 /**
  * Presenter Theme
@@ -66,7 +66,7 @@ $presenter->assets = [
     'autoload' => [
         'head' => [
             'css'   => [  ],
-            'fonts' => [ 
+            'fonts' => [
                 'font-awesome',
                 'https://fonts.googleapis.com/css?family=Maven+Pro:400,700|Oxygen:400,700'
             ],
@@ -84,7 +84,6 @@ $presenter->assets = [
                     'popper'
                 ]
             ],
-            'tinymce',
             'o2system-ui' => [
                 'themes' => 'multipurpose'
             ]

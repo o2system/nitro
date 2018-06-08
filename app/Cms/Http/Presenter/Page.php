@@ -17,14 +17,14 @@ namespace Cms\Http\Presenter;
 use O2System\Kernel\Http\Message\Uri;
 use O2System\Framework\Libraries\Ui\Components;
 use O2System\Framework\Libraries\Ui\Contents;
-use O2System\Psr\Patterns\AbstractVariableStoragePattern;
+use O2System\Psr\Patterns\Structural\Repository\AbstractRepository;
 
 /**
  * Class Page
  *
- * @package Cms\Datastructures
+ * @package Cms\Http\Presenter
  */
-class Page extends AbstractVariableStoragePattern
+class Page extends AbstractRepository
 {
     /**
      * Page::__construct

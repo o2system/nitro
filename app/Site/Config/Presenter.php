@@ -81,6 +81,7 @@ $presenter->assets = [
                     'popper'
                 ]
             ],
+            'tinymce',
             'o2system-ui' => [
                 'themes' => 'multipurpose'
             ]
