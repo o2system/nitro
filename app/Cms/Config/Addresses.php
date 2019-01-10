@@ -1,18 +1,22 @@
 <?php
 /**
- * This file is part of the O2System Content Management System package.
+ * This file is part of the O2System PHP Framework package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @author         Steeve Andrian
- * @copyright      Copyright (c) Steeve Andrian
+ * @author         Steeve Andrian Salim
+ * @copyright      Copyright (c) Steeve Andrian Salim
  */
+
 // ------------------------------------------------------------------------
 
-use O2System\Kernel\Http\Router\Addresses;
-
-$addresses = new Addresses();
+/**
+ * Router Addresses Configuration
+ *
+ * @var \O2System\Kernel\Http\Router\Addresses
+ */
+$addresses = new \O2System\Kernel\Http\Router\Addresses();
 
 // ------------------------------------------------------------------------
 
