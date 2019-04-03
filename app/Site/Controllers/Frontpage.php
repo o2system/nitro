@@ -24,6 +24,7 @@ class Frontpage extends Controller
 {
     public function index()
     {
+    	print_out('test');
         view('frontpage');
     }
 }
