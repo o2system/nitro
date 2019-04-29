@@ -17,3 +17,13 @@
  * @var \O2System\Kernel\Http\Router\Addresses
  */
 $addresses = new \O2System\Kernel\Http\Router\Addresses();
+
+// ------------------------------------------------------------------------
+
+// Example Route To Default Controller
+$addresses->any(
+    '/',
+    function () {
+        return new \App\Controllers\Hello();
+    }
+);

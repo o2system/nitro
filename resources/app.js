@@ -9,7 +9,20 @@
  */
 // ------------------------------------------------------------------------
 
-import VenusUi from 'o2system-venus-ui';
-import './app.scss';
+import "./app.scss";
 
-console.log(VenusUi);
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('service-worker.js')
+        .then(function(registration) {
+            console.info(
+                'Service Worker registration successful with scope: ',
+                registration.scope
+            );
+        })
+        .catch(function(err) {
+            console.error('Service Worker registration failed: ', err);
+        });
+} else {
+    console.error('Service Worker registration failed, insecure page, please serve your page over HTTPS or use localhost');
+}
