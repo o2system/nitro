@@ -1,0 +1,104 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="nav-pages">    
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">All</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Active</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Inactive</a>
+                            </li>
+                        </ul>
+
+                        <form class="nav-search">
+                            <div class="search-icon open-search">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="search-input">
+                                <input type="search" placeholder="Search...">
+                            </div>
+                            <div class="search-icon close-search">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div data-role="search-not-found" class="row justify-content-center">
+        <div class="col-md-4 text-center p-3">
+            <img src="assets/img/nopost.png" class="img-fluid">
+            <h3 class="mt-3">Whoops!</h3>
+            <h6 class="text-danger mb-4">
+                No posts found.
+            </h6>
+            <a href="<?php echo base_url('package-manager/installer'); ?>" class="btn btn-primary btn-md">Add New Package</a>
+        </div>
+    </div>
+
+    <div class="package-list">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body with-table">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" class="form-check-input">
+                                        </th>
+                                        <th>Package Name</th>
+                                        <th width="40%">Description</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox" class="form-check-input"></td>
+                                        <td>Hello Package</td>
+                                        <td>
+                                            <p>Used by millions, Akismet is quite possibly the best way in the world to protect your blog from spam. It keeps your site protected even while you sleep. To get started: activate the Akismet plugin and then go to your Akismet Settings page to set up your API key.</p>
+                                            <div class="meta-package">
+                                                <span>Version 4.4.4</span>
+                                                <span>By <a href="#">O2System</a></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-success">Activated</span>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a href="#" class="btn btn-danger">Deactivate</a>
+                                                <a href="#" class="btn btn-default">Delete</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav>
+        <ul class="pagination d-flex justify-content-center">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>
+</div>

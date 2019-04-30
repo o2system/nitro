@@ -1,0 +1,6 @@
+{
+  "presets": {
+    "layout": "login",
+    "access": "public"
+  }
+}

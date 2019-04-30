@@ -1,0 +1,6 @@
+{
+  "presets": {
+    "title": "Posts",
+    "access": "authenticated"
+  }
+}

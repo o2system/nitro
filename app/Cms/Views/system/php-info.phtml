@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="nav-pages">    
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?=base_url('system');?>">Information</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?=base_url('system/folder-permissions');?>">Folder Permission</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?=base_url('system/php-settings');?>">PHP Settings</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="<?=base_url('system/php-info');?>">PHP Info</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">{{$phpinfo}}</div>
+            </div>
+        </div>
+    </div>
+</div>
