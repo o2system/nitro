@@ -1,0 +1,91 @@
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form method="post" id="form-api" action="<?php echo current_url(); ?>" enctype="multipart/form-data">
+                    <form method="post" action="<?php echo base_url('/master/banks/form'); ?>" enctype="multipart/form-data">
+                    <?php if ($post->id): ?>
+                        <input type="hidden" name="id" value="<?= $post->id ?>">
+                    <?php endif; ?>
+                    <div class="card">
+                        <h5 class="card-header d-flex justify-content-between align-items-center">
+                            <?php echo $page->title; ?>
+
+                            <div class="card-options">
+                                <button type="button" class="btn btn-default btn-md" data-action="cancel">
+                                    <?php echo $language->getLine('BTN_CANCEL'); ?>
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-md">
+                                    <?php echo $language->getLine('BTN_SAVE'); ?>
+                                </button>
+                            </div>
+                        </h5>
+                    </div>
+                    <div class="card">
+                        <div class="card-body" id="modal-form" data-title="<?php echo $page->header; ?>" data-action="<?php echo current_url(); ?>">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Logo</label>
+                                        <input type="file" name="photo" class="dropify" data-default-file="<?= $post->image ?>">        
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input class="form-control" type="text" name="name" value="<?= $post->name ?>" placeholder="" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Alias</label>
+                                        <input class="form-control" type="text" name="alias" value="<?= $post->alias ?>" placeholder="" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Company</label>
+                                        <input class="form-control" type="text" name="company" value="<?= $post->company ?>" placeholder="" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Code</label>
+                                        <input class="form-control" type="text" name="code" value="<?= $post->code ?>" placeholder="" required="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// $('#form-api').on('submit', function (e) {
+//     e.preventDefault();
+//     let url = window.location.hostname;
+//     var data = new FormData(this);
+//     if($(this).find('[name=id]').val() !== null){
+//         $.ajax({
+//             url: '/' + url + "/api/master/banks/update",
+//             type: "POST",
+//             data: data,
+//             async: false,
+//             processData: false,
+//             contentType: false,
+//             success: function(){
+//                 // window.location.href =  espresso.helpers.url.base("companies");
+//             }
+//         })
+//     }else{
+//         $.ajax({
+//             url: espresso.helpers.url.base("api/master/banks/create"),
+//             type: "POST",
+//             data: data,
+//             async: false,
+//             processData: false,
+//             contentType: false,
+//             success: function(){
+//                 // window.location.href =  espresso.helpers.url.base("companies");
+//             }
+//         })
+//     }
+// });
+</script>

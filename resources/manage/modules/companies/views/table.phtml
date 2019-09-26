@@ -1,0 +1,214 @@
+<div class="page-system">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header p-0 px-3">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <h5 class="mb-0">Companies Data Table</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-row align-items-center justify-content-end">
+                                    <div class="col-md-auto">
+                                        <div class="dropdown">
+                                            <a class="btn btn-default dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <?php echo $language->getLine('MANAGE'); ?>
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <a href="<?= base_url('/companies'); ?>" class="dropdown-item">
+                                                    <?php echo $language->getLine('COMPANIES'); ?>
+                                                </a>
+                                                <a href="<?= base_url('/companies/table'); ?>" class="dropdown-item">
+                                                    <?php echo $language->getLine('TABLE'); ?>
+                                                </a>
+                                                <a href="<?= base_url('/companies/categories'); ?>" class="dropdown-item">
+                                                    <?php echo $language->getLine('COMPANIES_CATEGORIES'); ?>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <a href="<?=base_url('companies/form');?>" class="btn btn-primary">Add</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <form action="<?=current_url();?>">
+                            <div class="form-row align-items-center">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Entries</span>
+                                            </div>
+                                            <select name="entries" class="form-control custom-select">
+                                                <?php foreach($entries as $entry): ?>
+                                                    <option value="<?php echo $entry; ?>" <?php echo ($get->entries == $entry ? 'selected' : ''); ?>><?php echo $entry; ?></option>
+                                                <?php endforeach; ?>
+                                                <option value="ALL" <?= ($get->entries ? (!is_numeric($get->entries) ? 'selected' : '') : '') ?>><?php echo $language->getLine('ALL') ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Period</span>
+                                            </div>
+                                            <input class="form-control input-daterange-datepicker-empty" type="text" name="period" value="<?= ($get->period ? $get->period : '') ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Name Company" value="<?= ($get->keyword ? $get->keyword : '') ?>" name="keyword">
+                                    </div>
+                                </div>
+                                <div class="col-md text-right">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">Filter</button>
+                                        <a class="btn btn-default" href="<?= base_url('companies/table') ?>">Reset</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-bordered datatables-basic">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>ID</th>
+                                    <th>Category</th>
+                                    <th>Contact</th> <!-- sebelumnya PIC -->
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if ($companies): ?>
+                                    <?php foreach ($companies as $company): ?>
+                                        <tr>
+                                            <td>
+                                                <div class="media align-items-center">
+                                                    <div class="avatar-30 mr-2">
+                                                        <img src="<?= $company->image ?>" alt="">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <a href="<?=base_url('companies/overview/'.$company->id);?>"><?= $company->name ?></a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><?= $company->id ?></td>
+                                            <td><?= $company->category ? $company->category->title : '' ?></td>
+                                            <td>
+                                                <?php if ($company->contact): ?>
+                                                    <?= $company->contact->name ?> <?= $company->contact->job_title ? '- '.$company->contact->job_title : '' ?>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <?php if ($company->metadata('email')): ?>
+                                                    <a href="mailto:<?= $company->metadata('email')->email ?>"><?= $company->metadata('email')->email ?></a>
+                                                <?php else: ?>
+                                                    -
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <?php if ($company->metadata('phone')): ?>
+                                                    <a href="tel:<?= $company->metadata('phone')->phone ?>"><?= $company->metadata('phone')->phone ?></a>
+                                                <?php else: ?>
+                                                    -
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-success py-1"><?= $company->record->status ?></span>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <a class="btn btn-default btn-sm" href="<?= base_url('/companies/form/'.$company->id) ?>" data-toggle="tooltip" title="Edit">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </a>
+                                                    <!-- <a class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="Stats">
+                                                        <i class="fas fa-chart-bar"></i>
+                                                    </a>
+                                                    <a class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="Copy">
+                                                        <i class="fa fa-copy"></i>
+                                                    </a> -->
+                                                    <a class="btn btn-default btn-sm" href="<?php echo base_url('companies/delete/'.$company->id); ?>" data-toggle="tooltip" title="Trash">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <?php if ($companies): ?>
+                    <div class="card nav-pagination">
+                        <div class="card-body">
+                            <div class="row justify-content-between">
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="btn-group">
+                                        <a href="<?=base_url('companies/table', [
+                                        'page' => input()->get('page') - 1,
+                                        'entries' => $get->entries,
+                                        'period' => $get->period,
+                                        'keyword' => $get->keyword,
+                                        ]); ?>" class="btn btn-default <?=($page = input()->get('page')) <= 1 ? 'disabled' : ''; ?>" >
+                                            <?php echo $language->getLine('PREV'); ?>
+                                        </a>
+                                        <?php if (($page = input()->get('page')) == 0):?>
+                                            <?php $page = $page + 1; ?>
+                                        <?php endif; ?>
+                                        <a href="<?=base_url('companies/table', [
+                                        'page' => $page + 1,
+                                        'entries' => $get->entries,
+                                        'period' => $get->period,
+                                        'keyword' => $get->keyword,
+                                        ]); ?>" class="btn btn-default <?=$page >= $companies->info->num_pages ? 'disabled' : ''; ?>" >
+                                            <?php echo $language->getLine('NEXT'); ?>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-3">
+                                    <form action="<?=current_url(); ?>" method="get">
+                                        <input type="hidden" name="entries" value="<?= $get->entries ?>">
+                                        <input type="hidden" name="period" value="<?= $get->period ?>">
+                                        <input type="hidden" name="keyword" value="<?= $get->keyword ?>">
+                                        <div class="input-group">
+                                            <select class="custom-select select2" name="page" method="get">
+                                                <?php for ($i = 1; $i <= $companies->info->num_pages; ++$i):?>
+                                                    <option value="<?=$i; ?>" <?= input()->get('page') == $i ? 'selected' : '' ?>><?=$i; ?></option>
+                                                <?php endfor; ?>
+                                            </select>
+
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-primary" <?= !$companies->info->num_pages ? 'disabled' : '' ?>>Go</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif ?>
+            </div>
+        </div>
+    </div>
+</div>

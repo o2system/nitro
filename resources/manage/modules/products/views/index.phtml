@@ -1,0 +1,206 @@
+<div class="page-products">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <h5 class="mb-0">Products</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-row align-items-center justify-content-end">
+                                    <div class="col-md-auto">
+                                        <div class="dropdown">
+                                            <a class="btn btn-default dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <?php echo $language->getLine('MANAGE'); ?>
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="<?=base_url('products/categories');?>"><?php echo $language->getLine('CATEGORIES'); ?></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <a href="<?=base_url('products/form');?>" class="btn btn-primary">Add</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <form action="<?=current_url();?>">
+                            <div class="form-row align-items-center">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Entries</span>
+                                            </div>
+                                            <select name="entries" class="form-control custom-select">
+                                                <?php foreach($entries as $entry): ?>
+                                                    <option value="<?php echo $entry; ?>" <?php echo ($get->entries == $entry ? 'selected' : ''); ?>><?php echo $entry; ?></option>
+                                                <?php endforeach; ?>
+                                                <option value="ALL" <?= ($get->entries ? (!is_numeric($get->entries) ? 'selected' : '') : '') ?>><?php echo $language->getLine('ALL') ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Period</span>
+                                            </div>
+                                            <input class="form-control input-daterange-datepicker-empty" type="text" name="period" value="<?= ($get->period ? $get->period : '') ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Product Name" value="<?= ($get->keyword ? $get->keyword : '') ?>" name="keyword">
+                                    </div>
+                                </div>
+                                <div class="col-md text-right">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">Filter</button>
+                                        <a class="btn btn-default" href="<?= base_url('products') ?>">Reset</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered datatables-basic">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Product
+                                        </th>
+                                        <th>Category</th>
+                                        <th>
+                                            Merchant
+                                        </th>
+                                        <th>
+                                            Price
+                                        </th>
+                                        <th>
+                                            Stock
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if ($products): ?>
+                                        <?php foreach ($products as $product): ?>
+                                            <tr>
+                                                <td>
+                                                    <div class="media align-items-center">
+                                                        <div class="avatar-30 mr-2">
+                                                            <img src="<?= $product->image ?>" alt="">
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6 class="mb-0"><?= $product->name ?></h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <?= ($product->category ? $product->category->name : '') ?>
+                                                </td>
+                                                <td>
+                                                    <div class="media align-items-center">
+                                                        <div class="avatar-30 mr-2">
+                                                            <img src="<?= $product->merchant ? $product->merchant->image : '' ?>" alt="">
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h6 class="mb-0"><?= $product->merchant ? $product->merchant->name : 'NO_MERCHANT' ?></h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-right">
+                                                    <?= $product->currency ? $product->currency->iso.'.' : 'IDR.' ?> <?= $product->price_sale ?>
+                                                </td>
+                                                <td>
+                                                    <?= $product->stock ?> Unit
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <!-- <a href="<?=base_url('products');?>" class="btn btn-default btn-sm">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a> -->
+                                                        <a href="<?=base_url('products/form/'.$product->id);?>" class="btn btn-default btn-sm">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <a href="<?=base_url('products/delete/'.$product->id);?>" class="btn btn-default btn-sm">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <?php if ($products): ?>
+            <div class="card nav-pagination">
+                        <div class="card-body">
+                            <div class="row justify-content-between">
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="btn-group">
+                                        <a href="<?=base_url('products', [
+                                        'page' => input()->get('page') - 1,
+                                        'entries' => $get->entries,
+                                        'period' => $get->period,
+                                        'keyword' => $get->keyword,
+                                        ]); ?>" class="btn btn-default <?=($page = input()->get('page')) <= 1 ? 'disabled' : ''; ?>" >
+                                            <?php echo $language->getLine('PREV'); ?>
+                                        </a>
+                                        <?php if (($page = input()->get('page')) == 0):?>
+                                            <?php $page = $page + 1; ?>
+                                        <?php endif; ?>
+                                        <a href="<?=base_url('products', [
+                                        'page' => $page + 1,
+                                        'entries' => $get->entries,
+                                        'period' => $get->period,
+                                        'keyword' => $get->keyword,
+                                        ]); ?>" class="btn btn-default <?=$page >= $products->info->num_pages ? 'disabled' : ''; ?>" >
+                                            <?php echo $language->getLine('NEXT'); ?>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-3">
+                                    <form action="<?=current_url(); ?>" method="get">
+                                        <input type="hidden" name="entries" value="<?= $get->entries ?>">
+                                        <input type="hidden" name="period" value="<?= $get->period ?>">
+                                        <input type="hidden" name="keyword" value="<?= $get->keyword ?>">
+                                        <div class="input-group">
+                                            <select class="custom-select select2" name="page" method="get">
+                                                <?php for ($i = 1; $i <= $products->info->num_pages; ++$i):?>
+                                                    <option value="<?=$i; ?>" <?= input()->get('page') == $i ? 'selected' : '' ?>><?=$i; ?></option>
+                                                <?php endfor; ?>
+                                            </select>
+
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-primary" <?= !$products->info->num_pages ? 'disabled' : '' ?>>Go</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        <?php endif ?>
+            </div>
+        </div>
+    </div>
+</div>

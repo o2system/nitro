@@ -1,0 +1,101 @@
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form method="post" action="<?php echo current_url(); ?>" enctype="multipart/form-data">
+                    <div class="card">
+                        <h5 class="card-header d-flex justify-content-between align-items-center">
+                            <?php echo $page->title; ?>
+
+                            <div class="card-options">
+                                <button type="button" class="btn btn-default btn-md" data-action="cancel">
+                                    <?php echo $language->getLine('BTN_CANCEL'); ?>
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-md">
+                                    <?php echo $language->getLine('BTN_SAVE'); ?>
+                                </button>
+                            </div>
+                        </h5>
+                    </div>
+                    <div class="card">
+                        <div class="card-body" id="modal-form" data-title="<?php echo $page->header; ?>" data-action="<?php echo current_url(); ?>">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input class="form-control" type="text" name="title" value="" placeholder="" required="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <h5 class="mb-0">Custom Field</h5>
+                            <button class="btn btn-primary" type="button" data-action="add-item">
+                                Add
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label><?php echo $language->getLine('FIELD'); ?></label>
+                                        <input type="text" class="form-control" name="other[field][]" value="" placeholder="Full Feature">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label><?php echo $language->getLine('VALUE'); ?></label>
+                                        <input type="text" class="form-control" name="other[value][]" value="" placeholder="Yes">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Template Clone -->
+                            <div data-tpl="item" class="d-none">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><?php echo $language->getLine('FIELD'); ?></label>
+                                            <input type="text" class="form-control" name="other[field][]" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><?php echo $language->getLine('VALUE'); ?></label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="other[value][]" value="">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-danger d-none" type="button" data-action="remove-item">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ------- -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).on('click', '[data-action="add-item"]', function (e) {
+    e.preventDefault();
+    var row = $(this).parents('.card').find('[data-tpl="item"]');
+    var clone = row.clone();
+
+    clone.attr('data-tpl', 'item-cloned');
+    clone.removeClass('d-none');
+
+    clone.find('input').each(function () {
+        $(this).val('');
+    });
+
+    clone.find('[data-action="remove-item"]').removeClass('d-none');
+    row.before(clone);
+});
+</script>

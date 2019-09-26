@@ -1,0 +1,58 @@
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form method="post" action="<?php echo current_url(); ?>" enctype="multipart/form-data">
+                    <?php if ($post->id): ?>
+                        <input type="hidden" name="id" value="<?= $post->id ?>">
+                    <?php endif; ?>
+                    <div class="card">
+                        <h5 class="card-header d-flex justify-content-between align-items-center">
+                            <?php echo $page->title; ?>
+
+                            <div class="card-options">
+                                <button type="button" class="btn btn-default btn-md" data-action="cancel">
+                                    <?php echo $language->getLine('BTN_CANCEL'); ?>
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-md">
+                                    <?php echo $language->getLine('BTN_SAVE'); ?>
+                                </button>
+                            </div>
+                        </h5>
+                    </div>
+                    <div class="card">
+                        <div class="card-body" id="modal-form" data-title="<?php echo $page->header; ?>" data-action="<?php echo current_url(); ?>">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Title</label>
+                                        <input class="form-control" type="text" name="title" value="<?= $post->title ?>" placeholder="" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Categories Parents</label>
+                                        <select name="id_parent" class="form-control select-dropdown" data-live-search="true">
+                                            <option value="0" selected>ROOT</option>
+                                            <?php foreach ($parents as $parent): ?>
+                                                <?php if ($post->id == $parent->id): ?>
+                                                    <?php continue; ?>
+                                                <?php endif ?>
+                                                <option value="<?= $parent->id ?>" <?= ($post->id_parent == $parent->id ? 'selected' : '') ?>><?= $parent->title ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea name="description" class="form-control"><?= $post->description ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+.page-chat{
+    .chat-body{
+        position: relative;
+        height: 500px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        .sent, .replies{
+            display: flex;
+
+            .media{
+                width: auto;
+                max-width: 50%;
+                .card{
+                    .card-body{
+                        img{
+                            max-width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+
+        .sent{
+            justify-content: end;
+        }
+    }
+}

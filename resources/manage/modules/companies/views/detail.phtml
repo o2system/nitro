@@ -1,0 +1,303 @@
+<div class="page-place-detail">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
+                <div class="row justify-content-center mb-4">
+                    <div class="col-auto">
+                        <div class="media align-items-center">
+                            <div class="avatar-80 mr-3">
+                                <img src="<?= $company->image ?>" alt="">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="d-flex align-items-center">
+                                    <span class="btn btn-default btn-xs mr-2 text-uppercase"><?= $company->category->title ?></span>
+                                    <?= $company->name ?>
+                                </h4>
+                                <div class="d-block">
+                                    <?php if ($company->metadata('email')): ?>
+                                        <a href="mailto:<?= $company->metadata('email')->email ?>"
+                                           class="btn btn-xs btn-default btn-icon"> <i
+                                                class="fa fa-envelope"></i> <?= $company->metadata('email')->email ?>
+                                        </a>
+                                    <?php endif; ?>
+                                    <?php if ($company->metadata('phone')): ?>
+                                        <a href="tel:<?= $company->metadata('phone')->phone ?>"
+                                           class="btn btn-xs btn-default btn-icon"> <i
+                                                class="fa fa-phone"></i> <?= $company->metadata('phone')->phone ?> </a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header p-0">
+                        <div class="nav-pages">
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link active"
+                                       href="<?= base_url('/companies/overview/' . $company->id); ?>">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       href="<?= base_url('/companies/overview/contacts/' . $company->id); ?>">Contacts</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       href="<?= base_url('companies/overview/products/' . $company->id); ?>">Products</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       href="<?= base_url('companies/overview/transactions/' . $company->id); ?>">Transactions</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       href="<?= base_url('companies/overview/members/' . $company->id); ?>">Members</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       href="<?= base_url('companies/overview/users/' . $company->id); ?>">Users</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="profile">
+                                    <h6>
+                                        Address
+                                    </h6>
+                                    <p></p>
+                                    <p>
+                                        <?= ($company->metadata('address') ? ($company->metadata('address')->address ? $company->metadata('address')->address : '') : '') ?>
+                                        <br>
+                                        <?php if ($company->city): ?>
+                                            <?= 'Provinsi '.$company->city['province'].', '.$company->city['type'].' '.$company->city['city_name'].' '.$company->city['postal_code'] ?>
+                                        <?php endif ?>
+                                        <br>
+                                    </p>
+                                </div>
+                                <div id="contact-inforamation-profile" class="profile">
+                                    <h6>
+                                        Contact Information
+                                    </h6>
+                                    <ul class="list-unstyled">
+                                        <?php if ($company->metadata('email')): ?>
+                                            <?php if ($company->metadata('email')->email): ?>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"><i class="far fa-envelope"></i></div>
+                                                <div class="media-body">
+                                                    
+                                                        <p class="mb-0"><a
+                                                                href="mailto:<?= $company->metadata('email')->email ?>%20"> <?= $company->metadata('email')->email ?> </a>
+                                                        </p>
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </li>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                        <?php if ($company->metadata('domain')): ?>
+                                            <?php if ($company->metadata('domain')->domain): ?>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"><i class="fas fa-globe"></i></div>
+                                                <div class="media-body">
+                                                    
+                                                        <p class="mb-0"><a
+                                                                href="<?= $company->metadata('domain')->domain ?>"
+                                                                target="_blank"> <?= $company->metadata('domain')->domain ?> </a>
+                                                        </p>
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </li>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                        <?php if ($company->metadata('phone')): ?>
+                                            <?php if ($company->metadata('phone')->phone): ?>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"><i class="fas fa-phone"></i></div>
+                                                <div class="media-body">
+                                                    
+                                                        <p class="mb-0"><a
+                                                                href="tel:<?= $company->metadata('phone')->phone ?>"> <?= $company->metadata('phone')->phone ?></a>
+                                                        </p>
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </li>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                        <?php if ($company->metadata('fax')): ?>
+                                            <?php if ($company->metadata('fax')->fax): ?>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"><i class="fas fa-fax"></i></div>
+                                                <div class="media-body">
+                                                    
+                                                        <p class="mb-0"><a
+                                                                href="tel:<?= $company->metadata('fax')->fax ?>"> <?= $company->metadata('fax')->fax ?></a>
+                                                        </p>
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </li>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                        <?php if ($company->metadata('hotline')): ?>
+                                            <?php if ($company->metadata('hotline')->hotline): ?>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"><i class="fas fa-headphones"></i></div>
+                                                <div class="media-body">
+                                                    
+                                                        <p class="mb-0"><a
+                                                                href="tel:<?= $company->metadata('hotline')->hotline ?>"> <?= $company->metadata('hotline')->hotline ?></a>
+                                                        </p>
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </li>
+                                            <?php endif; ?>    
+                                        <?php endif; ?>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="profile">
+                                    <h6>
+                                        Online Messengers
+                                    </h6>
+                                    <ul class="list-unstyled">
+                                        <?php if ($company->metadata('whatsapp')): ?>
+                                            <?php if ($company->metadata('whatsapp')->whatsapp): ?>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"><i class="fab fa-whatsapp"></i></div>
+                                                <div class="media-body">
+                                                    
+                                                        <p class="mb-0"><?= $company->metadata('whatsapp')->whatsapp ?></p>
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </li>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                        <?php if ($company->metadata('line')): ?>
+                                            <?php if ($company->metadata('line')->line): ?>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"><i class="fab fa-line"></i></div>
+                                                <div class="media-body">
+                                                    
+                                                        <p class="mb-0"><?= $company->metadata('line')->line ?></p>
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </li>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    </ul>
+                                </div>
+                                <div id="social-media-profile" class="profile">
+                                    <h6>
+                                        Social Media
+                                    </h6>
+                                    <ul class="list-unstyled">
+                                        <?php if ($company->metadata('linkedin')): ?>
+                                            <?php if ($company->metadata('linkedin')->linkedin): ?>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"><i class="fab fa-linkedin"></i></div>
+                                                <div class="media-body">
+                                                    
+                                                        <p class="mb-0"><a
+                                                                href="<?= $company->metadata('linkedin')->linkedin ?>"
+                                                                target="_blank"> <?= $company->metadata('linkedin')->linkedin ?> </a>
+                                                        </p>
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </li>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                        <?php if ($company->metadata('facebook')): ?>
+                                            <?php if ($company->metadata('facebook')->facebook): ?>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"><i class="fab fa-facebook"></i></div>
+                                                <div class="media-body">
+                                                    
+                                                        <p class="mb-0"><a
+                                                                href="<?= $company->metadata('facebook')->facebook ?>"
+                                                                target="_blank"> <?= $company->metadata('facebook')->facebook ?> </a>
+                                                        </p>
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </li>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                        <?php if ($company->metadata('youtube')): ?>
+                                            <?php if ($company->metadata('youtube')->youtube): ?>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"><i class="fab fa-youtube"></i></div>
+                                                <div class="media-body">
+                                                    
+                                                        <p class="mb-0"><a
+                                                                href="<?= $company->metadata('youtube')->youtube ?>"
+                                                                target="_blank"> <?= $company->metadata('youtube')->youtube ?> </a>
+                                                        </p>
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </li>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                        <?php if ($company->metadata('instagram')): ?>
+                                            <?php if ($company->metadata('instagram')->instagram): ?>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"><i class="fab fa-instagram"></i></div>
+                                                <div class="media-body">
+                                                    
+                                                        <p class="mb-0"><a
+                                                                href="<?= $company->metadata('instagram')->instagram ?>"
+                                                                target="_blank"> <?= $company->metadata('instagram')->instagram ?> </a>
+                                                        </p>
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </li>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

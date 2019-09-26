@@ -1,0 +1,235 @@
+<div class="page-company-detail">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
+                <div class="row justify-content-center mb-4">
+                    <div class="col-auto">
+                        <div class="media align-items-center">
+                            <div class="avatar-80 mr-3">
+                                <img src="assets/img/avatar-female.png" alt="">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="d-flex align-items-center">
+                                    Teguh Rianto
+                                </h4>
+                                <div class="d-block">
+                                    <a href="<?=base_url('members/detail');?>" class="btn btn-xs btn-default btn-icon mr-1 mb-1"> <i class="fa fa-at"></i> teguhrianto </a>
+                                    <a href="mailto:cs@IKEA.co.id" class="btn btn-xs btn-default btn-icon"> <i class="fa fa-envelope"></i> cs@IKEA.co.id </a>
+                                    <a href="tel:%20%20(021)%2029853900" class="btn btn-xs btn-default btn-icon"> <i class="fa fa-phone"></i> (021) 29853900 </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header p-0">
+                        <div class="nav-pages">    
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?=base_url('members/detail');?>">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="<?=base_url('members/detail/transactions');?>">Transactions</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header p-0 pl-3">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <h5 class="mb-0">Transactions</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-row align-items-center justify-content-end">
+                                    <div class="col-md-auto">
+                                        <div class="nav-pages">
+                                            <ul class="nav">
+                                                <li class="nav-item">
+                                                    <a href="<?= base_url('members/detail/transactions'); ?>" class="nav-link" data-toggle="tooltip" title="Grid View">
+                                                        <i class="fas fa-th-large"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="<?= base_url('members/detail/transactions/table'); ?>" class="nav-link active" data-toggle="tooltip" title="Table View">
+                                                        <i class="fas fa-table"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <form action="<?=current_url();?>">
+                            <div class="form-row align-items-center">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Entries</span>
+                                            </div>
+                                            <select name="entries" class="form-control custom-select">
+                                                <option>10</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Period</span>
+                                            </div>
+                                            <input class="form-control input-daterange-datepicker" type="text" name="period" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Keyword" value="" name="keyword">
+                                    </div>
+                                </div>
+                                <div class="col-md text-right">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">Filter</button>
+                                        <a class="btn btn-default" href="#">Reset</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- List -->
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-bordered datatables-basic text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Invoice</th>
+                                    <th>Date</th>
+                                    <th>Merchant</th>
+                                    <th>Product</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>INV/20190805/XIX/VIII/349483812</td>
+                                    <td>31 Agustus 2019 16:00 AM</td>
+                                    <td>
+                                        <div class="media align-items-center">
+                                            <div class="avatar-30 mr-2">
+                                                <img src="assets/img/avatar-female.png" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <a href="<?=base_url('companies/detail');?>">PT. Kredit Impian</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="media align-items-center">
+                                            <div class="avatar-30 mr-2">
+                                                <img src="assets/img/avatar-female.png" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <a href="<?=base_url('products/detail');?>">Nama Products</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Rp. 2.000.000
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-success py-1">Selesai</span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="Edit">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </a>
+                                            <a class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="View">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="Stats">
+                                                <i class="fas fa-chart-bar"></i>
+                                            </a>
+                                            <a class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="Copy">
+                                                <i class="fa fa-copy"></i>
+                                            </a>
+                                            <a class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="Trash">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>2</td>
+                                    <td>INV/20190805/XIX/VIII/349483812</td>
+                                    <td>31 Agustus 2019 16:00 AM</td>
+                                    <td>
+                                        <div class="media align-items-center">
+                                            <div class="avatar-30 mr-2">
+                                                <img src="assets/img/avatar-female.png" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <a href="<?=base_url('companies/detail');?>">PT. Kredit Impian</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="media align-items-center">
+                                            <div class="avatar-30 mr-2">
+                                                <img src="assets/img/avatar-female.png" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <a href="<?=base_url('products/detail');?>">Nama Products</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Rp. 2.000.000
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-success py-1">Selesai</span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="Edit">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </a>
+                                            <a class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="View">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="Stats">
+                                                <i class="fas fa-chart-bar"></i>
+                                            </a>
+                                            <a class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="Copy">
+                                                <i class="fa fa-copy"></i>
+                                            </a>
+                                            <a class="btn btn-default btn-sm" href="#" data-toggle="tooltip" title="Trash">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- --------- -->
+            </div>
+        </div>
+    </div>
+</div>

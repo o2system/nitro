@@ -1,0 +1,277 @@
+<div class="page-company-detail">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
+                <div class="row justify-content-center mb-4">
+                    <div class="col-auto">
+                        <div class="media align-items-center">
+                            <div class="avatar-80 mr-3">
+                                <img src="<?= $member->image ?>" alt="">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="d-flex align-items-center">
+                                    <?= $member->fullname ?>
+                                </h4>
+                                <div class="d-block">
+                                    <?php if ($member->metadata('username')): ?>
+                                        <?php if ($member->metadata('username')->username): ?>
+                                        <a href="<?=base_url('members/detail/'.$member->id);?>" class="btn btn-xs btn-default btn-icon mr-1 mb-1"> <i class="fa fa-at"></i> <?= $member->metadata('username')->username ?> </a>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                    <?php if ($member->metadata('email')): ?>
+                                        <?php if ($member->metadata('email')->email): ?>
+                                        <a href="mailto:<?= $member->metadata('email')->email ?>"
+                                           class="btn btn-xs btn-default btn-icon"> <i
+                                                class="fa fa-envelope"></i> <?= $member->metadata('email')->email ?>
+                                        </a>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                    <?php if ($member->metadata('phone')): ?>
+                                        <?php if ($member->metadata('phone')->phone): ?>
+                                        <a href="tel:<?= $member->metadata('phone')->phone ?>"
+                                           class="btn btn-xs btn-default btn-icon"> <i
+                                                class="fa fa-phone"></i> <?= $member->metadata('phone')->phone ?> </a>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header p-0">
+                        <div class="nav-pages">    
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="<?=base_url('members/detail/'.$member->id);?>">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?=base_url('members/detail/transactions/'.$member->id);?>">Transactions</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="profile">
+                                    <h6>
+                                        Address
+                                    </h6>
+                                    <p></p>
+                                    <p>
+                                        <?= ($member->metadata('address') ? $member->metadata('address')->address : $language->getLine('ADDRESS_EMPTY')) ?>
+                                        <br>
+                                         <?php if ($member->city): ?>
+                                            <?= 'Provinsi '.$member->city['province'].', '.$member->city['type'].' '.$member->city['city_name'].' '.$member->city['postal_code'] ?>
+                                        <?php endif ?>
+                                        <br>
+                                    </p>
+                                </div>
+                                <div id="contact-inforamation-profile" class="profile">
+                                    <h6>
+                                        Contact Information
+                                    </h6>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"> <i class="far fa-envelope"></i> </div>
+                                                <div class="media-body">
+                                                    <?php if ($member->metadata('email')): ?>
+                                                        <p class="mb-0"> <a href="mailto:<?= $member->metadata('email')->email ?>%20"> <?= $member->metadata('email')->email ?> </a> </p>
+                                                    <?php else: ?>
+                                                        <p class="mb-0"> - </p>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"> <i class="fas fa-globe"></i> </div>
+                                                <div class="media-body">
+                                                    <?php if ($member->metadata('website')): ?>
+                                                        <?php if ($member->metadata('website')->website): ?>
+                                                        <p class="mb-0"> <a href="<?= $member->metadata('website')->website ?>" target="_blank"> <?= $member->metadata('website')->website ?> </a> </p>
+                                                        <?php else: ?>
+                                                            <p class="mb-0"> - </p>
+                                                        <?php endif; ?>
+                                                    <?php else: ?>
+                                                        <p class="mb-0"> - </p>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"> <i class="fas fa-phone"></i> </div>
+                                                <div class="media-body">
+                                                    <?php if ($member->metadata('phone')): ?>
+                                                        <?php if ($member->metadata('phone')->phone): ?>
+                                                        <p class="mb-0"> <a href="tel:<?= $member->metadata('phone')->phone ?>"> <?= $member->metadata('phone')->phone ?></a> </p>
+                                                        <?php else: ?>
+                                                            <p class="mb-0"> - </p>
+                                                        <?php endif; ?>
+                                                        <?php else: ?>
+                                                        <p class="mb-0"> - </p>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"> <i class="fas fa-fax"></i> </div>
+                                                <div class="media-body">
+                                                    <?php if ($member->metadata('fax')): ?>
+                                                        <?php if ($member->metadata('fax')->fax): ?>
+                                                        <p class="mb-0"> <a href="tel:<?= $member->metadata('fax')->fax ?>"> <?= $member->metadata('fax')->fax ?></a> </p>
+                                                        <?php else: ?>
+                                                            <p class="mb-0"> - </p>
+                                                        <?php endif; ?>
+                                                        <?php else: ?>
+                                                        <p class="mb-0"> - </p>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"> <i class="fas fa-headphones"></i> </div>
+                                                <div class="media-body">
+                                                    <?php if ($member->metadata('hotline')): ?>
+                                                        <?php if ($member->metadata('hotline')->hotline): ?>
+                                                        <p class="mb-0"> <a href="tel:<?= $member->metadata('hotline')->hotline ?>"> <?= $member->metadata('hotline')->hotline ?></a> </p>
+                                                        <?php else: ?>
+                                                            <p class="mb-0"> - </p>
+                                                        <?php endif; ?>
+                                                        <?php else: ?>
+                                                        <p class="mb-0"> - </p>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="profile">
+                                    <h6>
+                                        Online Messengers
+                                    </h6>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"> <i class="fab fa-whatsapp"></i> </div>
+                                                <div class="media-body">
+                                                    <?php if ($member->metadata('whatsapp')): ?>
+                                                        <?php if ($member->metadata('whatsapp')->whatsapp): ?>
+                                                        <p class="mb-0"><?= $member->metadata('whatsapp')->whatsapp ?></p>
+                                                        <?php else: ?>
+                                                            <p class="mb-0"> - </p>
+                                                        <?php endif; ?>
+                                                        <?php else: ?>
+                                                        <p class="mb-0"> - </p>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"> <i class="fab fa-line"></i> </div>
+                                                <div class="media-body">
+                                                    <?php if ($member->metadata('line')): ?>
+                                                        <?php if ($member->metadata('line')->line): ?>
+                                                        <p class="mb-0"><?= $member->metadata('line')->line ?></p>
+                                                        <?php else: ?>
+                                                            <p class="mb-0"> - </p>
+                                                        <?php endif; ?>
+                                                        <?php else: ?>
+                                                        <p class="mb-0"> - </p>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div id="social-media-profile" class="profile">
+                                    <h6>
+                                        Social Media
+                                    </h6>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"> <i class="fab fa-linkedin"></i> </div>
+                                                <div class="media-body">
+                                                    <?php if ($member->metadata('linkedin')): ?>
+                                                        <?php if ($member->metadata('linkedin')->linkedin): ?>
+                                                        <p class="mb-0"> <a href="<?= $member->metadata('linkedin')->linkedin ?>" target="_blank"> <?= $member->metadata('linkedin')->linkedin ?> </a> </p>
+                                                        <?php else: ?>
+                                                            <p class="mb-0"> - </p>
+                                                        <?php endif; ?>
+                                                        <?php else: ?>
+                                                        <p class="mb-0"> - </p>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"> <i class="fab fa-facebook"></i> </div>
+                                                <div class="media-body">
+                                                    <?php if ($member->metadata('facebook')): ?>
+                                                        <?php if ($member->metadata('facebook')->facebook): ?>
+                                                        <p class="mb-0"> <a href="<?= $member->metadata('facebook')->facebook ?>" target="_blank"> <?= $member->metadata('facebook')->facebook ?> </a> </p>
+                                                        <?php else: ?>
+                                                            <p class="mb-0"> - </p>
+                                                        <?php endif; ?>
+                                                        <?php else: ?>
+                                                        <p class="mb-0"> - </p>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"> <i class="fab fa-youtube"></i> </div>
+                                                <div class="media-body">
+                                                    <?php if ($member->metadata('youtube')): ?>
+                                                        <?php if ($member->metadata('youtube')->youtube): ?>
+                                                        <p class="mb-0"> <a href="<?= $member->metadata('youtube')->youtube ?>" target="_blank"> <?= $member->metadata('youtube')->youtube ?> </a> </p>
+                                                        <?php else: ?>
+                                                            <p class="mb-0"> - </p>
+                                                        <?php endif; ?>
+                                                        <?php else: ?>
+                                                        <p class="mb-0"> - </p>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="mb-2">
+                                            <div class="media">
+                                                <div class="icon mr-3"> <i class="fab fa-instagram"></i> </div>
+                                                <div class="media-body">
+                                                    <?php if ($member->metadata('instagram')): ?>
+                                                        <?php if ($member->metadata('instagram')->instagram): ?>
+                                                        <p class="mb-0"> <a href="<?= $member->metadata('instagram')->instagram ?>" target="_blank"> <?= $member->metadata('instagram')->instagram ?> </a> </p>
+                                                        <?php else: ?>
+                                                            <p class="mb-0"> - </p>
+                                                        <?php endif; ?>
+                                                        <?php else: ?>
+                                                        <p class="mb-0"> - </p>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,306 @@
+<div class="page-transactions">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header p-0 pl-3">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <h5 class="mb-0">Transactions</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-row align-items-center justify-content-end">
+                                    <div class="col-md-auto">
+                                        <div class="nav-pages">
+                                            <ul class="nav">
+                                                <li class="nav-item">
+                                                    <a href="<?= base_url('transactions'); ?>" class="nav-link active"
+                                                       data-toggle="tooltip" title="Grid View">
+                                                        <i class="fas fa-th-large"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="<?= base_url('transactions/table'); ?>" class="nav-link"
+                                                       data-toggle="tooltip" title="Table View">
+                                                        <i class="fas fa-table"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <form action="<?= current_url(); ?>">
+                            <div class="form-row align-items-center">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Entries</span>
+                                            </div>
+                                            <select name="entries" class="form-control custom-select">
+                                                <?php if($options->entries):?>
+                                                    <?php foreach ($options->entries as $value):?>
+                                                        <option value="<?=$value;?>"
+                                                        <?=$get->entries == $value ? 'selected' : ''?>
+                                                        ><?=$value;?></option>
+                                                    <?php endforeach;?>
+                                                <?php endif;?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Period</span>
+                                            </div>
+                                            <input class="form-control input-daterange-datepicker-empty" type="text" name="period" value="<?=$get->period;?>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Product Name" value="<?=$get->period;?>" name="keyword">
+                                    </div>
+                                </div>
+                                <div class="col-md text-right">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">Filter</button>
+                                        <a class="btn btn-default" href="<?= base_url('/transactions') ?>">Reset</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <?php if ($statistics): ?>
+                <?php foreach ($statistics as $statistic): ?>
+                    <div class="col-md-4">
+                        <div class="card card-widget">
+                            <div class="card-body pb-4">
+                                <div class="icon"><i class="<?= $statistic->icon ?>"></i></div>
+                                <div class="num text-success"><?= $statistic->total ?></div>
+                                <h3 class="text-muted"><?= $language->getLine($statistic->status) ?></h3>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach ?>
+            <?php endif; ?>
+            <!-- <div class="col-md-4">
+                <div class="card card-widget">
+                    <div class="card-body pb-4">
+                        <div class="icon"><i class="fas fa-money-bill-alt"></i></div>
+                        <div class="num text-success">0</div>
+                        <h3 class="text-muted">Paid</h3>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="col-md-4">
+                <div class="card card-widget">
+                    <div class="card-body pb-4">
+                        <div class="icon"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="num text-warning">0</div>
+                        <h3 class="text-muted">Booked</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-widget">
+                    <div class="card-body pb-4">
+                        <div class="icon"><i class="fas fa-times"></i></div>
+                        <div class="num text-danger">0</div>
+                        <h3 class="text-muted">Canceled</h3>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- List -->
+        <?php if ($transactions): ?>
+            <?php foreach ($transactions as $transaction): ?>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row justify-content-between align-items-center">
+                            <?php if ($transaction->product): ?>
+                                <?php if ($merchant = $transaction->product->merchant): ?>
+                            <div class="col-md-auto">
+                                <div class="media align-items-center">
+                                    <div class="avatar-30 mr-3">
+                                        <img src="<?= $merchant->image ?>" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="mb-0">
+                                            <a href="<?=base_url('companies/overview/'.$merchant->id);?>"><?= $merchant->name ?></a>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                                <?php endif ?>
+                            <?php endif ?>
+                            <?php if($transaction->latestLog->status === 'WAITING_FOR_CONFIRMATION'):?>
+                                <div class="col-md-auto">
+                                    <a href="<?=base_url('transactions/approval',['id' => $transaction->id]);?>"><?=$language->getLine('APPROVAL');?></a>
+                                </div>
+                            <?php elseif ($transaction->latestLog->status === 'PAID'):?>
+                                <div class="col-md-auto">
+                                    <a href="<?=base_url('transactions/approval-down-payment',['id' => $transaction->id]);?>"><?=$language->getLine('CONFIRM_PAID_DOWN_PAYMENT');?></a>
+                                </div>
+                            <?php endif;?>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-5 border-right">
+                                <div class="media">
+                                    <div class="avatar-30 mr-3">
+                                        <?php if($transaction->memberTransaction):?>
+                                            <?php if($transaction->memberTransaction->member):?>
+                                                <img src="<?=$transaction->memberTransaction->member->image;?>" alt="">
+                                            <?php endif;?>
+                                        <?php endif;?>
+                                    </div>
+                                    <div class="media-body">
+                                        <?php if($transaction->memberTransaction):?>
+                                            <?php if($transaction->memberTransaction->member):?>
+                                                <h5 class="mb-0">
+                                                    <a href="<?=base_url('transactions/detail',['id'    => $transaction->id]);?>"><?= $transaction->memberTransaction->member->fullname ?> (ID Member <?= $transaction->memberTransaction->member->number ?>)</a>
+                                                </h5>
+                                            <?php endif;?>
+                                        <?php endif;?>
+                                        <p>(<?=$transaction->number;?>)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 border-right">
+                                <p class="mb-0">Status</p>
+                                <h5><h5><?= $transaction->latestLog->status ?></h5></h5>
+                            </div>
+                            <div class="col-md-2">
+                                <p class="mb-0">Total Belanja</p>
+                                <h5 class="text-primary"><?=$transaction->product->currency ? $transaction->product->currency->iso : 'IDR' ?> <?= number_format($transaction->product->price_sale,0,',','.') ?></h5>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-5 border-right">
+                                <div class="media align-items-center">
+                                    <div class="avatar-80 mr-3">
+                                        <img src="<?=$transaction->product->image;?>" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="d-flex align-items-center">
+                                            <?php if($transaction->product->sku):?>
+                                            <span class="btn btn-default btn-xs mr-2 text-uppercase"><?= $transaction->product->sku ?></span>
+                                            <?php endif;?>
+                                            <a href="#" target="_blank"><?= $transaction->product->name ?></a>
+                                        </h5>
+                                        <p><?=$transaction->product->currency ? $transaction->product->currency->iso : 'IDR' ?>. <?= number_format($transaction->product->price_sale,0,',','.') ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php if($transaction->product->method):?>
+                            <div class="col-md-7 border-right">
+                                <div class="media align-items-center">
+                                    <div class="avatar-80 mr-3">
+                                        <img src="<?=$transaction->product->imagePrevious;?>" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="d-flex align-items-center">
+                                          <?=$language->getLine('PRODUCT_REQUEST');?>
+                                        </h5>
+                                        <?=$language->getLine('METHOD');?> : <span class="badge badge-info"><?=$language->getLine($transaction->product->method);?></span>
+                                        <p><?=$transaction->product->content?></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php else:?>
+                                <div class="col-md-7 border-right">
+                                    <div class="media align-items-center">
+                                        <div class="avatar-80 mr-3">
+                                            <img src="<?=$transaction->product->image;?>" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <h5 class="d-flex align-items-center">
+                                                <span class="btn btn-default btn-xs mr-2 text-uppercase"><?= $transaction->product->sku ?></span>
+                                                <a href="#" target="_blank"><?= $transaction->product->name ?></a>
+                                            </h5>
+                                            <p><?=$transaction->product->currency ? $transaction->product->currency->iso : 'IDR' ?>. <?= number_format($transaction->product->price_sale,0,',','.') ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif;?>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="d-flex">
+                            <a href="<?=base_url('transactions/detail',['id'    => $transaction->id]);?>">
+                                <i class="fas fa-eye"></i> View Order Detail
+                            </a>
+                            <a href="<?=base_url('transactions/chat',['id' => $transaction->id]);?>" class="ml-3">
+                                <i class="fas fa-comment"></i> Chat
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <div class="card nav-pagination">
+                        <div class="card-body">
+                            <div class="row justify-content-between">
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="btn-group">
+                                        <a href="<?=base_url('transactions', [
+                                        'page' => input()->get('page') - 1,
+                                        'entries' => $get->entries,
+                                        'period' => $get->period,
+                                        'keyword' => $get->keyword,
+                                        ]); ?>" class="btn btn-default <?=($page = input()->get('page')) <= 1 ? 'disabled' : ''; ?>" >
+                                            <?php echo $language->getLine('PREV'); ?>
+                                        </a>
+                                        <?php if (($page = input()->get('page')) == 0):?>
+                                            <?php $page = $page + 1; ?>
+                                        <?php endif; ?>
+                                        <a href="<?=base_url('transactions', [
+                                        'page' => $page + 1,
+                                        'entries' => $get->entries,
+                                        'period' => $get->period,
+                                        'keyword' => $get->keyword,
+                                        ]); ?>" class="btn btn-default <?=$page >= $transactions->info->num_pages ? 'disabled' : ''; ?>" >
+                                            <?php echo $language->getLine('NEXT'); ?>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-3">
+                                    <form action="<?=current_url(); ?>" method="get">
+                                        <input type="hidden" name="entries" value="<?= $get->entries ?>">
+                                        <input type="hidden" name="period" value="<?= $get->period ?>">
+                                        <input type="hidden" name="keyword" value="<?= $get->keyword ?>">
+                                        <div class="input-group">
+                                            <select class="custom-select select2" name="page" method="get">
+                                                <?php for ($i = 1; $i <= $transactions->info->num_pages; ++$i):?>
+                                                    <option value="<?=$i; ?>" <?= input()->get('page') == $i ? 'selected' : '' ?>><?=$i; ?></option>
+                                                <?php endfor; ?>
+                                            </select>
+
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-primary" <?= !$transactions->info->num_pages ? 'disabled' : '' ?>>Go</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        <?php endif; ?>
+        <!-- --------- -->
+    </div>
+</div>

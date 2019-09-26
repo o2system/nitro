@@ -1,7 +1,0 @@
-{
-  "presets": {
-    "title": "Login",
-    "layout": "login",
-    "access": "public"
-  }
-}

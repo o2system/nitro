@@ -1,0 +1,178 @@
+<div class="page-place-detail">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
+                <div class="row justify-content-center mb-4">
+                    <div class="col-auto">
+                        <div class="media align-items-center">
+                            <div class="avatar-80 mr-3">
+                                <img src="assets/img/avatar-female.png" alt="">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="d-flex align-items-center">
+                                    <span class="btn btn-default btn-xs mr-2 text-uppercase">CATEGORY</span>
+                                    PT. Kredit Impian
+                                </h4>
+                                <div class="d-block">
+                                    <a href="mailto:cs@IKEA.co.id" class="btn btn-xs btn-default btn-icon"> <i class="fa fa-envelope"></i> cs@IKEA.co.id </a>
+                                    <a href="tel:%20%20(021)%2029853900" class="btn btn-xs btn-default btn-icon"> <i class="fa fa-phone"></i> (021) 29853900 </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header p-0">
+                        <div class="nav-pages">    
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?=base_url('places/detail');?>">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?=base_url('places/detail/contact');?>">Contact</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="<?=base_url('places/detail/products');?>">Products</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?=base_url('places/detail/transactions');?>">Transactions</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?=base_url('places/detail/members');?>">Members</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?=base_url('places/detail/users');?>">Users</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?=base_url('places/detail/sliders');?>">Sliders</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <h5 class="mb-0">
+                                    Products
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <form action="<?=current_url();?>">
+                            <div class="form-row align-items-center">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Entries</span>
+                                            </div>
+                                            <select name="entries" class="form-control custom-select">
+                                                <option>10</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Period</span>
+                                            </div>
+                                            <input class="form-control input-daterange-datepicker" type="text" name="period" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Keyword" value="" name="keyword">
+                                    </div>
+                                </div>
+                                <div class="col-md text-right">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">Filter</button>
+                                        <a class="btn btn-default" href="#">Reset</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- List -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row justify-content-between">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-md-auto">
+                                        <div class="media align-items-center">
+                                            <div class="avatar-80 mr-3">
+                                                <img src="assets/img/avatar-female.png" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <h5 class="d-flex align-items-center">
+                                                    <span class="btn btn-default btn-xs mr-2 text-uppercase">CODE</span>
+                                                    <a href="#" target="_blank">Product Name</a>
+                                                </h5>
+                                                <div class="d-flex flex-wrap">
+                                                    <div class="btn-group btn-group-sm mr-2 mb-2"> 
+                                                        <span class="btn btn-default btn-sm"><?=language('CATEGORIES');?> </span>
+                                                        <span class="btn btn-sm btn-default">Category</span>
+                                                    </div>
+                                                    <div class="btn-group btn-group-sm mr-2 mb-2"> 
+                                                        <span class="btn btn-default btn-sm"> <?=language('PRICE');?> </span>
+                                                        <span class="btn btn-sm btn-default">Rp. 2.000.000</span>
+                                                    </div>
+                                                    <div class="btn-group btn-group-sm mr-2 mb-2"> 
+                                                        <span class="btn btn-default btn-sm"> <?=language('SOLD');?> </span>
+                                                        <span class="btn btn-sm btn-default">321 PCS</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="dropdown text-right">
+                                    <a class="dropdown-toggle dropdown-ellipsis" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="<?php echo base_url('pages/form'); ?>">
+                                            <i class="fas fa-pencil-alt"></i>
+                                            Edit
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fa fa-eye"></i>
+                                            View
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fas fa-chart-bar"></i>
+                                            Stats
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fa fa-copy"></i>
+                                            Copy
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fa fa-trash"></i>
+                                            Trash
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

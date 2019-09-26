@@ -1,0 +1,269 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12">
+            <?=view('settings/nav', [], true);?>
+
+            <form action="<?= current_url() ?>" method="post" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <h5 class="mb-0">Discussion</h5>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-primary" type="submit">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Default Article Setting</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="allow_notification" value="off" />
+                                    <input type="checkbox" name="allow_notification" <?= ($settings->fetch('allow_notification') ? ($settings->fetch('allow_notification')->allow_notification == 'on' ? 'checked' : '') : '' ) ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                Allow Notification From Linked Articles
+                            </label>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="allow_comments" value="off" />
+                                    <input type="checkbox" name="allow_comments" <?= ($settings->fetch('allow_comments') ? ($settings->fetch('allow_comments')->allow_comments == 'on' ? 'checked' : '') : '' ) ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                Allow Comments
+                            </label>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="new_article_allow_comments" value="off" />
+                                    <input type="checkbox" name="new_article_allow_comments" <?= ($settings->fetch('new_article_allow_comments') ? ($settings->fetch('new_article_allow_comments')->new_article_allow_comments == 'on' ? 'checked' : '') : '' ) ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                Allow People Comment New Articles
+                            </label>
+                        </div>
+                        <span class="form-text text-muted">These settings may be overridden for individual articles.</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Comments</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="comment_must_fill_email" value="off" />
+                                    <input type="checkbox" name="comment_must_fill_email" <?= ($settings->fetch('comment_must_fill_email') ? ($settings->fetch('comment_must_fill_email')->comment_must_fill_email == 'on' ? 'checked' : '') : '' ) ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                Comment Author Must Fill Email
+                            </label>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="comment_must_login" value="off" />
+                                    <input type="checkbox" name="comment_must_login" <?= ($settings->fetch('comment_must_login') ? ($settings->fetch('comment_must_login')->comment_must_login == 'on' ? 'checked' : '') : '' ) ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                Users must be registered and logged in to comment
+                            </label>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="auto_close_comment_older" value="off" />
+                                    <input type="checkbox" name="auto_close_comment_older" <?= ($settings->fetch('auto_close_comment_older') ? ($settings->fetch('auto_close_comment_older')->auto_close_comment_older == 'on' ? 'checked' : '') : '' ) ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                Automatically close comments on articles older than <input style="width: 80px" value="<?= ($settings->fetch('auto_close_comment_days') ? ($settings->fetch('auto_close_comment_days')->auto_close_comment_days != null ? $settings->fetch('auto_close_comment_days')->auto_close_comment_days : '') : '' ) ?>" type="number" name="auto_close_comment_days" class="form-control d-inline-block" /> days
+                            </label>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="enable_thread_comment" value="off" />
+                                    <input type="checkbox" name="enable_thread_comment" <?= ($settings->fetch('enable_thread_comment') ? ($settings->fetch('enable_thread_comment')->enable_thread_comment == 'on' ? 'checked' : '') : '' ) ?>> 
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                Enable threaded (nested) comments up to <input style="width: 80px" type="number" name="enable_thread_comment_levels" value="<?= ($settings->fetch('enable_thread_comment_levels') ? ($settings->fetch('enable_thread_comment_levels')->enable_thread_comment_levels != null ? $settings->fetch('enable_thread_comment_levels')->enable_thread_comment_levels : '') : '' ) ?>" class="form-control d-inline-block"/> levels deep
+                            </label>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="breaks_comment" value="off" />
+                                    <input type="checkbox" name="breaks_comment" <?= ($settings->fetch('breaks_comment') ? ($settings->fetch('breaks_comment')->breaks_comment == 'on' ? 'checked' : '') : '' ) ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                Break comments into pages with <input style="width: 80px" type="number" value="<?= ($settings->fetch('breaks_comment_pages') ? ($settings->fetch('breaks_comment_pages')->breaks_comment_pages != null ? $settings->fetch('breaks_comment_pages')->breaks_comment_pages : '') : '' ) ?>" name="breaks_comment_pages" class="form-control d-inline-block"/> top level comments per page and the
+                                <select class="form-control custom-select d-inline-block" style="width: 20%" name="breaks_comment_pages_select">
+                                    <option value="FIRST">First</option>
+                                    <option value="LAST">Last</option>
+                                </select>
+                                page displayed by default
+                            </label>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="comment_top_older" value="off" />
+                                    <input type="checkbox" name="comment_top_older" <?= ($settings->fetch('comment_top_older') ? ($settings->fetch('comment_top_older')->comment_top_older == 'on' ? 'checked' : '') : '' ) ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                Comments should be displayed with the older comments at the top of each page
+                            </label>
+                        </div>
+                    </div>
+                    <hr class="m-0">
+                    <div class="card-body">
+                        <div class="form-group mb-0">
+                            <label>Email Me Whenever</label>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="anyone_comment" value="off" />
+                                    <input type="checkbox" name="anyone_comment" <?= ($settings->fetch('anyone_comment') ? ($settings->fetch('anyone_comment')->anyone_comment == 'on' ? 'checked' : '') : '' ) ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                Anyone posts a comment
+                            </label>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="comment_held_mod" value="off" />
+                                    <input type="checkbox" name="comment_held_mod" <?= ($settings->fetch('comment_held_mod') ? ($settings->fetch('comment_held_mod')->comment_held_mod == 'on' ? 'checked' : '') : '' ) ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                A comment is held for moderation
+                            </label>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="notify_like" value="off" />
+                                    <input type="checkbox" name="notify_like" <?= ($settings->fetch('notify_like') ? ($settings->fetch('notify_like')->notify_like == 'on' ? 'checked' : '') : '' ) ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                Someone likes one of my posts
+                            </label>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="notify_reblog" value="off" />
+                                    <input type="checkbox" name="notify_reblog" <?= ($settings->fetch('notify_reblog') ? ($settings->fetch('notify_reblog')->notify_reblog == 'on' ? 'checked' : '') : '' ) ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                Someone reblogs one of my posts
+                            </label>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="notify_follow_blog" value="off" />
+                                    <input type="checkbox" name="notify_follow_blog" <?= ($settings->fetch('notify_follow_blog') ? ($settings->fetch('notify_follow_blog')->notify_follow_blog == 'on' ? 'checked' : '') : '' ) ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                Someone follows my blog
+                            </label>
+                        </div>
+                    </div>
+                    <hr class="m-0">
+                    <div class="card-body">
+                        <div class="form-group mb-0">
+                            <label>Before a comment appears</label>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="moderation_manually" value="off" />
+                                    <input type="checkbox" name="moderation_manually" <?= ($settings->fetch('moderation_manually') ? ($settings->fetch('moderation_manually')->moderation_manually == 'on' ? 'checked' : '') : '' ) ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                Comment must be manually approved
+                            </label>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="previously_approved" value="off" />
+                                    <input type="checkbox" name="previously_approved" <?= ($settings->fetch('previously_approved') ? ($settings->fetch('previously_approved')->previously_approved == 'on' ? 'checked' : '') : '' ) ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                Comment author must have a previously approved comment
+                            </label>
+                        </div>
+                    </div>
+                    <hr class="m-0">
+                    <div class="card-body">
+                        <div class="form-group mb-0">
+                            <label>Comment Moderation</label>
+                        </div>
+                        <p>Hold a comment in the queue if it contains <input style="width: 80px" type="number" name="comment_links_moderation" value="<?= ($settings->fetch('comment_links_moderation') ? ($settings->fetch('comment_links_moderation')->comment_links_moderation != null ? $settings->fetch('comment_links_moderation')->comment_links_moderation : '10') : '10' ) ?>" class="form-control d-inline-block"/> or more links. (A common characteristic of comment spam is a large number of hyperlinks.)</p>
+                        <p>When a comment contains any of these words in its content, name, URL, e-mail, or IP, it will be held in the moderation queue. One word or IP per line. It will match inside words.</p>
+                        <div class="form-group">
+                            <textarea class="form-control" name="comment_onhold"><?= ($settings->fetch('comment_onhold') ? ($settings->fetch('comment_onhold')->comment_onhold != null ? $settings->fetch('comment_onhold')->comment_onhold : '') : '' ) ?></textarea>
+                        </div>
+                    </div>
+                    <hr class="m-0">
+                    <div class="card-body">
+                        <div class="form-group mb-0">
+                            <label>Comment Blacklists</label>
+                        </div>
+                        <p>When a comment contains any of these words in its content, name, URL, e-mail, or IP, it will be held in the moderation queue. One word or IP per line. It will match inside words.</p>
+                        <div class="form-group">
+                            <textarea class="form-control" name="comment_blacklist"><?= ($settings->fetch('comment_blacklist') ? ($settings->fetch('comment_blacklist')->comment_blacklist != null ? $settings->fetch('comment_blacklist')->comment_blacklist : '') : '' ) ?></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

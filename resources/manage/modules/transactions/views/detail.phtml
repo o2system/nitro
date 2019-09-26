@@ -1,0 +1,269 @@
+<div class="page-transactions">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <h5 class="mb-0">Detail Pesanan</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-md-auto">
+                        <div class="media align-items-center">
+                            <div class="avatar-30 mr-3">
+                                <img src="assets/img/avatar-female.png" alt="">
+                            </div>
+                            <div class="media-body">
+                                <h5 class="mb-0">
+                                    <a href="<?=base_url('transactions/detail',['id'    => $transaction->id]);?>">PT. Kredit Impian</a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <?php if($transaction->latestLog->status === 'WAITING_FOR_CONFIRMATION'):?>
+                        <div class="col-md-auto">
+                            <a href="<?=base_url('transactions/approval',['id' => $transaction->id]);?>"><?=$language->getLine('APPROVAL');?></a>
+                        </div>
+                    <?php elseif ($transaction->latestLog->status === 'PAID'):?>
+                        <div class="col-md-auto">
+                            <a href="<?=base_url('transactions/approval-down-payment',['id' => $transaction->id]);?>"><?=$language->getLine('CONFIRM_PAID_DOWN_PAYMENT');?></a>
+                        </div>
+                    <?php endif;?>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-5 border-right">
+                        <div class="media">
+                            <div class="avatar-30 mr-3">
+                                <img src="<?=$transaction->memberTransaction->member->image;?>" alt="">
+                            </div>
+                            <div class="media-body">
+                                <h5 class="mb-0">
+                                    <a href="<?=base_url('transactions/detail',['id'    => $transaction->id]);?>"><?= $transaction->memberTransaction->member->fullname ?> (ID Member <?= $transaction->memberTransaction->member->number ?>)</a>
+                                </h5>
+                                <p>(<?=$transaction->number;?>)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 border-right">
+                        <p class="mb-0">Status</p>
+                        <h5><h5><?= $transaction->latestLog->status ?></h5></h5>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="mb-0">Total Belanja</p>
+                        <h5 class="text-primary"><?=$transaction->product->currency ? $transaction->product->currency->iso : 'IDR' ?> <?= number_format($transaction->product->price_sale,0,',','.') ?></h5>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-5 border-right">
+                        <div class="media align-items-center">
+                            <div class="avatar-80 mr-3">
+                                <img src="<?=$transaction->product->image;?>" alt="">
+                            </div>
+                            <div class="media-body">
+                                <h5 class="d-flex align-items-center">
+                                    <span class="btn btn-default btn-xs mr-2 text-uppercase"><?= $transaction->product->sku ?></span>
+                                    <a href="#" target="_blank"><?= $transaction->product->name ?></a>
+                                </h5>
+                                <p><?=$transaction->product->currency ? $transaction->product->currency->iso : 'IDR' ?>. <?= number_format($transaction->product->price_sale,0,',','.') ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <?php if($transaction->product->method):?>
+                        <div class="col-md-7 border-right">
+                            <div class="media align-items-center">
+                                <div class="avatar-80 mr-3">
+                                    <img src="<?=$transaction->product->imagePrevious;?>" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="d-flex align-items-center">
+                                        <?=$language->getLine('PRODUCT_REQUEST');?>
+                                    </h5>
+                                    <?=$language->getLine('METHOD');?> : <span class="badge badge-info"><?=$language->getLine($transaction->product->method);?></span>
+                                    <p><?=$transaction->product->content?></p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php else:?>
+                        <div class="col-md-7 border-right">
+                            <div class="media align-items-center">
+                                <div class="avatar-80 mr-3">
+                                    <img src="<?=$transaction->product->image;?>" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="d-flex align-items-center">
+                                        <span class="btn btn-default btn-xs mr-2 text-uppercase"><?= $transaction->product->sku ?></span>
+                                        <a href="#" target="_blank"><?= $transaction->product->name ?></a>
+                                    </h5>
+                                    <p><?=$transaction->product->currency ? $transaction->product->currency->iso : 'IDR' ?>. <?= number_format($transaction->product->price_sale,0,',','.') ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif;?>
+                </div>
+            </div>
+        </div>
+        <?php if($metadata = $transaction->metadata):?>
+            <?php if($metadata->count()):?>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Transaction</h5>
+                    </div>
+                    <div class="card-body with-table">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td width="70%"><?=$language->getLine('PAYMENT_METHOD');?></td>
+                                        <td><?=$metadata->payment_method;?></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="70%"><?=$language->getLine('CURRIER');?></td>
+                                        <td><?=$metadata->currier;?></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="70%"><?=$language->getLine('DOWN_PAYMENT');?></td>
+                                        <td><?=$metadata->down_payment;?></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="70%"><?=$language->getLine('CREDITOR');?></td>
+                                        <td><?=$transaction->creditor->name;?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <?php endif;?>
+        <?php endif;?>
+        <?php if($transaction->installment):?>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Installment</h5>
+                </div>
+                <div class="card-body with-table">
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <tbody>
+                            <?php foreach ($transaction->installment as $name => $content):?>
+                                <tr>
+                                    <td width="70%"><?=$language->getLine('MONTH') .'-'.$name;?></td>
+                                    <td><?=$content;?></td>
+                                </tr>
+                            <?php endforeach?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        <?php endif;?>
+        <?php if($transaction->postal_fee):?>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><?=$language->getLine('POSTAL_FEE');?></h5>
+                </div>
+                <div class="card-body with-table">
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <tbody>
+                            <?php foreach ($transaction->postal_fee as $name => $content):?>
+                                <?php if($name === 'costs'):?>
+                                    <?php foreach ($content as $key => $values):?>
+                                        <tr>
+                                            <td width="70%">SERVICE</td>
+                                            <td><?=$values->service;?></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="70%">DESCRIPTION</td>
+                                            <td><?=$values->description;?></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="70%">VALUE</td>
+                                            <td><?=$values->cost[0]->value;?></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="70%">ETD</td>
+                                            <td><?=$values->cost[0]->etd;?></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="70%">NOTE</td>
+                                            <td><?=$values->cost[0]->note;?></td>
+                                        </tr>
+                                    <?php endforeach;?>
+                                <?php else:?>
+                                    <tr>
+                                        <td width="70%"><?=$name;?></td>
+                                        <td><?=$content;?></td>
+                                    </tr>
+                                <?php endif;?>
+                            <?php endforeach?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        <?php endif;?>
+        <?php if($transaction->shipping):?>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Shipping</h5>
+            </div>
+            <div class="card-body with-table">
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <tbody>
+                        <?php foreach ($transaction->shipping as $name => $content):?>
+                            <tr>
+                                <td width="70%"><?=$name;?></td>
+                                <td><?=$content;?></td>
+                            </tr>
+                        <?php endforeach?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <?php endif;?>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Status</h5>
+            </div>
+            <div class="card-body">
+                <div class="tracker-list v2">
+                    <?php if($transaction->logs):?>
+                        <?php foreach ($transaction->logs as $log):?>
+                        <div class="tracker-item active">
+                            <div class="d-flex align-items-strech">
+                                <div class="tracker-body text-right">
+                                    <div class="mb-1">
+                                        <span class="badge badge-light no-radius text--grey"><?=$log->status;?></span>
+                                    </div>
+                                </div>
+                                <div class="tracker-body">
+                                    <div class="tracker-dot"></div>
+                                    <div class="tracker-head">
+                                        <span class="status-track"><?=date('d, M Y', strtotime($log->timestamp));?></span>
+                                    </div>
+                                    <div class="tracker-desc">
+                                        <?=date('h:i:s', strtotime($log->timestamp));?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endforeach;?>
+                    <?php endif;?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

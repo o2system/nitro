@@ -1,0 +1,110 @@
+<div class="page-transactions">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form action="" enctype="multipart/form-data" method="post" id="form-api">
+                    <input type="file" name="upload" class="fade">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-md-auto">
+                                    <div class="media align-items-center">
+                                        <div class="avatar-30 mr-3">
+                                            <img src="<?=$transaction->product->image;?>" alt="<?=$transaction->product->name;?>">
+                                        </div>
+                                        <div class="media-body">
+                                            <h6 class="mb-0"><?=$transaction->product->name;?></h6>
+                                            <p class="mb-0"><?=$transaction->product->price_sale;?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-auto">
+                                    <h6>
+                                        <a href="#"><?=$transaction->number;?></a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body chat-body">
+                            <?php if($transaction->chats):?>
+                                <?php foreach ($transaction->chats as $chat):?>
+                                    <div class="<?php echo globals()->account->user->id === $chat->id_sys_user ? 'sent' : 'replies' ;?>">
+                                        <div class="media flex-row-reverse">
+                                            <div class="avatar-30 ml-3">
+                                                <img src="<?=$chat->user->image;?>" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="media-item-file-details">
+                                                <img src="<?=$chat->image;?>" alt="" class="img-fluid">
+                                                </div>
+                                                <div class="card bg-primary">
+                                                    <div class="card-body">
+                                                        <p class="mb-0 text-white"><?=$chat->message;?></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach;?>
+                            <?php  endif;?>
+                        </div>
+                        <input type="hidden" name="id_sys_user" value="<?=globals()->account->user->id;?>">
+                        <input type="hidden" name="id_transaction" value="<?=$transaction->id;?>">
+                        <div class="card-footer">
+                            <div class="input-group">
+                                <input type="text" name="metadata[message]" class="form-control" placeholder="Type message...">
+                                <div class="input-group-append input-group-prepend">
+                                    <a id="trigger-file" class="btn btn-default">
+                                        <i class="fas fa-image"></i>
+                                    </a>
+                                </div>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sent fade" data-tpl="item">
+    <div class="media flex-row-reverse">
+        <div class="avatar-30 ml-3">
+            <img src="" alt="" data-value="avatar">
+        </div>
+        <div class="media-body">
+            <img src="" alt="" data-value="image">
+            <div class="card bg-primary">
+                <div class="card-body">
+                    <p class="mb-0 text-white" data-value="message"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#form-api').on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: "<?=domain_url('transactions/chats/create',null,'api');?>",
+            type:"post",
+            data:new FormData(this),
+            dataType: 'json',
+            contentType: false,
+            cache: false,
+            processData:false,
+            beforeSend: function(){
+                $(this).find('[type="submit"]').remove();
+            },
+            success: function(){
+                location.reload();
+            }
+        });
+    });
+
+    $('#trigger-file').on('click', function () {
+       $('[name="upload"]').trigger('click');
+    });
+</script>

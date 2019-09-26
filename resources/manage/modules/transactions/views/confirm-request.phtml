@@ -1,0 +1,93 @@
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form method="post" action="<?php echo current_url();?>" enctype="multipart/form-data">
+                    <div class="card">
+                        <h5 class="card-header d-flex justify-content-between align-items-center">
+                            <?php echo $page->title; ?>
+
+                            <div class="card-options">
+                                <button type="button" class="btn btn-default btn-md" data-action="cancel">
+                                    <?php echo $language->getLine('BTN_CANCEL'); ?>
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-md">
+                                    <?php echo $language->getLine('BTN_SAVE'); ?>
+                                </button>
+                            </div>
+                        </h5>
+                    </div>
+                    <div class="card">
+                        <div class="card-body" id="modal-form" data-title="<?php echo $page->header; ?>" data-action="<?php echo current_url(); ?>">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="file" class="dropify" name="photo" data-default-file="<?= $transaction->image ?>" data-height="175" >
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label><?php echo $language->getLine('CATEGORY'); ?></label>
+                                        <select name="id_product_category" class="form-control">
+                                            <?php if($options->categories):?>
+                                                <?php foreach ($options->categories as $category):?>
+                                                    <option value="<?=$category->id;?>"
+                                                            <?php echo $category->id === $transaction->product->id_product_category ? 'selected': ''?>
+                                                    ><?=$category->name;?></option>
+                                                <?php endforeach;?>
+                                            <?php endif;?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label><?php echo $language->getLine('CITIES_OF_BYE_PRODUCT'); ?></label>
+                                        <select name="metadata[company][id_geodirectory]" class="form-control">
+                                            <?php if($options->origins):?>
+                                                <?php foreach ($options->origins as $origin):?>
+                                                    <option value="<?=$origin['city_id'];?>"
+                                                    ><?=$origin['city_name'];?></option>
+                                                <?php endforeach;?>
+                                            <?php endif;?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label><?php echo $language->getLine('WEIGHT'); ?></label>
+                                        <input class="form-control" name="metadata[weight_value]">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><?php echo $language->getLine('NAME_PRODUCT'); ?></label>
+                                        <input type="text"  name="name"  class="form-control" required value="<?= $transaction->product->name ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><?php echo $language->getLine('PRICE'); ?></label>
+                                        <div class="input-group">
+                                            <select name="id_currency" class="select-dropdown">
+                                                <?php if($options->currencies):?>
+                                                    <?php foreach ($options->currencies as $currency):?>
+                                                        <option value="<?=$currency->id;?>"
+                                                            <?php if($transaction->product->currency):?>
+                                                                <?php echo $currency->id === $transaction->product->currency->id ? 'selected': ''?>
+                                                            <?php else:?>
+                                                                <?php if($currency->id == 58):?>
+                                                                    selected
+                                                                <?php endif;?>
+                                                            <?php endif;?>
+                                                            ><?=$currency->iso;?></option>
+                                                    <?php endforeach;?>
+                                                <?php endif;?>
+                                            </select>
+                                            <input class="form-control" value="<?=$transaction->product->price_sale;?>" name="price_sale">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="metadata-address-street"><?php echo $language->getLine('ADDRESS'); ?></label>
+                                        <textarea id="metadata-address-street" class="form-control" name="description"><?= $transaction->product->description;?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

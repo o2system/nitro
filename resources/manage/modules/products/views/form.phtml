@@ -1,0 +1,680 @@
+<div class="container-fluid">
+    <form id="form-data" method="post" action="<?= base_url('/products/form') ?>" enctype="multipart/form-data">
+        <?php if ($post->id): ?>
+            <input type="hidden" name="id" value="<?= $post->id ?>">
+        <?php endif; ?>
+        <div class="card">
+            <h5 class="card-header d-flex justify-content-between align-items-center">
+                <?php echo $page->title; ?>
+
+                <div class="card-options">
+                    <button type="button" class="btn btn-default btn-md" data-action="cancel">
+                        <?php echo $language->getLine('BTN_CANCEL'); ?>
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-md">
+                        <?php echo $language->getLine('BTN_SAVE'); ?>
+                    </button>
+                </div>
+            </h5>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="product-add-feature">
+                    <div class="prod-add-input-wrap d-flex justify-content-center  align-items-center">
+                        <div class="prod-add-item-list-thumb d-flex justify-content-start  align-items-center">
+                            <?php if ($post->images): ?>
+                                <?php $no=1; foreach ($post->images as $image): ?>
+                                    <div class="prod-item-thumb">
+                                        <img id="imgProdThumb<?= $no++ ?>" class="thumb" src="<?= $image['image'] ?>">
+                                        <a class="btn btn-light removeProd">
+                                            <i class="far fa-trash-alt">
+                                            </i>
+                                        </a>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </div>
+                        <div class="prod-add-item-list d-flex justify-content-center align-items-center">
+                            <div class="prod-add-input-item">
+                                <input type="file" name="main" />
+                                <div class="prod-add-item-container">
+                                    <span>Utama</span>
+                                </div>
+                            </div>
+                            <div class="prod-add-input-item">
+                                <input type="file" name="front" />
+                                <div class="prod-add-item-container">
+                                    <span>depan</span>
+                                </div>
+                            </div>
+                            <div class="prod-add-input-item">
+                                <input type="file" name="side" />
+                                <div class="prod-add-item-container">
+                                    <span>samping</span>
+                                </div>
+                            </div>
+                            <div class="prod-add-input-item">
+                                <input type="file" name="top" />
+                                <div class="prod-add-item-container">
+                                    <span>atas</span>
+                                </div>
+                            </div>
+                            <div class="prod-add-input-item">
+                                <input type="file" name="detail" />
+                                <div class="prod-add-item-container">
+                                    <span>detail</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <h5 class="card-header">
+                        Product Name
+                    </h5>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="name" value="<?= $post->name ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-link"></i>
+                                    </span>
+                                </div>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <?=domain_url('products/', [], null);?>/
+                                    </span>
+                                </div>
+                                <input class="form-control" name="slug" value="<?= $post->slug ?>" <?= ($post->slug ? 'disabled' : '') ?> type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5 class="card-header">
+                        Description
+                    </h5>
+                    <div class="card-body p-0 post-editor">
+                        <div class="form-group row mb-0">
+                            <div class="col-md-12">
+                                <textarea class="form-control tinymce" name="description"><?= $post->description ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5 class="card-header">
+                        Product Management
+                    </h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Harga Pokok</label>
+                                    <input type="number" min="0" class="form-control" name="price_capital" value="<?= $post->price_capital ?>" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Harga Jual</label>
+                                    <input type="number" min="0" class="form-control" name="price_sale" value="<?= $post->price_sale ?>" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>SKU (Stock Keeping Unit)</label>
+                                    <input type="text" class="form-control" name="sku" value="<?= $post->sku ?>">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Stock</label>
+                                    <input type="number" min="0" class="form-control" name="stock" value="<?= $post->stock ?>" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <h5 class="mb-0">Product Variant</h5>
+                            </div>
+                            <div class="col-auto">
+                                <button data-action="add-item" class="btn btn-primary">
+                                    Add Variant
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Add product variant such as color, size or others.</p>
+                        <?php if ($post->variants): ?>
+                            <?php foreach ($post->variants as $variant): ?>
+                                <input type="hidden" name="variant[id][]" value="<?= $variant->id ?>">
+                                <div data-tpl="item">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="input-upload-cs-circle mx-auto uploadProdBtn">
+                                                <div class="upload-cs-wrap">
+                                                    <input type="file" name="variant-0" />
+                                                    <span class="fas fa-camera"></span>
+                                                    <img class="ImgUploadProd" src="" alt="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Label</label>
+                                                        <select class="form-control custom-select" name="variant[name][]">
+                                                            <?php foreach ($variant_name as $key => $value): ?>
+                                                                <option value="<?= $key ?>" <?= ($variant->name == $key ? 'selected' : '') ?>><?= $value ?></option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Value</label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" name="variant[value][]" value="<?= $variant->value ?>">
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-danger" data-action="remove-item"><i class="fas fa-trash"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <label>Price</label>
+                                                        <input type="number" min="0" placeholder="Price" class="form-control" name="variant[price_additional][]" value="<?= $variant->price_additional ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>SKU</label>
+                                                        <input type="text" class="form-control" placeholder="SKU" name="variant[sku][]" value="<?= $variant->sku ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Stock</label>
+                                                        <input type="number" min="0" placeholder="Stock" class="form-control" name="variant[stock][]" value="<?= $variant->stock ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                            <?php endforeach ?>
+                        <?php endif; ?>
+                        <div data-tpl="item" class="d-none">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="input-upload-cs-circle mx-auto uploadProdBtn">
+                                        <div class="upload-cs-wrap">
+                                            <input type="file" name="variant-0" />
+                                            <span class="fas fa-camera"></span>
+                                            <img class="ImgUploadProd" src="" alt="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Label</label>
+                                                <select class="form-control custom-select" name="variant[name][]">
+                                                    <?php foreach ($variant_name as $key => $value): ?>
+                                                        <option value="<?= $key ?>"><?= $value ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Value</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="variant[value][]">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-danger" data-action="remove-item"><i class="fas fa-trash"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label>Price</label>
+                                                <input type="number" min="0" placeholder="Price" class="form-control" name="variant[price_additional][]">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>SKU</label>
+                                                <input type="text" class="form-control" placeholder="SKU" name="variant[sku][]">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Stock</label>
+                                                <input type="number" min="0" placeholder="Stock" class="form-control" name="variant[stock][]">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <h5 class="mb-0">Wholesale Price</h5>
+                            </div>
+                            <div class="col-auto">
+                                <button data-action="add-item" class="btn btn-primary">
+                                    Add Wholesale Price
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Add Wholesale Price</p>
+                        <?php if ($post->wholesales): ?>
+                            <?php foreach ($post->wholesales as $wholesale): ?>
+                                <div data-tpl="item">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            &ge;
+                                                        </span>
+                                                    </div>
+                                                    <input type="number" min="1" class="form-control" placeholder="5" name="meta[wholesale][wholesale_unit][]" value="<?= $wholesale['wholesale_unit'] ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        Rp.
+                                                    </span>
+                                                </div>
+                                                <input type="number" min="1" class="form-control" placeholder="Wholesale Price" name="meta[wholesale][wholesale_price][]" value="<?= $wholesale['wholesale_price'] ?>">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-danger" data-action="remove-item"><i class="fas fa-trash"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach ?>
+                        <?php endif; ?>
+                        <div data-tpl="item" class="d-none">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    &ge;
+                                                </span>
+                                            </div>
+                                            <input type="number" min="1" class="form-control" placeholder="5" name="meta[wholesale][wholesale_unit][]">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                Rp.
+                                            </span>
+                                        </div>
+                                        <input type="number" min="1" class="form-control" placeholder="Wholesale Price" name="meta[wholesale][wholesale_price][]">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-danger" data-action="remove-item"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <h5 class="card-header">
+                        Product Categories
+                    </h5>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <select class="form-control custom-select select-dropdown" data-live-search="true" name="id_product_category" placeholder="Select or Add">
+                                <?php if ($categories): ?>
+                                    <?php foreach ($categories as $category): ?>
+                                        <option value="<?= $category->id ?>" <?= ($post->id_product_category == $category->id ? 'selected' : '') ?>><?= $category->name ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5 class="card-header">
+                        Merchants
+                    </h5>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <select class="form-control custom-select select-dropdown" data-live-search="true" name="id_company" placeholder="Select or Add">
+                                <?php if ($merchants): ?>
+                                    <?php foreach ($merchants as $merchant): ?>
+                                        <option value="<?= $merchant->id ?>" <?= (($post->merchant ? $post->merchant->id : '') == $merchant->id ? 'selected' : '') ?>><?= $merchant->name ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5 class="card-header">
+                        Currencies
+                    </h5>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <select class="form-control custom-select select-dropdown" data-live-search="true" name="id_currency" placeholder="Select or Add">
+                                <?php if ($currencies): ?>
+                                    <?php foreach ($currencies as $currency): ?>
+                                        <option value="<?= $currency->id ?>" <?= ($post->id_currency == $currency->id ? 'selected' : '') ?>><?= $currency->name ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5 class="card-header">
+                        Condition
+                    </h5>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <select class="form-control custom-select select-dropdown" data-live-search="true" name="condition" placeholder="Select or Add">
+                                <?php if ($conditions): ?>
+                                    <?php foreach ($conditions as $key => $value): ?>
+                                        <option value="<?= $key ?>" <?= ($post->condition == $key ? 'selected' : '') ?>><?= $value ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="custom-select form-control" name="record_status">
+                                <?php foreach ($status as $key => $value): ?>
+                                    <option value="<?= $key ?>" <?= ($post->record ? ($post->record->status == $key ? 'selected' : '') : '') ?>><?= $value ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Visibility</label>
+                            <select class="custom-select form-control" name="visibility">
+                                <?php if ($visibility): ?>
+                                    <?php foreach ($visibility as $key => $value): ?>
+                                        <option value="<?= $key ?>" <?= $post->visibility == $key ? 'selected' : '' ?>><?= $value ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h5 class="card-header">Weight & Shipping</h5>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Weight</label>
+                            <div class="input-group">
+                                <input type="number" min="0" name="meta[weight_value]" class="form-control" placeholder="Weight" value="<?= ($post->metadata ? ($post->metadata->weight_value ? $post->metadata->weight_value : '') : '') ?>">
+                                <select name="meta[weight]" class="custom-select">
+                                <?php foreach ($weight as $key => $value): ?>
+                                    <option value="<?= $key ?>" <?= ($post->metadata ? ($post->metadata->weight ? ($post->metadata->weight == $key ?  'selected' : '') : '') : '') ?>><?= $value ?></option>
+                                <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Length</label>
+                            <div class="input-group">
+                                <input type="number" min="0" name="meta[length_value]" class="form-control" placeholder="Length" value="<?= ($post->metadata ? ($post->metadata->length_value ? $post->metadata->length_value : '') : '') ?>">
+                                <select name="meta[length]" class="custom-select">
+                                <?php foreach ($length_width_height as $key => $value): ?>
+                                    <option value="<?= $key ?>" <?= ($post->metadata ? ($post->metadata->length ? ($post->metadata->length == $key ?  'selected' : '') : '') : '') ?>><?= $value ?></option>
+                                <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Width</label>
+                            <div class="input-group">
+                                <input type="number" min="0" name="meta[width_value]" class="form-control" placeholder="Width" value="<?= ($post->metadata ? ($post->metadata->width_value ? $post->metadata->width_value : '') : '') ?>">
+                                <select name="meta[width]" class="custom-select">
+                                <?php foreach ($length_width_height as $key => $value): ?>
+                                    <option value="<?= $key ?>" <?= ($post->metadata ? ($post->metadata->width ? ($post->metadata->width == $key ?  'selected' : '') : '') : '') ?>><?= $value ?></option>
+                                <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Height</label>
+                            <div class="input-group">
+                                <input type="number" min="0" name="meta[height_value]" class="form-control" placeholder="Height" value="<?= ($post->metadata ? ($post->metadata->height_value ? $post->metadata->height_value : '') : '') ?>">
+                                <select name="meta[height]" class="custom-select">
+                                <?php foreach ($length_width_height as $key => $value): ?>
+                                    <option value="<?= $key ?>" <?= ($post->metadata ? ($post->metadata->height ? ($post->metadata->height == $key ?  'selected' : '') : '') : '') ?>><?= $value ?></option>
+                                <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Insurance</label>
+                            <select name="meta[insurance]" class="custom-select">
+                                <?php foreach ($insurance as $key => $value): ?>
+                                    <option value="<?= $key ?>" <?= ($post->metadata ? ($post->metadata->insurance ? ($post->metadata->insurance == $key ?  'selected' : '') : '') : '') ?>><?= $value ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h5 class="card-header">Delivery</h5>
+                    <div class="card-body">
+                        <div class="form-group d-flex justify-content-between align-items-center">
+                            <label class="mb-0">Deliverable</label>
+                            <label class="switch">
+                                <input type="hidden" name="deliverable" value="NO">
+                                <input type="checkbox" name="deliverable" value="YES" <?= ($post->deliverable ? ($post->deliverable == 'YES' ? 'checked' : '') : '') ?>>
+                                <span></span> 
+                            </label>
+                        </div>
+                        <div class="form-group d-flex justify-content-between align-items-center">
+                            <label class="mb-0">Download</label>
+                            <label class="switch">
+                                <input type="hidden" name="downloadable" value="NO">
+                                <input type="checkbox" name="downloadable" value="YES" <?= ($post->downloadable ? ($post->downloadable == 'YES' ? 'checked' : '') : '') ?>>
+                                <span></span> 
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h5 class="card-header">
+                        Tags
+                    </h5>
+                    <div class="card-body">
+                        <div class="form-group mb-0">
+                            <input type="text" name="meta[tags]" data-role="tagsinput" value="<?= ($post->metadata ? ($post->metadata->tags ? $post->metadata->tags : '') : '') ?>" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h5 class="card-header">Target</h5>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Target Jenis Kelamin</label>
+                            <select name="target_gender" class="custom-select">
+                                <?php if ($target_gender): ?>
+                                    <?php foreach ($target_gender as $key => $value): ?>
+                                        <option value="<?= $key ?>" <?= $post->target_gender == $key ? 'selected' : '' ?>><?= $value ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Target Umur</label>
+                            <select name="target_age" class="custom-select">
+                                <?php if ($target_age): ?>
+                                    <?php foreach ($target_age as $key => $value): ?>
+                                        <option value="<?= $key ?>" <?= $post->target_age == $key ? 'selected' : '' ?>><?= $value ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h5 class="card-header">Sharing</h5>
+                    <div class="card-body">
+                        <div class="form-group d-flex justify-content-between align-items-center">
+                            <label class="mb-0">Show sharing buttons</label>
+                            <label class="switch">
+                                <input type="hidden" name="meta[sharing_button]" value="off">
+                                <input type="checkbox" name="meta[sharing_button]" <?= ($post->metadata ? ($post->metadata->sharing_button ? ($post->metadata->sharing_button == 'on' ? 'checked' : '') : '') : '') ?>>
+                                <span></span> 
+                            </label>
+                        </div>
+                        <div class="form-group d-flex justify-content-between align-items-center">
+                            <label class="mb-0">Show like button</label>
+                            <label class="switch">
+                                <input type="hidden" name="meta[like_button]" value="off">
+                                <input type="checkbox" name="meta[like_button]" <?= ($post->metadata ? ($post->metadata->like_button ? ($post->metadata->like_button == 'on' ? 'checked' : '') : '') : '') ?>>
+                                <span></span> 
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h5 class="card-header">More Options</h5>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Excerpt</label>
+                            <textarea name="meta[excerpt]" class="form-control" placeholder="Write an excerpt"><?= ($post->metadata ? ($post->metadata->excerpt ? $post->metadata->excerpt : '') : '') ?></textarea>
+                        </div>
+                        <div class="form-group d-flex justify-content-between align-items-center">
+                            <label class="mb-0">Featured</label>
+                            <label class="switch">
+                                <input type="hidden" name="meta[featured]" value="off">
+                                <input type="checkbox" name="meta[featured]" <?= ($post->metadata ? ($post->metadata->featured ? ($post->metadata->featured == 'on' ? 'checked' : '') : '') : '') ?>>
+                                <span></span> 
+                            </label>
+                        </div>
+                        <div class="form-group mb-0">
+                            <label class="text-muted small">DISCUSSION</label>
+                        </div>
+                        <div class="form-group d-flex justify-content-between align-items-center">
+                            <label class="mb-0">Allow Comments</label>
+                            <label class="switch">
+                                <input type="hidden" name="meta[allow_comments]" value="off">
+                                <input type="checkbox" name="meta[allow_comments]" <?= ($post->metadata ? ($post->metadata->allow_comments ? ($post->metadata->allow_comments == 'on' ? 'checked' : '') : '') : '') ?>>
+                                <span></span> 
+                            </label>
+                        </div>
+                        <div class="form-group d-flex justify-content-between align-items-center mb-0">
+                            <label class="mb-0">Allow Pingbacks &amp; Trackbacks</label>
+                            <label class="switch">
+                                <input type="hidden" name="meta[allow_pingbacks]" value="off">
+                                <input type="checkbox" name="meta[allow_pingbacks]" <?= ($post->metadata ? ($post->metadata->allow_pingbacks ? ($post->metadata->allow_pingbacks == 'on' ? 'checked' : '') : '') : '') ?>>
+                                <span></span> 
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(document).on('click', '[data-action="add-item"]', function (e) {
+		e.preventDefault();
+		var row = $(this).parents('.card').find('[data-tpl="item"]');
+		var clone = row.clone();
+
+        clone.attr('data-tpl', 'item-cloned');
+        clone.removeClass('d-none')
+
+		clone.find('input').each(function () {
+			$(this).val('');
+        });
+        
+		row.before(clone);
+	});
+
+	$(document).on('click', '[data-action="remove-item"]', function (e) {
+		e.preventDefault();
+		$(this).parents('[data-tpl="item-cloned"]').remove();
+    });
+    
+    $(document).on('click', '[data-action="add-item-tr"]', function (e) {
+        e.preventDefault();
+        var row = $(this).parents('.card').find('[data-tpl="item"]');
+        var clone = row.clone();
+
+        clone.attr('data-tpl', 'item-cloned');
+        clone.removeClass('d-none');
+
+        clone.find('input').each(function () {
+            $(this).val('');
+        });
+        $(this).parents('.card').find('tbody').append(clone);
+    });
+
+    $(document).on('click', '[data-action="remove-item-tr"]', function (e) {
+        e.preventDefault();
+        $(this).parents('[data-tpl="item-cloned"]').remove();
+    });
+
+    $('.prod-item-thumb').each(function(index){
+        $('.prod-add-input-item').eq($(this).index(i)).addClass('hide-cs');
+    });
+</script>

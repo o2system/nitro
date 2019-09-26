@@ -1,0 +1,159 @@
+<div class="page-transactions">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header p-0 pl-3">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <h5 class="mb-0">Transactions</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-row align-items-center justify-content-end">
+                                    <div class="col-md-auto">
+                                        <div class="nav-pages">
+                                            <ul class="nav">
+                                                <li class="nav-item">
+                                                    <a href="<?= base_url('transactions'); ?>" class="nav-link active" data-toggle="tooltip" title="Grid View">
+                                                        <i class="fas fa-th-large"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="<?= base_url('transactions/table'); ?>" class="nav-link" data-toggle="tooltip" title="Table View">
+                                                        <i class="fas fa-table"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <form action="<?=current_url();?>">
+                            <div class="form-row align-items-center">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Entries</span>
+                                            </div>
+                                            <select name="entries" class="form-control custom-select">
+                                                <option>10</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Period</span>
+                                            </div>
+                                            <input class="form-control input-daterange-datepicker" type="text" name="period" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Keyword" value="" name="keyword">
+                                    </div>
+                                </div>
+                                <div class="col-md text-right">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">Filter</button>
+                                        <a class="btn btn-default" href="#">Reset</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- List -->
+        <div class="card">
+            <div class="card-header">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-md-auto">
+                        <div class="media align-items-center">
+                            <div class="avatar-30 mr-3">
+                                <img src="assets/img/avatar-female.png" alt="">
+                            </div>
+                            <div class="media-body">
+                                <h5 class="mb-0">
+                                    <a href="#">PT. Kredit Impian</a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <span>31 Agustus 2019 16:00 AM</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-5 border-right">
+                        <div class="media">
+                            <div class="avatar-30 mr-3">
+                                <img src="assets/img/avatar-female.png" alt="">
+                            </div>
+                            <div class="media-body">
+                                <h5 class="mb-0">
+                                    <a href="#">Annash (ID Member 123)</a>
+                                </h5>
+                                <p>(INV/20190805/XIX/VIII/349483812)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 border-right">
+                        <p class="mb-0">Status</p>
+                        <h5>Pesanan Selesai</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="mb-0">Total Belanja</p>
+                        <h5 class="text-primary">Rp. 2.000.000</h5>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-5 border-right">
+                        <div class="media align-items-center">
+                            <div class="avatar-80 mr-3">
+                                <img src="assets/img/avatar-female.png" alt="">
+                            </div>
+                            <div class="media-body">
+                                <h5 class="d-flex align-items-center">
+                                    <span class="btn btn-default btn-xs mr-2 text-uppercase">CODE</span>
+                                    <a href="#" target="_blank">Product Name</a>
+                                </h5>
+                                <p>Rp. 2.000.000</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <p class="mb-0">
+                            Total Harga Produk
+                        </p>
+                        <h5 class="text-primary">
+                            Rp. 2.000.000
+                        </h5>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="#" class="btn btn-primary btn-block">Beli Lagi</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <a href="<?=base_url('transactions/detail');?>">
+                    <i class="fas fa-eye"></i> View Order Detail
+                </a>
+            </div>
+        </div>
+        <!-- --------- -->
+    </div>
+</div>

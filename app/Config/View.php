@@ -23,7 +23,7 @@ $view = new \O2System\Kernel\DataStructures\Config([
          *
          * @var bool
          */
-        'debugToolBar' => false,
+        'debugToolBar' => true,
 
         // ------------------------------------------------------------------------
 

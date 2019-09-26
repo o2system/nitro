@@ -1,0 +1,122 @@
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12">
+            <?=view('settings/nav', [], true);?>
+
+            <form action="<?= current_url()  ?>" method="post" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <h5 class="mb-0">Contents</h5>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-primary" type="submit">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list-group mb-3">
+                    <a href="<?=base_url('master/taxonomies');?>" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">Categories</h6>
+                        </div>
+                        <p class="mb-0 text-muted"> <span class="fa fa-tag"></span> <?= ($total_taxonomies ? $total_taxonomies : 0) ?> Taxonomies</p>
+                    </a>
+                    <!-- <a href="<?=base_url('master/tags');?>" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">Tags</h6>
+                        </div>
+                        <p class="mb-0 text-muted"> <span class="fa fa-tag"></span> 0 Tags</p>
+                    </a> -->
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Composing</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="compose_show_publish_confirmation" value="off" />
+                                    <input type="checkbox" name="compose_show_publish_confirmation" <?= ($settings->fetch('compose_show_publish_confirmation') ? ($settings->fetch('compose_show_publish_confirmation')->compose_show_publish_confirmation == 'on' ? 'checked' : '') : '') ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                Show Publish Confirmation<br>
+                                <span class="form-text text-muted">This adds a confirmation step with helpful settings and tips for double-checking your content before publishing.</span>
+                            </label>
+                        </div>
+                    </div>
+                    <hr class="m-0">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Default Post Format</label>
+                                <select name="compose_post_format" class="form-control custom-select">
+                                    <?php foreach ($compose_post_format as $key => $value): ?>
+                                        <option value="<?= $key ?>" <?= ($settings->fetch('compose_post_format') ? ($settings->fetch('compose_post_format')->compose_post_format == $key ? 'selected' : '') : '') ?>><?= $value ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Default Time Format</label>
+                                <select value="" name="compose_time_format" class="form-control custom-select">
+                                    <?php foreach ($compose_time_format as $key => $value): ?>
+                                        <option value="<?= $key ?>" <?= ($settings->fetch('compose_time_format') ? ($settings->fetch('compose_time_format')->compose_time_format == $key ? 'selected' : '') : '') ?>><?= $value ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Display Settings</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="mb-0"><strong>Blog posts</strong></label>
+                            <p class="mb-0 pl-5">Display <input style="width: 80px" type="number" name="display_posts_per_page" class="form-control d-inline-block" value="<?= ($settings->fetch('display_posts_per_page') ? $settings->fetch('display_posts_per_page')->display_posts_per_page : '') ?>" /> blog posts per page</p>
+                            <span class="form-text text-muted pl-5">On blog pages, the number of posts to show per page.</span>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="display_testimonial" value="off" />
+                                    <input type="checkbox" name="display_testimonial" <?= ($settings->fetch('display_testimonial') ? ($settings->fetch('display_testimonial')->display_testimonial == 'on' ? 'checked' : '') : '') ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                <strong>Testimonials</strong>
+                                <p class="mb-0 mt-2">Display <input style="width: 80px" type="number" value="<?= ($settings->fetch('display_testimonials_per_page') ? $settings->fetch('display_testimonials_per_page')->display_testimonials_per_page : '') ?>" name="display_testimonials_per_page" class="form-control d-inline-block"/> testimonials per page</p>
+                                <span class="form-text text-muted">Add, organize, and display testimonials. If your theme doesn’t support testimonials yet, you can display them using the shortcode [testimonials].</span>
+                            </label>
+                        </div>
+
+                        <div class="form-group d-flex">
+                            <div class="mt-0">
+                                <label class="switch">
+                                    <input type="hidden" name="display_portfolio" value="off" />
+                                    <input type="checkbox" name="display_portfolio" <?= ($settings->fetch('display_portfolio') ? ($settings->fetch('display_portfolio')->display_portfolio == 'on' ? 'checked' : '') : '') ?>>
+                                    <span></span> 
+                                </label>
+                            </div>
+                            <label class="mb-0 ml-3">
+                                <strong>Portfolios</strong>
+                                <p class="mb-0 mt-2">Display <input style="width: 80px" type="number" value="<?= ($settings->fetch('display_portfolios_per_page') ? $settings->fetch('display_portfolios_per_page')->display_portfolios_per_page : '') ?>" name="display_portfolios_per_page" class="form-control d-inline-block"/> portfolio projects per page</p>
+                                <span class="form-text text-muted">Add, organize, and display portfolio projects. If your theme doesn’t support portfolio projects yet, you can display them using the shortcode [portfolio].</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

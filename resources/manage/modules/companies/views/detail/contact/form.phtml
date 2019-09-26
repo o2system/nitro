@@ -1,0 +1,181 @@
+<?php //print_out($post)?>
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form method="post" action="<?= domain_url('/companies/contacts/'.($post->id ? 'update' : 'create'), null, 'api') ?>" enctype="multipart/form-data">
+                    <input type="hidden" name="id_company" value="<?= $id_company ?>">
+                    <?php if ($post->id): ?>
+                        <input type="hidden" name="id" value="<?= $post->id ?>">
+                    <?php endif; ?>
+                    <div class="card">
+                        <h5 class="card-header d-flex justify-content-between align-items-center">
+                            <?php echo $page->title; ?>
+
+                            <div class="card-options">
+                                <button type="button" class="btn btn-default btn-md" data-action="cancel">
+                                    <?php echo $language->getLine('BTN_CANCEL'); ?>
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-md">
+                                    <?php echo $language->getLine('BTN_SAVE'); ?>
+                                </button>
+                            </div>
+                        </h5>
+                    </div>
+                    <div class="card">
+                        <div class="card-body" id="modal-form" data-title="<?php echo $page->header; ?>" data-action="<?php echo current_url(); ?>">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Photo</label>
+                                        <input type="file" name="photo" class="dropify" data-default-file="<?= $post->image ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input type="text" class="form-control" name="name" value="<?= $post->name ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Job Title </label>
+                                                <input type="text" class="form-control" name="job_title" value="<?= $post->job_title ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"> <i class="fas fa-envelope"></i> </span>
+                                                    </div>
+                                                    <input type="email" class="form-control" name="emails" value="<?= $post->emails ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile mt-3">
+                                <h6>
+                                    Messengers
+                                </h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="metadata-wa">WA</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-whatsapp"></i> </span>
+                                                </div>
+                                                <input id="metadata-wa" type="text" class="form-control" name="messengers[whatsapp]'" value="<?= ($post->messengers ? ($post->messengers['whatsapp'] ? $post->messengers['whatsapp'] : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="metadata-skype">Skype</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-skype"></i> </span>
+                                                </div>
+                                                <input id="metadata-skype" type="text" class="form-control" name="messengers[skype]" value="<?= ($post->messengers ? ($post->messengers['skype'] ? $post->messengers['skype'] : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="metadata-line">Line</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-line"></i> </span>
+                                                </div>
+                                                <input id="metadata-line" type="text" class="form-control" name="messengers[line]" value="<?= ($post->messengers ? ($post->messengers['line'] ? $post->messengers['line'] : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="metadata-telegram">Telegram</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-telegram"></i> </span>
+                                                </div>
+                                                <input id="metadata-telegram" type="text" class="form-control" name="messengers[telegram]" value="<?= ($post->messengers ? ($post->messengers['telegram'] ? $post->messengers['telegram'] : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="metadata-webchat">WeChat</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-weixin"></i> </span>
+                                                </div>
+                                                <input id="metadata-webchat" type="text" class="form-control" name="messengers[wechat]" value="<?= ($post->messengers ? ($post->messengers['wechat'] ? $post->messengers['wechat'] : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile mt-3">
+                                <h6>
+                                    Social Media
+                                </h6>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="metadata-social-linkedin">LinkedIn</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-linkedin"></i> </span>
+                                                </div>
+                                                <input id="metadata-social-linkedin" type="url" class="form-control" name="socials[linkedin]" value="<?= ($post->socials ? ($post->socials['linkedin'] ? $post->socials['linkedin'] : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="metadata-social-facebook">Facebook</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-facebook"></i> </span>
+                                                </div>
+                                                <input id="metadata-social-facebook" type="url" class="form-control" name="socials[facebook]" value="<?= ($post->socials ? ($post->socials['facebook'] ? $post->socials['facebook'] : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="metadata-social-youtube">Youtube</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-youtube"></i> </span>
+                                                </div>
+                                                <input id="metadata-social-youtube" type="url" class="form-control" name="socials[youtube]" value="<?= ($post->socials ? ($post->socials['youtube'] ? $post->socials['youtube'] : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="metadata-social-instagram">Instagram</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-instagram"></i> </span>
+                                                </div>
+                                                <input id="metadata-social-instagram" type="url" class="form-control" name="socials[instagram]" value="<?= ($post->socials ? ($post->socials['instagram'] ? $post->socials['instagram'] : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

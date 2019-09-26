@@ -1,0 +1,209 @@
+<!-- Sidebar scroll-->
+<li class="scroll-sidebar perfect-scrollbar">
+    <!-- Sidebar navigation-->
+    <nav class="sidebar-nav">
+        <ul id="sidebarnav">
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="<?=base_url('dashboard');?>">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span class="hide-menu">Dashboard</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    <i class="fas fa-server"></i>
+                    <span class="hide-menu">System</span>
+                </a>
+                <ul aria-expanded="false" class="collapse first-level">
+                    <li class="sidebar-item">
+                        <a href="<?=base_url('system');?>" class="sidebar-link">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="hide-menu">System Info</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="<?=base_url('system/administrators');?>" class="sidebar-link">
+                            <i class="fas fa-user-cog"></i>
+                            <span class="hide-menu">Administrators</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="<?=base_url('system/settings');?>" aria-expanded="false">
+                            <i class="fas fa-cog"></i>
+                            <span class="hide-menu">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-small-cap">
+                <i class="fas fa-cubes"></i>
+                <span class="hide-menu">Manage</span>
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    <i class="fas fa-briefcase"></i>
+                    <span class="hide-menu">Places</span>
+                </a>
+                <ul aria-expanded="false" class="collapse first-level">
+                    <li class="sidebar-item">
+                        <a href="<?=base_url('places');?>" class="sidebar-link">
+                            <i class="fas fa-list"></i>
+                            <span class="hide-menu">List</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="<?=base_url('places/categories');?>" class="sidebar-link">
+                            <i class="fas fa-cubes"></i>
+                            <span class="hide-menu">Categories</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="<?=base_url('wallets');?>" class="sidebar-link">
+                    <i class="fas fa-wallet"></i>
+                    <span class="hide-menu">Wallets</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="<?=base_url('transactions');?>" class="sidebar-link">
+                    <i class="fas fa-cart-arrow-down"></i>
+                    <span class="hide-menu">Transactions</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="<?=base_url('members');?>" class="sidebar-link">
+                    <i class="fas fa-user"></i>
+                    <span class="hide-menu">Members</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="<?=base_url('promotions');?>" class="sidebar-link">
+                    <i class="fas fa-bullhorn"></i>
+                    <span class="hide-menu">Promotions</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="<?=base_url('coupons');?>" class="sidebar-link">
+                    <i class="fas fa-tags"></i>
+                    <span class="hide-menu">Coupons</span>
+                </a>
+            </li>
+
+            <li class="nav-small-cap">
+                <i class="fas fa-cubes"></i>
+                <span class="hide-menu">Site</span>
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="hide-menu">Pages</span>
+                </a>
+                <ul aria-expanded="false" class="collapse first-level">
+                    <li class="sidebar-item">
+                        <a href="<?=base_url('sites/page');?>" class="sidebar-link">
+                            <i class="fas fa-list"></i>
+                            <span class="hide-menu">List</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="<?=base_url('sites/page/categories');?>" class="sidebar-link">
+                            <i class="fas fa-cubes"></i>
+                            <span class="hide-menu">Categories</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    <i class="fas fa-align-left"></i>
+                    <span class="hide-menu">Posts</span>
+                </a>
+                <ul aria-expanded="false" class="collapse first-level">
+                    <li class="sidebar-item">
+                        <a href="<?=base_url('sites/posts');?>" class="sidebar-link">
+                            <i class="fas fa-list"></i>
+                            <span class="hide-menu">List</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="<?=base_url('sites/posts/categories');?>" class="sidebar-link">
+                            <i class="fas fa-cubes"></i>
+                            <span class="hide-menu">Categories</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="<?=base_url('sites/media');?>" class="sidebar-link">
+                    <i class="fas fa-image"></i>
+                    <span class="hide-menu">Media</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="<?=base_url('sites/sliders');?>" class="sidebar-link">
+                    <i class="fas fa-images"></i>
+                    <span class="hide-menu">Sliders</span>
+                </a>
+            </li>
+
+            <li class="nav-small-cap">
+                <i class="fas fa-cubes"></i>
+                <span class="hide-menu">Master Data</span>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="<?=base_url('master/taxonomies');?>" class="sidebar-link">
+                    <i class="fas fa-link"></i>
+                    <span class="hide-menu">Taxonomies</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="<?=base_url('master/categories');?>" class="sidebar-link">
+                    <i class="fas fa-cubes"></i>
+                    <span class="hide-menu">Categories</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="<?=base_url('master/tags');?>" class="sidebar-link">
+                    <i class="fas fa-tag"></i>
+                    <span class="hide-menu">Tags</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="<?=base_url('master/plans');?>" class="sidebar-link">
+                    <i class="fas fa-funnel-dollar"></i>
+                    <span class="hide-menu">Plans</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="<?=base_url('master/geodirectories');?>" class="sidebar-link">
+                    <i class="fas fa-globe"></i>
+                    <span class="hide-menu">Geodirectory</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="<?=base_url('master/banks');?>" class="sidebar-link">
+                    <i class="fas fa-university"></i>
+                    <span class="hide-menu">Bank</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

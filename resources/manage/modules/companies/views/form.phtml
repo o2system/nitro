@@ -1,0 +1,258 @@
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form method="post" action="<?php echo base_url('/companies/form/'.$post->id); ?>" enctype="multipart/form-data" id="form">
+                    <?php if ($post->id): ?>
+                        <input type="hidden" name="id" value="<?= $post->id ?>">
+                    <?php endif; ?>
+                    <div class="card">
+                        <h5 class="card-header d-flex justify-content-between align-items-center">
+                            <?php echo $page->title; ?>
+
+                            <div class="card-options">
+                                <button type="button" class="btn btn-default btn-md" data-action="cancel">
+                                    <?php echo $language->getLine('BTN_CANCEL'); ?>
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-md" id="btn-save">
+                                    <?php echo $language->getLine('BTN_SAVE'); ?>
+                                </button>
+                            </div>
+                        </h5>
+                    </div>
+                    <div class="card">
+                        <div class="card-body" id="modal-form" data-title="<?php echo $page->header; ?>" data-action="<?php echo current_url(); ?>">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="file" class="dropify" name="photo" data-default-file="<?= ($post->image ? $post->image : storage_url('images/default/no-image.jpg')) ?>" data-height="175" >
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label><?php echo $language->getLine('COMPANY_NAME'); ?></label>
+                                        <input type="text"  name="name"  class="form-control" required value="<?= $post->name ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="metadata-address-street"><?php echo $language->getLine('ADDRESS'); ?></label>
+                                        <textarea id="metadata-address-street" class="form-control" name="meta[address]"><?= ($post->metadata ? ($post->metadata->address ? $post->metadata->address : '') : '') ?></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="metadata-address-city"><?php echo $language->getLine('CITY'); ?></label>
+                                        <select name="id_geodirectory" id="metadata-address-city" class="form-control select-with-search">
+                                            <?php if($cities):?>
+                                                <?php foreach ($cities as $city):?>
+                                                    <option value="<?=$city['city_id'];?>"
+                                                        <?php echo ( $post->id_geodirectory == $city['city_id'] ? 'selected' : '')?>
+                                                        ><?=$city['city_name'];?></option>
+                                                <?php endforeach;?>
+                                            <?php endif;?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="metadata-address-city"><?php echo $language->getLine('CATEGORY'); ?></label>
+                                        <select name="id_company_category" id="metadata-address-city" class="form-control select-with-search">
+                                            <?php if($companies_categories):?>
+                                                <?php foreach ($companies_categories as $category):?>
+                                                    <option value="<?=$category->id;?>"
+                                                        <?php echo ( $post->id_company_category == $category->id ? 'selected' : '')?>
+                                                        ><?=$category->title;?></option>
+                                                <?php endforeach;?>
+                                            <?php endif;?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="metadata-address-postal-code"><?php echo $language->getLine('POSTAL_CODE'); ?> </label>
+                                        <input id="metadata-address-postal-code" type="number" class="form-control" name="meta[postal_code]" value="<?= ($post->metadata ? ($post->metadata->postal_code ? $post->metadata->postal_code : '') : '') ?>">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="profile mt-3">
+                                <h6><?php echo $language->getLine('CONTACTS'); ?></h6>
+                                <div class="form-group">
+                                    <label for="metadata-phone"><?php echo $language->getLine('PHONE'); ?></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-phone"></i>
+                                            </span>
+                                        </div>
+                                        <input id="metadata-phone" type="text" class="form-control" name="meta[phone]" value="<?= ($post->metadata ? ($post->metadata->phone ? $post->metadata->phone : '') : '') ?>" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="metadata-fax"><?php echo $language->getLine('FAX'); ?></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-fax"></i>
+                                            </span>
+                                        </div>
+                                        <input id="metadata-fax" type="text" class="form-control" name="meta[fax]" value="<?= ($post->metadata ? ($post->metadata->fax ? $post->metadata->fax : '') : '') ?>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="metadata-hotline"><?php echo $language->getLine('HOTLINE'); ?></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-headphones"></i>
+                                            </span>
+                                        </div>
+                                        <input id="metadata-hotline" type="text" class="form-control" name="meta[hotline]" value="<?= ($post->metadata ? ($post->metadata->hotline ? $post->metadata->hotline : '') : '') ?>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="metadata-email"><?php echo $language->getLine('EMAIL'); ?></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-envelope"></i>
+                                            </span>
+                                        </div>
+                                        <input id="metadata-email" type="email" class="form-control" name="meta[email]" value="<?= ($post->metadata ? ($post->metadata->email ? $post->metadata->email : '') : '') ?>" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="metadata-website"><?php echo $language->getLine('WEBSITE'); ?></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-globe"></i>
+                                            </span>
+                                        </div>
+                                        <input id="metadata-website" type="url" class="form-control" name="meta[domain]" value="<?= ($post->metadata ? ($post->metadata->domain ? $post->metadata->domain : '') : '') ?>">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="profile mt-3">
+                                <h6>
+                                    Messengers
+                                </h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="metadata-wa">WA</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-whatsapp"></i> </span>
+                                                </div>
+                                                <input id="metadata-wa" type="text" class="form-control" name="meta[whatsapp]'" value="<?= ($post->metadata ? ($post->metadata->whatsapp ? $post->metadata->whatsapp : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="metadata-skype">Skype</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-skype"></i> </span>
+                                                </div>
+                                                <input id="metadata-skype" type="text" class="form-control" name="meta[skype]" value="<?= ($post->metadata ? ($post->metadata->skype ? $post->metadata->skype : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="metadata-line">Line</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-line"></i> </span>
+                                                </div>
+                                                <input id="metadata-line" type="text" class="form-control" name="meta[line]" value="<?= ($post->metadata ? ($post->metadata->line ? $post->metadata->line : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="metadata-telegram">Telegram</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-telegram"></i> </span>
+                                                </div>
+                                                <input id="metadata-telegram" type="text" class="form-control" name="meta[telegram]" value="<?= ($post->metadata ? ($post->metadata->telegram ? $post->metadata->telegram : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="metadata-webchat">WeChat</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-weixin"></i> </span>
+                                                </div>
+                                                <input id="metadata-webchat" type="text" class="form-control" name="meta[wechat]" value="<?= ($post->metadata ? ($post->metadata->wechat ? $post->metadata->wechat : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="profile mt-3">
+                                <h6>
+                                    Social Media
+                                </h6>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="metadata-social-linkedin">LinkedIn</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-linkedin"></i> </span>
+                                                </div>
+                                                <input id="metadata-social-linkedin" type="url" class="form-control" name="meta[linkedin]" value="<?= ($post->metadata ? ($post->metadata->linkedin ? $post->metadata->linkedin : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="metadata-social-facebook">Facebook</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-facebook"></i> </span>
+                                                </div>
+                                                <input id="metadata-social-facebook" type="url" class="form-control" name="meta[facebook]" value="<?= ($post->metadata ? ($post->metadata->facebook ? $post->metadata->facebook : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="metadata-social-youtube">Youtube</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-youtube"></i> </span>
+                                                </div>
+                                                <input id="metadata-social-youtube" type="url" class="form-control" name="meta[youtube]" value="<?= ($post->metadata ? ($post->metadata->youtube ? $post->metadata->youtube : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="metadata-social-instagram">Instagram</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fab fa-instagram"></i> </span>
+                                                </div>
+                                                <input id="metadata-social-instagram" type="url" class="form-control" name="meta[instagram]" value="<?= ($post->metadata ? ($post->metadata->instagram ? $post->metadata->instagram : '') : '') ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,262 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12">
+            <?=view('settings/nav', [], true);?>
+
+            <form action="<?= current_url() ?>" method="post" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <h5 class="mb-0">General</h5>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-primary" type="submit">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Site Setting</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Logo</label>
+                                    <input type="file" class="dropify" data-height="150" data-default-file="<?= $settings->site_logo() ?>"  name="site_logo"/>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <div class="form-group">
+                                                <label>Site Title</label>
+                                                <input type="text" class="form-control" name="site_title" value="<?= ($settings->fetch('site_title') ? $settings->fetch('site_title')->site_title : '')  ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label>Site Name in Page Titles</label>
+                                                <select class="form-control custom-select" name="site_name_page_title">
+                                                    <?php foreach ($site_name_page_title as $key => $value): ?>
+                                                        <option value="<?= $key ?>" <?= ($settings->fetch('site_name_page_title') ? ($settings->fetch('site_name_page_title')->site_name_page_title == $key ? 'selected' : '') : '') ?>><?= $value ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Site Tagline</label>
+                                        <input type="text" class="form-control" name="site_tagline" value="<?= ($settings->fetch('site_tagline') ? $settings->fetch('site_tagline')->site_tagline : '')  ?>"/>
+                                        <span class="form-text text-muted">In a few words, explain what this site is about.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="m-0">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Language</label>
+                                    <select name="site_language" class="custom-select form-control">
+                                        <?php foreach ($world_languages as $key => $value): ?>
+                                            <option value="<?= $key ?>" <?= ($settings->fetch('site_language') ? ($settings->fetch('site_language')->site_language == $key ? 'selected' : '') : '') ?>><?= $value ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <span class="form-text text-muted">Language this blog is primarily written in.</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-0">
+                                    <label>Timezone</label>
+                                    <select name="site_timezone" value="" class="form-control custom-select">
+                                        <?php foreach ($site_timezone as $key => $value): ?>
+                                            <option value="<?= $key ?>" <?= ($settings->fetch('site_timezone') ? ($settings->fetch('site_timezone')->site_timezone == $key ? 'selected' : '') : '') ?>><?= $value ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <span class="form-text text-muted">Choose a city in your timezone.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="m-0">
+                    <div class="card-body">
+                        <div class="form-group d-flex align-items-center">
+                            <label class="switch">
+                                <input type="hidden" name="site_offline" value="off" />
+                                <input type="checkbox" name="site_offline" <?= ($settings->fetch('site_offline') ? ($settings->fetch('site_offline')->site_offline == 'on' ? 'checked' : '') : '') ?> data-toggle="collapse" data-target="#site-offline">
+                                <span></span> 
+                            </label>
+                            <label class="mb-0 ml-3">Site Offline</label>
+                        </div>
+                        <div id="site-offline" class="collapse">
+                            <div class="form-group">
+                                <label>Offline Message</label>
+                                <select name="site_offline_message" class="form-control custom-select" id="offline-message">
+                                    <?php foreach ($site_offline_message as $key => $value): ?>
+                                        <?php if ($key == 'CUSTOM_MESSAGE'): ?>
+                                            <option data-toggle="collapse" data-target="#custom-message" id="custom-message-select"><?= $value ?></option>
+                                            <?php continue; ?>
+                                        <?php endif ?>
+                                        <option value="<?= $key ?>" <?= ($settings->fetch('site_offline_message') ? ($settings->fetch('site_offline_message')->site_offline_message == $key ? 'selected' : '') : '') ?>><?= $value ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div id="custom-message" class="collapse">
+                                <label>Custom Message</label>
+                                <textarea name="site_offline_message_custom" class="form-control"><?= ($settings->fetch('site_offline_message_custom') ? $settings->fetch('site_offline_message_custom')->site_offline_message_custom : '') ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Application Manifest</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4">
+                                <h5><?php echo $language->getLine('ICON'); ?></h5>
+                                <div class="form-group">
+                                    <label>500 x 500px</label>
+                                    <input name="app_manifest_icon" type="file" class="dropify" data-default-file="<?= $settings->app_manifest_icon() ?>" data-allowed-file-extensions="jpg png" />
+                                </div>
+                            </div>
+                            <div class="col-lg-9 col-md">
+                                <h5><?php echo $language->getLine('APPLICATION'); ?></h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><?php echo $language->getLine('NAME'); ?></label>
+                                            <input class="form-control" type="text" name="pwa_name" value="<?= ($settings->fetch('pwa_name') ? $settings->fetch('pwa_name')->pwa_name : '') ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><?php echo $language->getLine('SHORTNAME'); ?></label>
+                                            <input class="form-control" type="text" name="pwa_shortname" value="<?= ($settings->fetch('pwa_shortname') ? $settings->fetch('pwa_shortname')->pwa_shortname : '') ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><?php echo $language->getLine('THEME_COLOR'); ?></label>
+                                            <input class="form-control color-picker" type="text" name="pwa_themecolor" value="<?= ($settings->fetch('pwa_themecolor') ? $settings->fetch('pwa_themecolor')->pwa_themecolor : '') ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><?php echo $language->getLine('BACKGROUND_COLOR'); ?></label>
+                                            <input class="form-control color-picker" type="text" name="pwa_backgroundcolor" value="<?= ($settings->fetch('pwa_backgroundcolor') ? $settings->fetch('pwa_backgroundcolor')->pwa_backgroundcolor : '') ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Privacy</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="privacy1" name="site_privacy" class="custom-control-input" value="1" <?= ($settings->fetch('site_privacy') ? ($settings->fetch('site_privacy')->site_privacy == 1 ? 'checked' : '') : '') ?>>
+                                <label class="custom-control-label" for="privacy1">
+                                    Public<br>
+                                    <span class="form-text text-muted">Your site is visible to everyone, and it may be indexed by search engines.</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="privacy2" name="site_privacy" class="custom-control-input" value="2" <?= ($settings->fetch('site_privacy') ? ($settings->fetch('site_privacy')->site_privacy == 2 ? 'checked' : '') : '') ?>>
+                                <label class="custom-control-label" for="privacy2">
+                                    Hidden<br>
+                                    <span class="form-text text-muted">Your site is visible to everyone, but we ask search engines to not index your site.</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="privacy3" name="site_privacy" class="custom-control-input" value="3" <?= ($settings->fetch('site_privacy') ? ($settings->fetch('site_privacy')->site_privacy == 3 ? 'checked' : '') : '') ?>>
+                                <label class="custom-control-label" for="privacy3">
+                                    Private<br>
+                                    <span class="form-text text-muted">Your site is only visible to you and users you approve.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Site Metadata</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Metarobot</label>
+                            <select class="form-control custom-select" name="meta_robot">
+                                <?php foreach ($meta_robot as $key => $value): ?>
+                                    <option value="<?= $key ?>" <?= ($settings->fetch('meta_robot') ? ($settings->fetch('meta_robot')->meta_robot == $key ? 'selected' : '') : '') ?>><?= $value ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Metatitle</label>
+                            <input class="form-control" name="meta_title" type="text" value="<?= ($settings->fetch('meta_title') ? $settings->fetch('meta_title')->meta_title : '') ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Metadescription</label>
+                            <textarea class="form-control" cols="5" name="meta_description"><?= ($settings->fetch('meta_description') ? $settings->fetch('meta_description')->meta_description : '') ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="d-block">Metakeywords</label>
+                            <input name="meta_keywords" class="tagsinput form-control" data-role="tagsinput" value="<?= ($settings->fetch('meta_keywords') ? $settings->fetch('meta_keywords')->meta_keywords : '') ?>" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Content Rights</label>
+                            <textarea name="content_rights" class="form-control"><?= ($settings->fetch('content_rights') ? $settings->fetch('content_rights')->content_rights : '') ?></textarea>
+                        </div>
+                        <div class="form-group d-flex align-items-center">
+                            <label class="switch">
+                                <input type="hidden" name="site_author" value="off" />
+                                <input type="checkbox" name="site_author" data-toggle="collapse" data-target="#site-author" <?= ($settings->fetch('site_author') ? ($settings->fetch('site_author')->site_author == 'on' ? 'checked' : '') : '') ?>>
+                                <span></span> 
+                            </label>
+                            <label class="mb-0 ml-3">Show Author Meta</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function selectCustomMessage(){
+        var isSelected = $('#custom-message-select').prop('selected');
+        if (isSelected == true){
+            $('#custom-message').collapse('show');
+        } else {
+            $('#custom-message').collapse('hide');
+        }
+    }
+
+    selectCustomMessage();
+
+    $(document).on('change', '#offline-message', function(){
+        selectCustomMessage();
+    });
+
+</script>
