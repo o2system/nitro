@@ -383,16 +383,16 @@
         },
         {
             "name": "o2system/framework",
-            "version": "v5.6.44",
+            "version": "v5.6.46",
             "source": {
                 "type": "git",
                 "url": "https://github.com/o2system/framework.git",
-                "reference": "a837e41e410e6a6c882410546b4a8fd8ebc6cb55"
+                "reference": "2d67fac519fc5ecdd64d97db1cc5f4b86e956179"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/o2system/framework/zipball/a837e41e410e6a6c882410546b4a8fd8ebc6cb55",
-                "reference": "a837e41e410e6a6c882410546b4a8fd8ebc6cb55",
+                "url": "https://api.github.com/repos/o2system/framework/zipball/2d67fac519fc5ecdd64d97db1cc5f4b86e956179",
+                "reference": "2d67fac519fc5ecdd64d97db1cc5f4b86e956179",
                 "shasum": ""
             },
             "require": {
@@ -443,7 +443,7 @@
                 "php",
                 "utilities"
             ],
-            "time": "2019-09-24T13:59:02+00:00"
+            "time": "2019-09-25T14:24:13+00:00"
         },
         {
             "name": "o2system/html",
