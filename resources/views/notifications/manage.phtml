@@ -1,0 +1,23 @@
+<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg py-0" aria-labelledby="dropdownNotif">
+    <div class="dropdown-item-header">
+        <p>Notification (<?php echo $notifications ? $notifications->count() : 0;?>)</p>
+    </div>
+    <div class="dropdown-item-list perfect-scrollbar">
+        <?php if($notifications):?>
+            <?php foreach ($notifications as $notification):?>
+                <a href="<?=base_url('system/users/notifications',['id' => $notification->id]);?>" class="dropdown-item">
+                                        <span class="icon bg-primary">
+                                            <?php if($notification->send):?>
+                                            <img src="<?=$notification->send->identity->image;?>">
+                                            <?php endif;?>
+                                        </span>
+                    <span class="notif-detail">
+                                            <h6><?=$notification->send->identity->name;?></h6>
+                                            <p><?=$notification->message;?></p>
+                                        </span>
+                </a>
+            <?php endforeach;?>
+        <?php endif;?>
+    </div>
+    <a href="#" class="dropdown-item dropdown-item-footer">View All</a>
+</div>
