@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
-                                            http://yourdomain.com/
+                                            <?=domain_url(null, null, null);?>
                                         </span>
                                     </div>
                                     <input class="form-control" name="slug" value="<?= $post->slug ?>" <?= ($post->slug ? 'readonly' : '') ?> type="text">
@@ -65,7 +65,7 @@
                         Images
                     </div>
                     <div class="card-body p-0">
-                        <div id="dropzone-cards" data-action-url="<?= domain_url('/posts/upload', null, 'api') ?>" data-allowed="image/*" data-max-files="" data-max-size="">
+                        <div id="dropzone-cards" data-action-url="<?= domain_url('/posts/upload', null, 'api') ?>" >
                             <div class="media-list">
                                 <div class="dropzone-form <?= ($post->medias ? 'dz-started' : '') ?>" id="dropzone-cards-form" style="cursor: pointer;">
                                     <div class="dz-message needsclick">
@@ -239,11 +239,11 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>Start Publishing</label>
-                            <input type="datetime-local" name="start_publishing" class="form-control" value="<?= ($post->start_publishing ? date('Y-m-d\TH:i:s', strtotime($post->start_publishing)) : '')  ?>">
+                            <input type="datetime-local" name="settings[start_publishing]" class="form-control" value="<?= $post->settings ? ($post->settings->start_publishing ? date('Y-m-d\TH:i:s', strtotime($post->settings->start_publishing)) : '') : ''  ?>">
                         </div>
                         <div class="form-group">
                             <label>Finish Publishing</label>
-                            <input type="datetime-local" name="finish_publishing" class="form-control" value="<?= ($post->finish_publishing ? date('Y-m-d\TH:i:s', strtotime($post->finish_publishing)) : '')  ?>">
+                            <input type="datetime-local" name="settings[finish_publishing]" class="form-control" value="<?=$post->settings ?  ($post->settings->finish_publishing ? date('Y-m-d\TH:i:s', strtotime($post->settings->finish_publishing)) : '')  : ''?>">
                         </div>
                     </div>
                 </div>
@@ -350,6 +350,7 @@
             window.location.href =  espresso.helpers.url.base("site/posts");
         },
         error: function (error) {
+            window.location.href =  espresso.helpers.url.base("site/posts");
             console.log(error);
         }
     });
