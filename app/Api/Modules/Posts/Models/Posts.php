@@ -227,7 +227,6 @@ class Posts extends Model
             unset($post['meta'], $post['settings'], $post['tags']);
             if (parent::insert($post)) {
                 $id_post = $this->getLastInsertId();
-
                 if (count($metas)) {
                     $metadata = [];
                     $no=0;

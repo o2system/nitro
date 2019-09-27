@@ -6,13 +6,13 @@
                     <div class="nav-pages">    
                         <ul class="nav">
                             <li class="nav-item">
-                                <a class="nav-link active" href="<?= base_url('site/posts') ?>">Published</a>
+                                <a class="nav-link <?php echo $get->status === 'PUBLISH' ?  'active' : ''?>" href="<?= base_url('site/posts', ['status' => 'PUBLISH']) ?>">Published</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= base_url('site/posts/drafts') ?>">Drafts</a>
+                                <a class="nav-link <?php echo $get->status === 'DRAFT' ?  'active' : ''?>" href="<?= base_url('site/posts', ['status' => 'DRAFT']) ?>">Drafts</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= base_url('site/posts/trash') ?>">Trash</a>
+                                <a class="nav-link <?php echo $get->status === 'TRASH' ?  'active' : ''?>" href="<?= base_url('site/posts', ['status' => 'TRASH']) ?>">Trash</a>
                             </li>
                         </ul>
 
@@ -21,7 +21,7 @@
                                 <i class="fas fa-search"></i>
                             </div>
                             <div class="search-input">
-                                <input type="search" placeholder="Search...">
+                                <input type="search" placeholder="Search..." name="title">
                             </div>
                             <div class="search-icon close-search">
                                 <i class="fas fa-times"></i>
@@ -99,6 +99,7 @@
                                     <div class="btn-group">
                                         <a href="<?=base_url('site/posts', [
                                         'page' => input()->get('page') - 1,
+                                        'status'    => $get->status,
                                         'entries' => $get->entries,
                                         'period' => $get->period,
                                         'keyword' => $get->keyword,
@@ -113,6 +114,7 @@
                                         'entries' => $get->entries,
                                         'period' => $get->period,
                                         'keyword' => $get->keyword,
+                                        'status'    => $get->status,
                                         ]); ?>" class="btn btn-default <?=$page >= $posts->info->num_pages ? 'disabled' : ''; ?>" >
                                             <?php echo $language->getLine('NEXT'); ?>
                                         </a>
@@ -123,6 +125,7 @@
                                         <input type="hidden" name="entries" value="<?= $get->entries ?>">
                                         <input type="hidden" name="period" value="<?= $get->period ?>">
                                         <input type="hidden" name="keyword" value="<?= $get->keyword ?>">
+                                        <input type="hidden" name="status" value="<?= $get->status ?>">
                                         <div class="input-group">
                                             <select class="custom-select select2" name="page" method="get">
                                                 <?php for ($i = 1; $i <= $posts->info->num_pages; ++$i):?>

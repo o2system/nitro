@@ -27,69 +27,25 @@ class Page extends Controller
     public $model = '\App\Api\Modules\Pages\Models\Pages';
 	public function index()
     {
-        $get = input()->get();
-        if ($get == false || $get == null) {
-            $get = new SplArrayObject([
-                'get' => 'false'
-            ]);
+        $get = new SplArrayObject([
+            'status'    => input()->get('status') ?  input()->get('status') : 'PUBLISH',
+            'title'    => input()->get('title') ?  input()->get('title') : '',
+        ]);
+        if($status = $get->status){
+            $this->model->qb->where('record_status', $status);
         }
-        $this->model->qb->where('record_status', 'PUBLISH');
-        $all = $this->model->allWithPaging();
-        $vars = [
-            'pages' => $all,
-            'get' => $get
-        ];
-        view('pages/index', $vars);
+        if($title = $get->title){
+            $this->model->qb->where('title', $title);
+        }
+        view('pages/index', [
+            'pages' =>  $this->model->allWithPaging(),
+            'get'   => $get
+        ]);
     }
 
-    public function drafts()
-    {
-        $get = input()->get();
-        if ($get == false || $get == null) {
-            $get = new SplArrayObject([
-                'get' => 'false'
-            ]);
-        }
-        $this->model->qb->where('record_status', 'DRAFT');
-        $all = $this->model->allWithPaging();
-        $vars = [
-            'pages' => $all,
-            'get' => $get
-        ];
-        view('pages/drafts', $vars);
-    }
-
-    public function trash()
-    {
-        $get = input()->get();
-        if ($get == false || $get == null) {
-            $get = new SplArrayObject([
-                'get' => 'false'
-            ]);
-        }
-        $this->model->qb->where('record_status', 'DELETED');
-        $all = $this->model->allWithPaging();
-        $vars = [
-            'pages' => $all,
-            'get' => $get
-        ];
-        view('pages/trash', $vars);
-    }
 
     public function form($id=null)
     {
-        // models(PagesMedia::class)->appendColumns = ['images'];
-        // if ($medias = models(PagesMedia::class)->findWhere(['id_post' => 0])) {
-        //     foreach ($medias as $media) {
-        //         if ($image = $media->images) {
-        //             if (is_file($filePath = PATH_STORAGE . 'images/posts/media/' . $image->filename)) {
-        //                 unlink($filePath);
-        //             }
-        //             models(Media::class)->delete($image->id);
-        //         }
-        //     }
-        //     models(PagesMedia::class)->deleteManyBy(['id_post' => 0]);
-        // }
         $this->presenter->page->setHeader( 'FORM_ADD' );
         $vars = [
             'post' => new SplArrayObject(),

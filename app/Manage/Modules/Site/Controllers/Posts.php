@@ -28,53 +28,20 @@ class Posts extends Controller
     public $model = '\App\Api\Modules\Posts\Models\Posts';
 	public function index()
     {
-        $get = input()->get();
-        if ($get == false || $get == null) {
-            $get = new SplArrayObject([
-                'get' => 'false'
-            ]);
+        $get = new SplArrayObject([
+            'title'  => input()->get('title') ?  input()->get('title') : '',
+            'status'  => input()->get('status') ?  input()->get('status') : 'PUBLISH',
+        ]);
+        if($title = $get->title){
+            $this->model->qb->where('title', $title);
         }
-        $this->model->qb->where('record_status', 'PUBLISH');
-        $all = $this->model->allWithPaging();
-        $vars = [
-            'posts' => $all,
-            'get' => $get
-        ];
-        view('posts/index', $vars);
-    }
-
-    public function drafts()
-    {
-        $get = input()->get();
-        if ($get == false || $get == null) {
-            $get = new SplArrayObject([
-                'get' => 'false'
-            ]);
+        if($status = $get->status){
+            $this->model->qb->where('record_status', $status);
         }
-        $this->model->qb->where('record_status', 'DRAFT');
-        $all = $this->model->allWithPaging();
-        $vars = [
-            'posts' => $all,
-            'get' => $get
-        ];
-        view('posts/drafts', $vars);
-    }
-
-    public function trash()
-    {
-        $get = input()->get();
-        if ($get == false || $get == null) {
-            $get = new SplArrayObject([
-                'get' => 'false'
-            ]);
-        }
-        $this->model->qb->where('record_status', 'DELETED');
-        $all = $this->model->allWithPaging();
-        $vars = [
-            'posts' => $all,
-            'get' => $get
-        ];
-        view('posts/trash', $vars);
+        view('posts/index', [
+            'posts' => $this->model->allWithPaging(),
+            'get'   => $get,
+        ]);
     }
 
     public function form($id=null)

@@ -6,13 +6,13 @@
                     <div class="nav-pages">    
                         <ul class="nav">
                             <li class="nav-item">
-                                <a class="nav-link active" href="<?= base_url('site/page') ?>">Published</a>
+                                <a class="nav-link <?=$get->status === 'PUBLISH' ? 'active' : '' ?>" href="<?= base_url('site/page') ?>">Published</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= base_url('site/page/drafts') ?>">Drafts</a>
+                                <a class="nav-link <?=$get->status === 'DRAFT' ? 'active' : '' ?>" href="<?= base_url('site/page',['status' => 'DRAFT']) ?>">Drafts</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= base_url('site/page/trash') ?>">Trash</a>
+                                <a class="nav-link <?=$get->status === 'TRASH' ? 'active' : '' ?>" href="<?= base_url('site/page',['status' => 'TRASH']) ?>">Trash</a>
                             </li>
                         </ul>
 
@@ -21,7 +21,7 @@
                                 <i class="fas fa-search"></i>
                             </div>
                             <div class="search-input">
-                                <input type="search" placeholder="Search...">
+                                <input type="search" placeholder="Search..." name="title">
                             </div>
                             <div class="search-icon close-search">
                                 <i class="fas fa-times"></i>
@@ -98,6 +98,7 @@
                                 <div class="col-sm-6 col-md-6">
                                     <div class="btn-group">
                                         <a href="<?=base_url('site/page', [
+                                        'status'    => $get->status,
                                         'page' => input()->get('page') - 1,
                                         'entries' => $get->entries,
                                         'period' => $get->period,
@@ -109,6 +110,7 @@
                                             <?php $page = $page + 1; ?>
                                         <?php endif; ?>
                                         <a href="<?=base_url('site/page', [
+                                        'status'    => $get->status,
                                         'page' => $page + 1,
                                         'entries' => $get->entries,
                                         'period' => $get->period,
@@ -120,6 +122,7 @@
                                 </div>
                                 <div class="col-sm-4 col-md-3">
                                     <form action="<?=current_url(); ?>" method="get">
+                                        <input type="hidden" name="status" value="<?= $get->status ?>">
                                         <input type="hidden" name="entries" value="<?= $get->entries ?>">
                                         <input type="hidden" name="period" value="<?= $get->period ?>">
                                         <input type="hidden" name="keyword" value="<?= $get->keyword ?>">
