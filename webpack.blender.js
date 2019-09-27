@@ -17,6 +17,14 @@ blender.js('./resources/app.js', 'assets')
 blender.setOutputPath('assets/');
 blender.setResourceRoot('');
 
+// const babelLoader = {
+//     loader: 'babel-loader',
+//     options: {
+//       presets: ['@babel/preset-env' ],
+//       plugins: ['@babel/transform-runtime']
+//     }
+// }
+
 // Set Entry
 if (typeof process.env.npm_config_theme !== "undefined") {
     if (typeof process.env.npm_config_app !== "undefined") {

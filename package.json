@@ -10,6 +10,8 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/o2system-blender/setup/webpack.config.js"
     },
     "devDependencies": {
+        "@babel/plugin-transform-runtime": "^7.6.2",
+        "@babel/runtime": "^7.6.2",
         "axios": "^0.19",
         "cross-env": "^5.1",
         "lodash": "^4.17.13",
@@ -23,6 +25,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@frontkom/gutenberg-js": "^4.0.1",
         "jquery-slinky": "^4.2.1",
         "o2system-espresso": "^1.1.2",
         "o2system-venus-admin": "^1.1.3"

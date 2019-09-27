@@ -16,6 +16,8 @@ require("./assets/js/Sidebar");
 require("./assets/js/Customizer");
 require("./assets/js/products");
 
+import './assets/js/gutenberg/init';
+
 $('.datatables-basic, .datatables-fixed, .datatables-unorder').prop('width', '100%');
 var printCounter = 0;
 var datatablesUnorder = $('.datatables-unorder').DataTable({
