@@ -17,7 +17,6 @@ $addresses = new Addresses();
 
 // ------------------------------------------------------------------------
 
-// CMS Default Controller
 $addresses->any(
     '/',
     function () {

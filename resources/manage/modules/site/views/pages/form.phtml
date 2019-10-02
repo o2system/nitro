@@ -5,14 +5,14 @@
         <?php endif; ?>
         <div class="card">
             <h5 class="card-header d-flex justify-content-between align-items-center">
-                <?php echo $page->title; ?>
+                <?php echo $page->header; ?>
 
                 <div class="card-options">
                     <button type="button" class="btn btn-default btn-md" data-action="cancel">
-                        <?php echo $language->getLine('BTN_CANCEL'); ?>
+                        <?php echo language('BTN_CANCEL'); ?>
                     </button>
                     <button type="submit" class="btn btn-primary btn-md">
-                        <?php echo $language->getLine('BTN_SAVE'); ?>
+                        <?php echo language('BTN_SAVE'); ?>
                     </button>
                 </div>
             </h5>
@@ -42,7 +42,7 @@
                                             <?php echo domain_url(null, null, null);?>
                                         </span>
                                     </div>
-                                    <input class="form-control" name="slug" value="<?= $post->slug ?>" <?= ($post->slug ? 'readonly' : '') ?> type="text">
+                                    <input class="form-control" name="slug" value="<?= $post->slug ?>" type="text">
                                 </div>
                             </div>
                         </div>
@@ -132,31 +132,39 @@
 
                 <div class="card mb-2">
                     <div class="card-header">
-                        Search Engine Optimization
+                        <?=language('SEARCH_ENGINE_OPTIMIZATION')?>
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="col-md-3">Metarobot</label>
+                            <label class="col-md-3">
+	                            <?=language('META_ROBOT')?>
+                            </label>
                             <div class="col-md-9">
-                                <input class="form-control" name="meta[metarobot]" value="<?= ($post->metadata ? ($post->metadata->metarobot ? $post->metadata->metarobot : '') : '') ?>" type="text">
+                                <input class="form-control" name="meta[robot]" value="<?= ($post->metadata ? ($post->metadata->robot ? $post->metadata->robot : '') : '') ?>" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3">Metatitle</label>
+                            <label class="col-md-3">
+	                            <?=language('META_TITLE')?>
+                            </label>
                             <div class="col-md-9">
-                                <input class="form-control" name="meta[metatitle]" value="<?= ($post->metadata ? ($post->metadata->metatitle ? $post->metadata->metatitle : '') : '') ?>" type="text">
+                                <input class="form-control" name="meta[title]" value="<?= ($post->metadata ? ($post->metadata->title ? $post->metadata->title : '') : '') ?>" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3">Metadescription</label>
+                            <label class="col-md-3">
+	                            <?=language('META_DESCRIPTION')?>
+                            </label>
                             <div class="col-md-9">
-                                <textarea class="form-control" cols="5" name="meta[metadescription]"><?= ($post->metadata ? ($post->metadata->metadescription ? $post->metadata->metadescription : '') : '') ?></textarea>
+                                <textarea class="form-control" cols="5" name="meta[description]"><?= ($post->metadata ? ($post->metadata->description ? $post->metadata->description : '') : '') ?></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3">Metakeywords</label>
+                            <label class="col-md-3">
+	                            <?=language('META_KEYWORDS')?>
+                            </label>
                             <div class="col-md-9">
-                                <input class="tagsinput form-control" data-role="tagsinput" name="meta[metakeywords]" value="<?= ($post->metadata ? ($post->metadata->metakeywords ? $post->metadata->metakeywords : '') : '') ?>" type="text">
+                                <input class="tagsinput form-control" data-role="tagsinput" name="meta[keywords]" value="<?= ($post->metadata ? ($post->metadata->keywords ? $post->metadata->keywords : '') : '') ?>" type="text">
                             </div>
                         </div>
                     </div>
@@ -166,112 +174,40 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group">
-                            <label>Language</label>
-                            <select class="custom-select form-control" name="settings[language]">
-                                <?php foreach ($world_languages as $key => $value): ?>
-                                    <option value="<?= $key ?>" <?= ($post->settings ? ($post->settings->language == $key ? 'selected' : '') : '') ?>><?= $value ?></option>
+                            <label><?=language('LANGUAGE')?></label>
+                            <select class="custom-select form-control" name="language">
+                                <?php foreach ($options->languages as $value => $option): ?>
+                                    <option value="<?= $value ?>" <?= ($post->settings ? ($post->language == $value ? 'selected' : '') : '') ?>><?= $option ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <!-- <div class="form-group">
-                            <label>Format</label>
-                            <select class="custom-select form-control" name="settings[format]">
-                                <option>Post</option>
-                            </select>
-                        </div> -->
                         <div class="form-group">
-                            <label>Status</label>
+                            <label><?=language('STATUS')?></label>
                             <select class="custom-select form-control" name="record_status">
-                                <?php foreach ($status as $key => $value): ?>
-                                    <option value="<?= $key ?>" <?= ($post->record ? ($post->record->status == $key ? 'selected' : '') : '') ?>><?= $value ?></option>
+                                <?php foreach ($options->status as $value => $option): ?>
+                                    <option value="<?= $value ?>" <?= ($post->record ? ($post->record->status == $value ? 'selected' : '') : '') ?>><?= $option ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Visibility</label>
+                            <label><?=language('VISIBILITY')?></label>
                             <select class="custom-select form-control" name="visibility">
-                                <?php if ($visibility): ?>
-                                    <?php foreach ($visibility as $key => $value): ?>
-                                        <option value="<?= $key ?>" <?= $post->visibility == $key ? 'selected' : '' ?>><?= $value ?></option>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
+                                <?php foreach ($options->visibility as $value => $option): ?>
+		                            <option value="<?= $value ?>" <?= $post->visibility == $value ? 'selected' : '' ?>><?= $option ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
                 </div>
 
                 <div class="card">
-                    <h6 class="card-header">Publishing</h6>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label>Start Publishing</label>
-                            <input type="datetime-local" name="settings[publish_start]" class="form-control" value="<?= ($post->start_publishing ? date('Y-m-d\TH:i:s', strtotime($post->start_publishing)) : '')  ?>">
-                        </div>
-                        <div class="form-group">
-                            <label>Finish Publishing</label>
-                            <input type="datetime-local" name="settings[publish_finish]" class="form-control" value="<?= ($post->finish_publishing ? date('Y-m-d\TH:i:s', strtotime($post->finish_publishing)) : '')  ?>">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- <div class="card">
-                    <h6 class="card-header">
-                        Categories
-                    </h6>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <select class="form-control custom-select selectize-single" name="" placeholder="Select or Add">
-                                <option value="" selected>Test</option>
-                                <option>First</option>
-                                <option>Second</option>
-                                <option>Third</option>
-                            </select>
-                        </div>
-                    </div>
-                </div> -->
-
-                <!-- <div class="card">
-                    <h6 class="card-header">
-                        Tags
-                    </h6>
-                    <div class="card-body">
-                        <div class="form-group mb-0">
-                            <input type="text" name="tags[name]" data-role="tagsinput" value="<?= ($post->tag ? $post->tag->name : '') ?>" />
-                        </div>
-                    </div>
-                </div> -->
-
-                <div class="card">
-                    <h6 class="card-header">Sharing</h6>
-                    <div class="card-body">
-                        <div class="form-group d-flex justify-content-between align-items-center">
-                            <label class="mb-0">Show sharing buttons</label>
-                            <label class="switch">
-                                <input type="hidden" name="settings[sharing_button]" value="off" />
-                                <input type="checkbox" <?= ($post->settings ? ($post->settings->sharing_button ? ($post->settings->sharing_button == 'on' ? 'checked' : '') : '') : '') ?> name="settings[sharing_button]">
-                                <span></span> 
-                            </label>
-                        </div>
-                        <div class="form-group d-flex justify-content-between align-items-center">
-                            <label class="mb-0">Show like button</label>
-                            <label class="switch">
-                                <input type="hidden" name="settings[like_button]" value="off" />
-                                <input type="checkbox" <?= ($post->settings ? ($post->settings->like_button ? ($post->settings->like_button == 'on' ? 'checked' : '') : '') : '') ?> name="settings[like_button]">
-                                <span></span> 
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h6 class="card-header">More Options</h6>
                     <div class="card-body">
                         <!-- <div class="form-group">
                             <label>Excerpt</label>
                             <textarea name="excerpt" class="form-control" placeholder="Write an excerpt"><?= $post->excerpt ?></textarea>
                         </div> -->
                         <div class="form-group d-flex justify-content-between align-items-center">
-                            <label class="mb-0">Featured</label>
+                            <label class="mb-0"><?=language('FEATURED')?></label>
                             <label class="switch">
                                 <input type="hidden" name="settings[featured]" value="off" />
                                 <input type="checkbox" <?= ($post->settings ? ($post->settings->featured ? ($post->settings->featured == 'on' ? 'checked' : '') : '') : '') ?> name="settings[featured]">
@@ -279,10 +215,14 @@
                             </label>
                         </div>
                         <div class="form-group mb-0">
-                            <label class="text-muted small">DISCUSSION</label>
+                            <label class="text-muted small">
+	                            <?=language('DISCUSSION')?>
+                            </label>
                         </div>
                         <div class="form-group d-flex justify-content-between align-items-center">
-                            <label class="mb-0">Allow Comments</label>
+                            <label class="mb-0">
+	                            <?=language('ALLOW_COMMENTS')?>
+                            </label>
                             <label class="switch">
                                 <input type="hidden" name="settings[allow_comments]" value="off" />
                                 <input type="checkbox" <?= ($post->settings ? ($post->settings->allow_comments ? ($post->settings->allow_comments == 'on' ? 'checked' : '') : '') : '') ?> name="settings[allow_comments]">
@@ -290,13 +230,38 @@
                             </label>
                         </div>
                         <div class="form-group d-flex justify-content-between align-items-center mb-0">
-                            <label class="mb-0">Allow Pingbacks &amp; Trackbacks</label>
+                            <label class="mb-0">
+	                            <?=language('ALLOW_PINGBACKS_TRACKBACKS')?>
+                            </label>
                             <label class="switch">
                                 <input type="hidden" name="settings[allow_pingbacks]" value="off" />
                                 <input type="checkbox" <?= ($post->settings ? ($post->settings->allow_pingbacks ? ($post->settings->allow_pingbacks == 'on' ? 'checked' : '') : '') : '') ?> name="settings[allow_pingbacks]">
                                 <span></span> 
                             </label>
                         </div>
+
+	                    <div class="form-group mt-3 mb-0">
+		                    <label class="text-muted small">
+                                <?=language('SOCIALMEDIA')?>
+		                    </label>
+	                    </div>
+
+	                    <div class="form-group d-flex justify-content-between align-items-center">
+		                    <label class="mb-0"><?=language('SOCIALMEDIA_SHOW_SHARING_BUTTONS')?></label>
+		                    <label class="switch">
+			                    <input type="hidden" name="settings[sharing_button]" value="off" />
+			                    <input type="checkbox" <?= ($post->settings ? ($post->settings->sharing_button ? ($post->settings->sharing_button == 'on' ? 'checked' : '') : '') : '') ?> name="settings[sharing_button]">
+			                    <span></span>
+		                    </label>
+	                    </div>
+	                    <div class="form-group d-flex justify-content-between align-items-center">
+		                    <label class="mb-0"><?=language('SOCIALMEDIA_SHOW_LIKE_BUTTONS')?></label>
+		                    <label class="switch">
+			                    <input type="hidden" name="settings[like_button]" value="off" />
+			                    <input type="checkbox" <?= ($post->settings ? ($post->settings->like_button ? ($post->settings->like_button == 'on' ? 'checked' : '') : '') : '') ?> name="settings[like_button]">
+			                    <span></span>
+		                    </label>
+	                    </div>
                     </div>
                 </div>
             </div>
@@ -304,23 +269,24 @@
     </form>
 </div>
 <script>
+	$('[data-action="cancel"]').click(function(){
+	    window.location = "<?=base_url('site/pages')?>";
+	});
     $('#form-data').on('submit', function (e) {
-    e.preventDefault();
-    var data = new FormData(this);
-    let domain_url = "<?= domain_url('/pages/'.($post->id ? 'update' : 'create'), null, 'api') ?>";
-    $.ajax({
-        url: domain_url,
-        type: "POST",
-        data:data,
-        async: false,
-        processData: false,
-        contentType: false,
-        success: function(result){
-            window.location.href =  espresso.helpers.url.base("site/page");
-        },
-        error: function (error) {
-            window.location.href =  espresso.helpers.url.base("site/page");
-        }
-    });
+        e.preventDefault();
+	    $.ajax({
+	        url: "/api/site/pages/<?=($post->id ? 'update' : 'create')?>",
+	        type: "POST",
+	        data: $(this).serialize(),
+	        async: false,
+	        processData: false,
+	        contentType: false,
+	        success: function(result){
+	            //window.location.href =  espresso.helpers.url.base("site/pages");
+	        },
+	        error: function (error) {
+	            //window.location.href =  espresso.helpers.url.base("site/pages");
+	        }
+	    });
 });
 </script>

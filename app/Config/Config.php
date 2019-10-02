@@ -20,6 +20,13 @@
 $config[ 'app' ] = null;
 
 /**
+ * Web Token
+ *
+ * @var string
+ */
+$config[ 'web-token' ] = 'ZbTnSu4G3HKzSu36XLdAjptJaKIQdT1B';
+
+/**
  * Default Character Set
  *
  * This determines which character set is used by default in various methods

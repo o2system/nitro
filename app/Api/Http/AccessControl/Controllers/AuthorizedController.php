@@ -31,9 +31,6 @@ class AuthorizedController extends Controller
     public function __reconstruct()
     {
         parent::__reconstruct();
-
-        // Register user authentication middleware
-        // middleware()->register( new UserAuthorization() );
-        // middleware()->register( new UserAuthentication() );
+        middleware()->register( new UserAuthorization() );
     }
 }

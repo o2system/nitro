@@ -14,6 +14,7 @@ namespace App\Api\Http;
 
 // ------------------------------------------------------------------------
 
+use App\Api\Http\AccessControl\Middleware\WebToken;
 use O2System\Framework\Http\Controllers\Restful;
 
 /**
@@ -22,5 +23,11 @@ use O2System\Framework\Http\Controllers\Restful;
  */
 class Controller extends Restful
 {
-
+    /**
+     * Controller::__reconstruct
+     */
+    public function __reconstruct()
+    {
+        middleware()->register(new WebToken());
+    }
 }

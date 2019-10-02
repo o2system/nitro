@@ -29,7 +29,7 @@ class AuthenticatedController extends Controller
      */
     public function __reconstruct()
     {
-        // Register user authentication middleware
-         middleware()->register( new UserAuthentication() );
+        parent::__reconstruct();
+        middleware()->register( new UserAuthentication() );
     }
 }

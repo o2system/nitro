@@ -1,6 +1,6 @@
 {
-    "/assets/app.js": "/assets/app.js",
-    "/assets/app.css": "/assets/app.css",
+    "/manage/app.js": "/manage/app.js",
+    "/manage/app.css": "/manage/app.css",
     "/manage/themes/default/theme.css": "/manage/themes/default/theme.css",
     "/manage/themes/default/theme.js": "/manage/themes/default/theme.js"
 }

@@ -21,7 +21,7 @@ use O2System\Psr\Http\Message\ServerRequestInterface;
  *
  * @package App\Api\Http\AccessControl\Middleware
  */
-class UserAuthorization extends \App\Http\AccessControl\Middleware\UserAuthorization
+class UserAuthorization extends UserAuthentication
 {
 /**
      * UserAuthorization::handle
@@ -35,7 +35,7 @@ class UserAuthorization extends \App\Http\AccessControl\Middleware\UserAuthoriza
         parent::handle($request);
 
         if (services('user')->loggedIn()) {
-            if ( ! services('user')->hasAccess($request->getUri()->getSegments()->getParts())) {
+            if ( ! services('user')->hasAccess($request->getUri()->segments->getArrayCopy())) {
                 output()->sendError(403);
             }
         } else {

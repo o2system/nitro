@@ -19,7 +19,7 @@
     <?php if (null !== ($message = $session->getFlash('success'))): ?>
         <script type="text/javascript">
             Swal.fire({
-                title: '<?php echo $language->getLine('ALERT_SUCCESS_HEADING'); ?>',
+                title: '<?php echo language('ALERT_SUCCESS_HEADING'); ?>',
                 text: '<?php echo $message; ?>',
                 type: 'success'
             })
@@ -27,7 +27,7 @@
     <?php elseif (null !== ($message = $session->getFlash('danger'))): ?>
         <script type="text/javascript">
             Swal.fire({
-                title: '<?php echo $language->getLine('ALERT_DANGER_HEADING'); ?>',
+                title: '<?php echo language('ALERT_DANGER_HEADING'); ?>',
                 text: '<?php echo $message; ?>',
                 type: 'error'
             })
