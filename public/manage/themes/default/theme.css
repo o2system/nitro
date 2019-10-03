@@ -27043,6 +27043,10 @@ label.switch > input[type=checkbox]:checked ~ span:after {
  * @author         Steeve Andrian Salim
  *  @copyright      Copyright (c) Steeve Andrian Salim
  */
+.form-control {
+  padding: 0.475rem 0.75rem;
+}
+
 .bootstrap-tagsinput {
   height: calc(2.45rem + 2px);
   padding: 0.475rem 1.25rem;
@@ -27050,6 +27054,9 @@ label.switch > input[type=checkbox]:checked ~ span:after {
 }
 .bootstrap-tagsinput label {
   margin: 0 1px;
+}
+.bootstrap-tagsinput .label-info {
+  padding: 8px 10px;
 }
 
 .ms-container {

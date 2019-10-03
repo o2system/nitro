@@ -8,6 +8,10 @@
  *  @copyright      Copyright (c) Steeve Andrian Salim
  */
 
+ .form-control{
+	padding: 0.475rem 0.75rem;
+ }
+
 .bootstrap-tagsinput{
     height: calc(2.45rem + 2px);
     padding: .475rem 1.25rem;
@@ -15,7 +19,11 @@
 
     label{
         margin: 0 1px;
-    }
+	}
+	
+	.label-info{
+		padding: 8px 10px;
+	}
 }
 
 .ms-container{
