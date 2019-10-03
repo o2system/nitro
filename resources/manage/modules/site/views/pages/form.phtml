@@ -270,23 +270,19 @@
 </div>
 <script>
 	$('[data-action="cancel"]').click(function(){
-	    window.location = "<?=base_url('site/pages')?>";
+	    window.location = "/site/pages";
 	});
+
     $('#form-data').on('submit', function (e) {
         e.preventDefault();
-	    $.ajax({
-	        url: "/api/site/pages/<?=($post->id ? 'update' : 'create')?>",
-	        type: "POST",
-	        data: $(this).serialize(),
-	        async: false,
-	        processData: false,
-	        contentType: false,
-	        success: function(result){
-	            //window.location.href =  espresso.helpers.url.base("site/pages");
-	        },
-	        error: function (error) {
-	            //window.location.href =  espresso.helpers.url.base("site/pages");
-	        }
-	    });
+        ajaxSettings.method = "POST";
+        ajaxSettings.url = "/api/site/pages/<?=($post->id ? 'update' : 'create')?>";
+        ajaxSettings.data = new FormData(this);
+        ajaxSettings.processData = false;
+        ajaxSettings.contentType = false;
+
+        $.ajax(ajaxSettings).done(function(response){
+            window.location.href = '/site/pages';
+        });
 });
 </script>

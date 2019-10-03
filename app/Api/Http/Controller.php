@@ -28,6 +28,6 @@ class Controller extends Restful
      */
     public function __reconstruct()
     {
-        middleware()->register(new WebToken());
+        //middleware()->register(new WebToken());
     }
 }

@@ -56,6 +56,7 @@ class User extends PublicController
 
             if($rules->validate()) {
                 if(services()->has('user')) {
+                    print_out(services('user')->passwordHash($post->password));
                     if(services('user')->authenticate($post->username, $post->password)) {
                         $jwt = new JsonWebToken();
                         $token = $jwt->encode(session()->get('account'));

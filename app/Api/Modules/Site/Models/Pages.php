@@ -65,23 +65,6 @@ class Pages extends Model
     // ------------------------------------------------------------------------
 
     /**
-     * Pages::visibilityOptions
-     *
-     * @return array
-     */
-    public function visibilityOptions()
-    {
-        return [
-            'PUBLIC'    => language('PUBLIC'),
-            'READONLY'  => language('READONLY'),
-            'PROTECTED' => language('PROTECTED'),
-            'PRIVATE'   => language('PRIVATE'),
-        ];
-    }
-
-    // ------------------------------------------------------------------------
-
-    /**
      * Pages::meta
      *
      * @param string $name
@@ -273,7 +256,7 @@ class Pages extends Model
     /**
      * Pages::update
      *
-     * @param array $post
+     * @param array $sets
      * @param null  $conditions
      *
      * @return bool
@@ -281,26 +264,28 @@ class Pages extends Model
      * @throws \O2System\Spl\Exceptions\RuntimeException
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function update($post, $conditions = null)
+    public function update($sets, $conditions = null)
     {
-        if ($post) {
-            if ($post[ 'record_status' ]) {
-                unset($post[ 'record_status' ]);
+        if ($sets) {
+            if ($sets[ 'record_status' ]) {
+                unset($sets[ 'record_status' ]);
 
-                if (parent::update($post)) {
+                if (parent::update($sets)) {
                     return true;
                 }
             }
 
-            $post[ 'slug' ] = dash($post['slug']);
+            $sets[ 'slug' ] = dash($sets['slug']);
 
-            $metadata = $post[ 'meta' ];
-            $settings = $post[ 'settings' ];
+            $metadata = $sets[ 'meta' ];
+            $settings = $sets[ 'settings' ];
 
-            unset($post[ 'meta' ], $post[ 'settings' ]);
+            unset($sets[ 'meta' ], $sets[ 'settings' ]);
 
-            if (parent::update($post)) {
-                $id_page = $post[ 'id' ];
+            print_out($sets);
+
+            if (parent::update($sets)) {
+                $id_page = $sets[ 'id' ];
 
                 if (input()->files('photo')) {
                     $filePath = PATH_STORAGE . 'images/pages/media/';

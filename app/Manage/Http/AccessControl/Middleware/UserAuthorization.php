@@ -36,7 +36,7 @@ class UserAuthorization extends UserAuthentication
         parent::handle($request);
 
         if (services('user')->loggedIn()) {
-            if ( ! services('user')->hasAccess($request->getUri()->getSegments()->getParts())) {
+            if ( ! services('user')->hasAccess($request->getUri()->segments->getArrayCopy())) {
                 redirect_url('error/403');
             }
         } else {

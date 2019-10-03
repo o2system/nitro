@@ -1,48 +1,26 @@
 <?php
 /**
- * This file is part of the NEO ERP Application.
+ * This file is part of the O2System PHP Framework package.
  *
- *  For the full copyright and license information, please view the LICENSE
- *  file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  *
- *  @author         PT. Lingkar Kreasi (Circle Creative)
- *  @copyright      Copyright (c) PT. Lingkar Kreasi (Circle Creative)
+ * @author         Steeve Andrian Salim
+ * @copyright      Copyright (c) Steeve Andrian Salim
  */
 // ------------------------------------------------------------------------
 
 namespace App\Manage\Modules\System\Http;
 
 // ------------------------------------------------------------------------
-use App\Http\AccessControl\Controllers\AuthenticatedController;
 
+use App\Manage\Http\AccessControl\Controllers\AuthorizedController;
 
 /**
  * Class Controller
- *
- * @package Administrator\Http
+ * @package App\Manage\Modules\System\Http
  */
-class Controller extends AuthenticatedController
+class Controller extends AuthorizedController
 {
-    /**
-     * Controller::__construct
-     */
-    public $model;
-    public function __reconstruct()
-    {
-        parent::__reconstruct();
 
-        $this->presenter->page
-            ->setHeader( 'SYSTEM' )
-            ->setDescription( 'The O2CMS Administrator Module' );
-        if (empty($this->model)) {
-            $controllerClassName = get_called_class();
-            $modelClassName = str_replace(['App', 'Controllers'], ['App\Api', 'Models'], $controllerClassName);
-
-            if (class_exists($modelClassName)) {
-                $this->model = new $modelClassName();
-            }
-        } elseif (class_exists($this->model)) {
-            $this->model = new $this->model();
-        }
-    }
 }

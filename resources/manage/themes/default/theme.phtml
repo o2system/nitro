@@ -5,6 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {{ $assets->head }}
+
+	<script type="text/javascript">
+        var ajaxSettings = {
+            "async": true,
+            "crossDomain": true,
+            "method": "GET",
+            "headers": {
+                "X-WEB-TOKEN": "<?=config('web-token')?>>",
+            }
+        }
+	</script>
 </head>
 <body class="venus-admin">
     <header class="header">
@@ -13,7 +24,7 @@
     <aside class="sidebar-left">
         {{$partials->sidebar}}
     </aside>
-    <main class="main">
+    <main id="page-content" class="main">
         {{$partials->content}}
     </main>
     <?php if (null !== ($message = $session->getFlash('success'))): ?>

@@ -4,7 +4,7 @@
     <nav class="sidebar-nav">
         <ul id="sidebarnav">
             <li class="sidebar-item">
-                <a class="sidebar-link" href="<?=base_url('dashboard');?>">
+                <a class="sidebar-link" href="<?=base_url('dashboard');?>" data-action="load-page">
                     <i class="fas fa-tachometer-alt"></i>
                     <span class="hide-menu">Dashboard</span>
                 </a>
@@ -23,7 +23,7 @@
             </li>
 
             <li class="sidebar-item">
-                <a href="<?=base_url('site/page');?>" class="sidebar-link">
+                <a href="<?=base_url('site/pages');?>" class="sidebar-link">
                     <i class="fas fa-file-alt"></i>
                     <span class="hide-menu">Pages</span>
                 </a>
@@ -51,7 +51,7 @@
 
                 <ul aria-expanded="false" class="collapse second-level">
                     <li class="sidebar-item">
-                        <a href="<?=base_url('site/appearance/customize');?>" class="sidebar-link">
+                        <a href="<?=base_url('site/appearance/customize');?>" class="sidebar-link" target="_self">
                             <i class="fas fa-swatchbook"></i>
                             <span class="hide-menu">Customize</span>
                         </a>
@@ -102,7 +102,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="<?=base_url('system/settings');?>" aria-expanded="false">
+                        <a class="sidebar-link" href="<?=base_url('system/settings');?>" aria-expanded="false" data-action="load-page" data-target="page-content">
                             <i class="fas fa-cog"></i>
                             <span class="hide-menu">Settings</span>
                         </a>

@@ -23,12 +23,10 @@ use O2System\Psr\Http\Message\ServerRequestInterface;
  */
 class UserAuthorization extends UserAuthentication
 {
-/**
+    /**
      * UserAuthorization::handle
      *
-     * Handles a request and produces a response
-     *
-     * May call other collaborating code to generate the response.
+     * @param \O2System\Psr\Http\Message\ServerRequestInterface $request
      */
     public function handle(ServerRequestInterface $request)
     {

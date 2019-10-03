@@ -14,11 +14,13 @@ namespace App\Api\Modules\Site\Http;
 
 // ------------------------------------------------------------------------
 
+use App\Api\Http\AccessControl\Controllers\AuthorizedController;
+
 /**
  * Class Controller
  * @package App\Api\Modules\Site\Http
  */
-class Controller extends \App\Api\Http\AccessControl\Controllers\AuthenticatedController
+class Controller extends AuthorizedController
 {
 
 }
