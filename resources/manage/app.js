@@ -26,9 +26,7 @@ if ('serviceWorker' in navigator) {
 }
 
 $('body').on('click', 'a', function(e){
-    if($(this).attr('href') == '#' || $(this).attr('href') == 'javascript:void(0)') {
-        e.preventDefault();
-    } else if(typeof $(this).attr('target') == 'undefined') {
+    if(typeof $(this).attr('target') == 'undefined') {
         e.preventDefault();
         $('.active').removeClass('active');
         var targetElement = $(this).data('target');
