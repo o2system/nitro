@@ -14,12 +14,7 @@ namespace App\Api\Modules\System\Controllers;
 
 // ------------------------------------------------------------------------
 
-use App\Api\Http\AccessControl\Controllers\PublicController;
-use O2System\Security\Authentication\JsonWebToken;
-use O2System\Security\Filters\Rules;
-use O2System\Spl\Exceptions\Logic\DomainException;
-use O2System\Spl\Exceptions\Logic\OutOfRangeException;
-use O2System\Spl\Datastructures\SplArrayObject;
+use App\Api\Http\AccessControl\Controllers\AuthorizedController;
 use O2System\Framework\Libraries\Ui\Contents\Lists\Unordered;
 use O2System\Filesystem\Handlers\Uploader;
 use App\Api\Modules\System\Models\Users\Profiles;
@@ -30,7 +25,7 @@ use O2System\Kernel\Http\Message\UploadFile;
  * Class Users
  * @package App\Api\Modules\System\Controllers
  */
-class Users extends PublicController
+class Users extends AuthorizedController
 {
     /**
      * Users::$fillableColumnsWithRules
@@ -80,59 +75,6 @@ class Users extends PublicController
             'rules'    => 'optional',
         ],
     ];
-
-    /**
-     * Users::authenticate
-     *
-     * @throws OutOfRangeException
-     * @throws DomainException
-     */
-    public function authenticate()
-    {
-        if($post = input()->post()) {
-            $rules = new Rules($post);
-            $rules->sets(
-                [
-                    [
-                        'field'    => 'username',
-                        'label'    => 'Username',
-                        'rules'    => 'required',
-                        'messages' => 'Username cannot be empty!',
-                    ],
-                    [
-                        'field'    => 'password',
-                        'label'    => 'Password',
-                        'rules'    => 'required',
-                        'messages' => 'Password cannot be empty!',
-                    ],
-                ]
-            );
-
-            if($rules->validate()) {
-                if(services()->has('user')) {
-                    if(services('user')->authenticate($post->username, $post->password)) {
-                        $jwt = new JsonWebToken();
-                        $token = $jwt->encode(session()->get('account'));
-
-                        if(services('user')->loggedIn()) {
-                            $this->sendPayload($token);
-                        } else {
-                            $this->sendPayload([
-                                'success' => false,
-                                'message' => 'Login failed, please try again in a few minutes!'
-                            ]);
-                        }
-                    }
-                } else {
-                    $this->sendError(503, 'Service user is not exists!');
-                }
-            } else {
-                $this->sendError(400, 'Username and password cannot be empty!');
-            }
-        } else {
-            $this->sendError(400);
-        }
-    }
 
     public function membersUpdate()
     {
@@ -208,6 +150,8 @@ class Users extends PublicController
             $this->sendError(400, 'Post parameters cannot be empty!');
         }
     }
+
+    // ------------------------------------------------------------------------
 
     public function detectFiles()
     {

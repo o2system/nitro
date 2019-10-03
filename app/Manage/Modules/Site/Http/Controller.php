@@ -21,5 +21,12 @@ use App\Manage\Http\AccessControl\Controllers\AuthenticatedController;
  */
 class Controller extends AuthenticatedController
 {
-
+    public function route($method, array $arguments = [])
+    {
+        if(in_array($method, ['add', 'edit'])) {
+            call_user_func_array([$this, 'form'], $arguments);
+        } elseif(method_exists($this, $method)) {
+            call_user_func_array([$this, $method], $arguments);
+        }
+    }
 }

@@ -8,6 +8,7 @@
  * @author         Steeve Andrian Salim
  * @copyright      Copyright (c) Steeve Andrian Salim
  */
+
 // ------------------------------------------------------------------------
 
 namespace App\Manage\Http;
@@ -39,15 +40,16 @@ class Controller extends \App\Http\Controller
     public function __reconstruct()
     {
         parent::__reconstruct();
-        presenter()->page
-            ->setHeader( 'Manage' )
-            ->setDescription( 'Kredit Impian Manage Module' );
+
+        presenter()->meta->title->replace('Nitro by O2System');
+
         $className = get_class_name($this);
 
         // Set Page Title and Header
         presenter()->page
-            ->setHeader(strtoupper($className))
-            ->setTitle(strtoupper($className));
+            ->setHeader($className)
+            ->setTitle($className);
+
         if (empty($this->model)) {
             $controllerClassName = get_called_class();
             $modelClassName = str_replace(['App', 'Controllers'], ['App\Api', 'Models'], $controllerClassName);
@@ -58,20 +60,21 @@ class Controller extends \App\Http\Controller
         } elseif (class_exists($this->model)) {
             $this->model = new $this->model();
         }
-            // Set Breadcrumb
+
+        // Set Breadcrumb
         $segments = server_request()->getUri()->segments->getArrayCopy();
         $numSegments = count($segments);
         $breadcrumbSegments = [];
-        for($i=0; $i<$numSegments; $i++) {
-            $breadcrumbSegments[$i] = $segments[$i];
-            if($i == $numSegments) {
+        for ($i = 0; $i < $numSegments; $i++) {
+            $breadcrumbSegments[ $i ] = $segments[ $i ];
+            if ($i == $numSegments) {
                 presenter()->page->breadcrumb->createList(new Link(
-                    language(strtoupper(underscore($segments[$i])))
+                    language(strtoupper(underscore($segments[ $i ])))
                 ));
                 break;
             } else {
                 presenter()->page->breadcrumb->createList(new Link(
-                    language(strtoupper(underscore($segments[$i]))),
+                    language(strtoupper(underscore($segments[ $i ]))),
                     base_url($breadcrumbSegments)
                 ));
             }

@@ -14,8 +14,6 @@ namespace App\Http;
 
 // ------------------------------------------------------------------------
 
-use App\Http\Presenter\Page;
-
 /**
  * Class Controller
  *

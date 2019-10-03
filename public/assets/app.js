@@ -127,9 +127,9 @@ eval("// removed by extract-text-webpack-plugin//# sourceURL=[module]\n//# sourc
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/o2system/boilerplate/nitro/resources/app.js */"./resources/app.js");
-__webpack_require__(/*! /Applications/MAMP/htdocs/o2system/boilerplate/nitro/resources/app.scss */"./resources/app.scss");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/o2system/boilerplate/nitro/resources/manage/themes/default/theme.scss */"./resources/manage/themes/default/theme.scss");
+__webpack_require__(/*! /private/var/www/frameworks/o2system/boilerplates/nitro/resources/app.js */"./resources/app.js");
+__webpack_require__(/*! /private/var/www/frameworks/o2system/boilerplates/nitro/resources/app.scss */"./resources/app.scss");
+module.exports = __webpack_require__(/*! /private/var/www/frameworks/o2system/boilerplates/nitro/resources/manage/themes/default/theme.scss */"./resources/manage/themes/default/theme.scss");
 
 
 /***/ })

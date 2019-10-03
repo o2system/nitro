@@ -14,8 +14,6 @@ namespace App\Http;
 
 // ------------------------------------------------------------------------
 
-use App\Http\Presenter\Page;
-
 /**
  * Class Controller
  *
@@ -28,6 +26,6 @@ class Presenter extends \O2System\Framework\Http\Presenter
         parent::__construct();
 
         $this->meta->title->prepend('O2System');
-        $this->meta->offsetSet('generator', 'O2System Framework - The Next Generation of PHP Framework');
+        $this->meta->offsetSet('generator', FRAMEWORK_NAME . ' ' . FRAMEWORK_VERSION);
     }
 }

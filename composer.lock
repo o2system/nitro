@@ -230,16 +230,16 @@
         },
         {
             "name": "o2system/database",
-            "version": "v2.2.39",
+            "version": "v2.2.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/o2system/database.git",
-                "reference": "05b340b850125b2b97f7d241d132ecb2dd2cbc95"
+                "reference": "40291918bd03ee89035fda2b3a2836b64d751de5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/o2system/database/zipball/05b340b850125b2b97f7d241d132ecb2dd2cbc95",
-                "reference": "05b340b850125b2b97f7d241d132ecb2dd2cbc95",
+                "url": "https://api.github.com/repos/o2system/database/zipball/40291918bd03ee89035fda2b3a2836b64d751de5",
+                "reference": "40291918bd03ee89035fda2b3a2836b64d751de5",
                 "shasum": ""
             },
             "require": {
@@ -272,7 +272,7 @@
                 "php",
                 "utilities"
             ],
-            "time": "2019-09-24T06:16:39+00:00"
+            "time": "2019-10-02T16:39:36+00:00"
         },
         {
             "name": "o2system/email",
@@ -383,16 +383,16 @@
         },
         {
             "name": "o2system/framework",
-            "version": "v5.6.46",
+            "version": "v5.6.54",
             "source": {
                 "type": "git",
                 "url": "https://github.com/o2system/framework.git",
-                "reference": "2d67fac519fc5ecdd64d97db1cc5f4b86e956179"
+                "reference": "90a43b335e119f66985e925ea08a138ec7021651"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/o2system/framework/zipball/2d67fac519fc5ecdd64d97db1cc5f4b86e956179",
-                "reference": "2d67fac519fc5ecdd64d97db1cc5f4b86e956179",
+                "url": "https://api.github.com/repos/o2system/framework/zipball/90a43b335e119f66985e925ea08a138ec7021651",
+                "reference": "90a43b335e119f66985e925ea08a138ec7021651",
                 "shasum": ""
             },
             "require": {
@@ -443,20 +443,20 @@
                 "php",
                 "utilities"
             ],
-            "time": "2019-09-25T14:24:13+00:00"
+            "time": "2019-10-02T16:38:19+00:00"
         },
         {
             "name": "o2system/gear",
-            "version": "v2.1.62",
+            "version": "v2.1.63",
             "source": {
                 "type": "git",
                 "url": "https://github.com/o2system/gear.git",
-                "reference": "b76406b68c5f72122c6f840b757e957f424bc772"
+                "reference": "c092919e4dd62ff6dc93bfa1ab1a4e6b84670b89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/o2system/gear/zipball/b76406b68c5f72122c6f840b757e957f424bc772",
-                "reference": "b76406b68c5f72122c6f840b757e957f424bc772",
+                "url": "https://api.github.com/repos/o2system/gear/zipball/c092919e4dd62ff6dc93bfa1ab1a4e6b84670b89",
+                "reference": "c092919e4dd62ff6dc93bfa1ab1a4e6b84670b89",
                 "shasum": ""
             },
             "require": {
@@ -497,7 +497,7 @@
                 "php",
                 "utilities"
             ],
-            "time": "2019-04-09T06:22:43+00:00"
+            "time": "2019-10-02T16:40:31+00:00"
         },
         {
             "name": "o2system/html",
@@ -606,16 +606,16 @@
         },
         {
             "name": "o2system/kernel",
-            "version": "v1.9.177",
+            "version": "v1.9.179",
             "source": {
                 "type": "git",
                 "url": "https://github.com/o2system/kernel.git",
-                "reference": "8aec84262b7454617331ad09618adfe5dd4aaa23"
+                "reference": "2679d21fe09087bba1fa7c35b1c7ef60af998c96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/o2system/kernel/zipball/8aec84262b7454617331ad09618adfe5dd4aaa23",
-                "reference": "8aec84262b7454617331ad09618adfe5dd4aaa23",
+                "url": "https://api.github.com/repos/o2system/kernel/zipball/2679d21fe09087bba1fa7c35b1c7ef60af998c96",
+                "reference": "2679d21fe09087bba1fa7c35b1c7ef60af998c96",
                 "shasum": ""
             },
             "require": {
@@ -665,7 +665,7 @@
                 "php",
                 "singleton"
             ],
-            "time": "2019-09-24T13:58:36+00:00"
+            "time": "2019-09-27T07:38:35+00:00"
         },
         {
             "name": "o2system/parser",
@@ -928,16 +928,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.0.7",
+            "version": "v6.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "0c41a36d4508d470e376498c1c0c527aa36a2d59"
+                "reference": "26bd96350b0b2fcbf0ef4e6f0f9cf3528302a9d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/0c41a36d4508d470e376498c1c0c527aa36a2d59",
-                "reference": "0c41a36d4508d470e376498c1c0c527aa36a2d59",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/26bd96350b0b2fcbf0ef4e6f0f9cf3528302a9d8",
+                "reference": "26bd96350b0b2fcbf0ef4e6f0f9cf3528302a9d8",
                 "shasum": ""
             },
             "require": {
@@ -970,16 +970,16 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL-2.1"
+                "LGPL-2.1-only"
             ],
             "authors": [
                 {
-                    "name": "Jim Jagielski",
-                    "email": "jimjag@gmail.com"
-                },
-                {
                     "name": "Marcus Bointon",
                     "email": "phpmailer@synchromedia.co.uk"
+                },
+                {
+                    "name": "Jim Jagielski",
+                    "email": "jimjag@gmail.com"
                 },
                 {
                     "name": "Andy Prevost",
@@ -990,7 +990,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2019-02-01T15:04:28+00:00"
+            "time": "2019-09-27T21:33:43+00:00"
         },
         {
             "name": "ps/image-optimizer",
