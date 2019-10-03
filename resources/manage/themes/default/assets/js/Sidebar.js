@@ -8,13 +8,13 @@
  *  @copyright      Copyright (c) Steeve Andrian Salim
  */
 
-export default class Sidebar {
+class Sidebar {
     /**
      * Sidebar.constructor
      */
     constructor() {
         //Sidebar Right Toggle
-        $(".rightside-toggle, .editor-sidebar-toggle").click(function () {
+        $('.rightside-toggle, .editor-sidebar-toggle, [data-action="sidebar-right-toggle"]').click(function () {
             if ($("body").hasClass("editor-sidebar-showing")) {
                 $("body").removeClass("editor-sidebar-showing");
             } else {
@@ -23,3 +23,5 @@ export default class Sidebar {
         });
     }
 }
+
+export default new Sidebar();

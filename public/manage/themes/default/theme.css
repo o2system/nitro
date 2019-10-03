@@ -26691,7 +26691,7 @@ input {
   right: -270px;
   width: 270px;
   z-index: 40;
-  background: #E9EFF3;
+  background-color: #fff;
   padding-bottom: 20px;
   height: 100%;
   border-left: 1px solid #e9ecef;
@@ -26715,7 +26715,8 @@ input {
   font-size: 0.9rem;
   position: absolute;
   right: 5%;
-  top: 25%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .right-sidebar .card {
   margin-bottom: 0;

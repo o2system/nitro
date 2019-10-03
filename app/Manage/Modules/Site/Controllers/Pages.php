@@ -66,6 +66,7 @@ class Pages extends Controller
      */
     public function form($id = null)
     {
+        presenter()->theme->setLayout( 'blank' );
         presenter()->page->setHeader( 'PAGES_ADD' );
 
         $vars = [

@@ -25,31 +25,31 @@ if ('serviceWorker' in navigator) {
     console.error('Service Worker registration failed, insecure page, please serve your page over HTTPS or use localhost');
 }
 
-$('body').on('click', 'a', function(e){
-    if(typeof $(this).attr('target') == 'undefined') {
-        e.preventDefault();
-        $('.active').removeClass('active');
-        var targetElement = $(this).data('target');
+// $('body').on('click', 'a', function(e){
+//     if(typeof $(this).attr('target') == 'undefined') {
+//         e.preventDefault();
+//         $('.active').removeClass('active');
+//         var targetElement = $(this).data('target');
 
-        if(typeof targetElement == 'undefined') {
-            if($('#page-sub-content').length == 0) {
-                targetElement = 'page-content';
-            } else {
-                targetElement = 'page-sub-content';
-            }
-        }
+//         if(typeof targetElement == 'undefined') {
+//             if($('#page-sub-content').length == 0) {
+//                 targetElement = 'page-content';
+//             } else {
+//                 targetElement = 'page-sub-content';
+//             }
+//         }
 
-        $(this).addClass('active');
+//         $(this).addClass('active');
 
-        $(this).closest('ul').find('.selected').removeClass('selected');
-        $(this).closest('li').addClass('selected');
+//         $(this).closest('ul').find('.selected').removeClass('selected');
+//         $(this).closest('li').addClass('selected');
 
-        window.history.pushState(null, null, $(this).attr('href'));
-        $( '#' + targetElement ).load($(this).attr('href'), function(){
-            $.getScript('/manage/themes/default/theme.js');
-        });
-    } else if($(this).attr('target') == '_self') {
-        e.preventDefault();
-        window.location = $(this).attr('href');
-    }
-});
+//         window.history.pushState(null, null, $(this).attr('href'));
+//         $( '#' + targetElement ).load($(this).attr('href'), function(){
+//             $.getScript('/manage/themes/default/theme.js');
+//         });
+//     } else if($(this).attr('target') == '_self') {
+//         e.preventDefault();
+//         window.location = $(this).attr('href');
+//     }
+// });

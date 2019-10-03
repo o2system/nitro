@@ -1,7 +1,7 @@
 <div class="page-administrator">
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between p-0 pr-3">
                         <div class="nav-pages">
@@ -9,12 +9,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" href="<?=base_url('system/users/manage')?>"><?php echo $language->getLine('USERS'); ?></a>
                                 </li>
-                                <!-- <li class="nav-item">
+                                <li class="nav-item">
                                     <a class="nav-link" href="<?=base_url('system/users/modules/roles')?>"><?php echo $language->getLine('ROLES'); ?></a> -->
                                 </li>
-                                <!-- <li class="nav-item">
+                                <li class="nav-item">
                                     <a class="nav-link" href="<?=base_url('system/modules')?>"><?php echo $language->getLine('MODULES'); ?></a>
-                                </li> -->
+                                </li>
                             </ul>
                         </div>
                         <a href="<?=base_url('system/users/manage/form'); ?>" class="btn btn-primary btn-md">
@@ -28,11 +28,11 @@
         <?php if($users):?>
             <div class="user-list">
                 <div class="row justify-content-center">
-                    <div class="col-lg-8 col-md-10">
-                        <div class="card">
-                            <div class="card-body pb-0">
-                                <?php foreach($users as $user): ?>
-                                    <div class="media align-items-center mb-4">
+                    <div class="col-lg-12">
+                        <div class="list-group mb-3">
+                            <?php foreach($users as $user): ?>
+                                <div class="list-item">
+                                    <div class="media align-items-center">
                                         <div class="avatar">
                                             <?php if(is_object($user->profile)):?>
                                                 <img src="<?=$user->profile->avatar;?>" class="mr-3 rounded-circle" width="72" height="72">
@@ -73,10 +73,10 @@
                                                 </div>
                                         </div>
                                     </div>
-                                <?php endforeach; ?>
-                            </div>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
-                        <!-- <div class="card nav-pagination">
+                        <div class="card nav-pagination">
                             <div class="card-body">
                                 <div class="row justify-content-between">
                                     <div class="col-sm-6 col-md-6">
@@ -113,7 +113,7 @@
                             <div class="card-footer">
                                 <p class="mb-0 text-lowercase text-muted"><?php echo $language->getLine('SHOW'); ?> <span><?=$users->info->numbering->start; ?></span> <?php echo $language->getLine('TO'); ?> <span><?=$users->info->numbering->end; ?></span> <?php echo $language->getLine('FROM'); ?> <span><?=$users->info->total->rows; ?></span></p>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
