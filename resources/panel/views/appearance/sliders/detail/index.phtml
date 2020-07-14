@@ -1,0 +1,139 @@
+<div class="page-sliders">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <h5 class="mb-0">
+                                    Taxonomy Name
+                                </h5>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-row align-items-center justify-content-end">
+                                    <div class="col-md-auto">
+                                        <a href="<?=base_url('site/appearance/sliders/detail/form');?>" class="btn btn-primary">Add</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <form action="<?=current_url();?>">
+                            <div class="form-row align-items-center">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Entries</span>
+                                            </div>
+                                            <select name="entries" class="form-control custom-select">
+                                                <option value="ALL"><?php echo $language->getLine('ALL') ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Period</span>
+                                            </div>
+                                            <input class="form-control input-daterange-datepicker-empty" type="text" placeholder="Start - Finish Publishing" name="period" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Slider Title" value="" name="keyword">
+                                    </div>
+                                </div>
+                                <div class="col-md text-right">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">Filter</button>
+                                        <a class="btn btn-default" href="#">Reset</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-auto">
+                                <div class="slide-img">
+                                    <img src="assets/img/nopost.png" alt="" class="w-100">
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <div class="form-group">
+                                            <label>Title</label>
+                                            <p>Slider Title</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <p>Slider Description</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 text-right">
+                                        <div class="dropdown">
+                                            <a class="dropdown-toggle dropdown-ellipsis" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="<?php echo base_url('site/appearance/sliders/detail/form/'); ?>">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                    Edit
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="<?= current_url(); ?>" data-id="" data-action="delete">
+                                                    <i class="fa fa-trash"></i>
+                                                    Trash
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card nav-pagination">
+                    <div class="card-body">
+                        <div class="row justify-content-between">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="btn-group">
+                                    <a href="#" class="btn btn-default">
+                                        Prev                                        
+                                    </a>
+                                    <a href="#" class="btn btn-default">
+                                        Next                                        
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-3">
+                                <form action="#" method="get">
+                                    <input type="hidden" name="entries" value="">
+                                    <input type="hidden" name="period" value="">
+                                    <input type="hidden" name="keyword" value="">
+                                    <div class="input-group">
+                                        <select class="custom-select" name="page" method="get"></select>
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-primary">Go</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

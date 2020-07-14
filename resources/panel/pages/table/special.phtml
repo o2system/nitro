@@ -1,0 +1,293 @@
+<div class="page-table">
+    <div class="container-fluid">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-md-auto">
+                <h3 class="mb-1 font-weight-bold">Users List</h3>
+                <p class="text-muted">You have total 2,595 users.</p>
+            </div>
+            <div class="col-md-auto">
+                <div class="form-row justify-content-end">
+                    <div class="col-auto">
+                        <div class="form-group">
+                            <a href="#" class="btn btn-default">
+                                <i class="fas fa-download"></i> Export
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="form-group">
+                            <div class="drodown">
+                                <a href="#" class="dropdown-toggle btn btn-primary remove-caret" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="#" class="dropdown-item">
+                                        Add User
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                        Add Type
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header pb-0">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form action="">
+                            <div class="form-row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <select name="" id="" class="form-control custom-select">
+                                            <option value="">Option</option>
+                                            <option value="">Option</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-auto">
+                                    <button class="btn btn-default" type="submit">Apply</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-row justify-content-end">
+                            <div class="col-auto border-right">
+                                <a href="#" class="btn btn-link px-2" data-toggle="search">
+                                    <i class="fas fa-search"></i>
+                                </a>
+                            </div>
+                            <div class="col-auto">
+                                <div class="dropdown">
+                                    <a href="#" class="btn btn-link px-2 dropdown-toggle remove-caret" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-filter"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right p-0 stop-propagation">
+                                        <div class="dropdown-head">
+                                            <h6 class="font-weight-bold">Filters</h6>
+                                        </div>
+                                        <div class="dropdown-body">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <div class="custom-control custom-control-sm custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="hasBalance">
+                                                            <label class="custom-control-label" for="hasBalance"> Have Balance</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <div class="custom-control custom-control-sm custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="hasKYC">
+                                                            <label class="custom-control-label" for="hasKYC"> KYC Verified</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label>Role</label>
+                                                        <select class="form-select custom-select">
+                                                            <option value="any">Any Role</option>
+                                                            <option value="investor">Investor</option>
+                                                            <option value="seller">Seller</option>
+                                                            <option value="buyer">Buyer</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label>Status</label>
+                                                        <select class="form-select custom-select">
+                                                            <option value="any" data-select2-id="9">Any Status</option>
+                                                            <option value="active">Active</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="suspend">Suspend</option>
+                                                            <option value="deleted">Deleted</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <button type="button" class="btn btn-primary">Filter</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown-foot justify-content-between">
+                                            <a class="clickable" href="#">Reset Filter</a>
+                                            <a href="#">Save Filter</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="dropdown">
+                                    <a href="#" class="btn btn-link px-2 dropdown-toggle remove-caret" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-cog"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right p-0 stop-propagation">
+                                        <div class="dropdown-menu-checklist">
+                                            <p class="text-uppercase subtitle">SHOW</p>
+                                            <div class="item">
+                                                <input type="radio" name="show" id="show-10" checked>
+                                                <label for="show-10">
+                                                    10
+                                                </label>
+                                            </div>
+                                            <div class="item">
+                                                <input type="radio" name="show" id="show-20">
+                                                <label for="show-20">
+                                                    20
+                                                </label>
+                                            </div>
+                                            <div class="item">
+                                                <input type="radio" name="show" id="show-50">
+                                                <label for="show-50">
+                                                    50
+                                                </label>
+                                            </div>
+                                            <hr>
+                                            <p class="text-uppercase subtitle">ORDER</p>
+                                            <div class="item">
+                                                <input type="radio" name="ordering" id="ordering-asc" checked>
+                                                <label for="ordering-asc">
+                                                    ASC
+                                                </label>
+                                            </div>
+                                            <div class="item">
+                                                <input type="radio" name="ordering" id="ordering-desc">
+                                                <label for="ordering-desc">
+                                                    DESC
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-search">
+                    <form>
+                        <div class="form-row">
+                            <div class="col-auto">
+                                <a href="#" class="btn btn-link" data-toggle="search"><i class="fas fa-arrow-left"></i></a>
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Search...">
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-link" type="submit"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card-body with-table">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th width="5%">
+                                <div class="custom-control custom-control-sm custom-checkbox ml-2">
+                                    <input type="checkbox" class="custom-control-input" id="uid">
+                                    <label class="custom-control-label" for="uid">&nbsp;</label>
+                                </div>
+                            </th>
+                            <th>User</th>
+                            <th>Balance</th>
+                            <th>Phone</th>
+                            <th class="text-center">Verified</th>
+                            <th>Last Login</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-nowrap">
+                        <?php for($i=0;$i<10;$i++):?>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-control-sm custom-checkbox ml-2">
+                                        <input type="checkbox" class="custom-control-input" id="uid-1">
+                                        <label class="custom-control-label" for="uid-1">&nbsp;</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="media align-items-center">
+                                        <div class="avatar avatar-40 mr-2">
+                                            <img src="assets/img/avatar.jpg" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <h6 class="font-weight-bold mb-0">Teguh Rianto</h6>
+                                            <p class="mb-0 text-muted small">Frontend Developer</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>35,040.34 USD</td>
+                                <td>+811 847-4958</td>
+                                <td class="text-center">
+                                    <i class="fas fa-check-circle text-success"></i>
+                                </td>
+                                <td>10 Feb 2020</td>
+                                <td>
+                                    <span class="text-success">Active</span>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a href="#" class="dropdown-toggle remove-caret" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-h"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a href="#" class="dropdown-item">
+                                                <i class="fas fa-eye"></i> View
+                                            </a>
+                                            <a href="#" class="dropdown-item">
+                                                <i class="fas fa-pencil-alt"></i> Edit
+                                            </a>
+                                            <a href="#" class="dropdown-item">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endfor;?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row justify-content-between">
+                    <div class="col-sm-6 col-md-6">
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-default disabled">
+                                Prev
+                            </a>
+                            <a href="#" class="btn btn-default disabled">
+                                Next
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-3">
+                        <form action="" method="get">
+                            <div class="input-group">
+                                <select class="custom-select disabled" name="page" method="get"></select><div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary disabled" disabled="">
+                                        Go
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="page-form">
+    <div class="container-fluid">
+        <form action="<?= current_url();?>" method="post">
+            <input type="hidden" name="id" value="<?= $people->id; ?>">
+            <div class="card">
+                <h5 class="card-header d-flex justify-content-between align-items-center">
+                    <?php echo $page->title; ?>
+
+                    <div class="card-options">
+                        <button type="button" class="btn btn-default btn-md" data-action="cancel">
+                            CANCEL
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-md">
+                            SAVE
+                        </button>
+                    </div>
+                </h5>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label><?php echo language('FULL_NAME'); ?></label>
+                        <input class="form-control" name="fullname" type="text" value="<?= $people->fullname; ?>" required="">
+                    </div>
+                    <div class="form-group">
+                        <label><?php echo language('AVATAR'); ?></label>
+                        <input class="form-control" name="avatar" type="text" value="<?= $people->avatar; ?>" required="">
+                    </div>
+                    <div class="form-group">
+                        <label><?php echo language('COVER'); ?></label>
+                        <input class="form-control" name="cover" type="text" value="<?= $people->cover; ?>" required="">
+                    </div>
+                    <div class="form-group">
+                        <label><?php echo language('GENDER'); ?></label>
+                        <select name="gender" class="form-control">
+                        <option value="<?= $people->gender; ?>"><?= $people->gender; ?></option>
+                            <option value="MALE"><?php echo language('MALE'); ?></option>
+                            <option value="FEMALE"><?php echo language('FEMALE'); ?></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><?php echo language('RECORD_STATUS'); ?></label>
+                        <select name="record_status" class="form-control custom-select">
+                            <option value="<?= $people->record_status; ?>">
+                                <?= $people->record_status; ?>
+                            </option>
+                            <option value="PUBLISH">
+                                <?php echo language('PUBLISH'); ?>
+                            </option>
+                            <option value="DELETED">
+                                <?php echo language('DELETED'); ?>
+                            </option>
+                            <option value="ARCHIVED">
+                                <?php echo language('ARCHIVED'); ?>
+                            </option>
+                            <option value="DRAFT">
+                                <?php echo language('DRAFT'); ?>
+                            </option>
+                            <option value="UNPUBLISH">
+                                <?php echo language('UNPUBLISH'); ?>
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

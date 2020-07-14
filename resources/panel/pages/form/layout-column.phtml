@@ -1,0 +1,271 @@
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <form id="form-post" method="post" action="<?= current_url() ?>" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <h6 class="card-header font-bold text-uppercase"><?php echo language('TITLE'); ?></h6>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input class="form-control" type="text" name="title" value="" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-link"></i>
+                                            </span>
+                                        </div>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                /posts/
+                                            </span>
+                                        </div>
+                                        <input class="form-control" name="slug" value="" type="text" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div id="toolbar-container">
+                            <span class="ql-formats">
+                                <select class="ql-font"></select>
+                                <select class="ql-size"></select>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-bold"></button>
+                                <button class="ql-italic"></button>
+                                <button class="ql-underline"></button>
+                                <button class="ql-strike"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <select class="ql-color"></select>
+                                <select class="ql-background"></select>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-script" value="sub"></button>
+                                <button class="ql-script" value="super"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-header" value="1"></button>
+                                <button class="ql-header" value="2"></button>
+                                <button class="ql-blockquote"></button>
+                                <button class="ql-code-block"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-list" value="ordered"></button>
+                                <button class="ql-list" value="bullet"></button>
+                                <button class="ql-indent" value="-1"></button>
+                                <button class="ql-indent" value="+1"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-direction" value="rtl"></button>
+                                <select class="ql-align"></select>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-link"></button>
+                                <button class="ql-image"></button>
+                                <button class="ql-video"></button>
+                                <button class="ql-formula"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-clean"></button>
+                            </span>
+                        </div>
+                        <div class="card-body p-0 post-editor">
+                            <div id="content-editor"></div>
+                            <textarea class="d-none" name="content"></textarea>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h6 class="font-bold text-uppercase mb-0"><?php echo language('IMAGES'); ?></h6>
+                            <a href="#modal-media" data-toggle="modal" class="btn btn-default btn-sm ml-auto">
+                                <i class="fas fa-images"></i> Insert
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="item-image">
+                                        <div class="image-container">
+                                            <img src="assets/img/mail.png" alt="">
+                                        </div>
+                                        <div class="action">
+                                            <div class="btn-group btn-group-sm">
+                                                <a href="#" class="btn btn-default btn-sm">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="font-bold text-uppercase mb-0"><?php echo language('EMBED CODE'); ?></h6>
+                        </div>
+                        <div class="card-body">
+                            <textarea name="" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <h6 class="card-header font-bold text-uppercase"><?php echo language('PUBLISHING'); ?></h6>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="record_language"><?php echo language('LANGUAGE'); ?></label>
+                                <select id="record_language" class="custom-select form-control" name="record_language">
+                                    <option>Choose</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="record_type"><?php echo language('TYPE'); ?></label>
+                                <select id="record_type" class="custom-select form-control" name="record_type">
+                                    <option>Choose</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="record_status"><?php echo language('STATUS'); ?></label>
+                                <select id="record_status" class="custom-select form-control" name="record_status">
+                                    <option>Choose</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="record_visibility"><?php echo language('VISIBILITY'); ?></label>
+                                <select id="record_visibility" class="custom-select form-control" name="record_visibility">
+                                    <option>Choose</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="publish_start"><?php echo language('PUBLISH_START'); ?></label>
+                                <input id="publish_start" type="datetime-local" name="publish_start" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="publish_end"><?php echo language('PUBLISH_END'); ?></label>
+                                <input id="publish_end" type="datetime-local" name="publish_end" class="form-control" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="metadata_robot"><?php echo language('ROBOTS'); ?></label>
+                                <select id="metadata_robot" class="form-control custom-select" name="metadata[robot]">
+                                    <option>Choose</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="metadata_description"><?php echo language('META_DESCRIPTION'); ?></label>
+                                <textarea id="metadata_description" class="form-control" cols="5" name="metadata[description]"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="metadata_keywords"><?php echo language('META_KEYWORDS'); ?></label>
+                                <input id="metadata_keywords" class="tagsinput form-control" data-role="tagsinput" name="metadata[keywords]" value="" type="text">
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="float-right">
+                                <button type="button" class="btn btn-default btn-md" data-action="cancel">
+                                    <?php echo language('BTN_CANCEL'); ?>
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-md">
+                                    <?php echo language('BTN_SAVE'); ?>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h6 class="card-header font-bold text-uppercase"><?php echo language('CATEGORIES'); ?></h6>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <select class="form-control custom-select selectize-single" name="categories" multiple>
+                                    <option value="" selected>Test</option>
+                                    <option>First</option>
+                                    <option>Second</option>
+                                    <option>Third</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h6 class="card-header font-bold text-uppercase"><?php echo language('TAGS'); ?></h6>
+                        <div class="card-body">
+                            <div class="form-group mb-0">
+                                <input type="text" name="tags" data-role="tagsinput" value="" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h6 class="card-header font-bold text-uppercase"><?php echo language('MORE_OPTIONS'); ?></h6>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label><?php echo language('EXCERPT'); ?></label>
+                                <textarea name="excerpt" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <label class="mb-0"><?php echo language('FEATURED'); ?></label>
+                                <label class="switch">
+                                    <input type="hidden" name="settings[featured]" value="" />
+                                    <input type="checkbox" name="settings[featured]">
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div class="form-group mb-0">
+                                <label class="text-muted small text-uppercase"><?php echo language('SOCIAL_MEDIA'); ?></label>
+                            </div>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <label class="mb-0"><?php echo language('SHOW_SHARING_BUTTON'); ?></label>
+                                <label class="switch">
+                                    <input type="hidden" name="settings[show_sharing_button]" value="" />
+                                    <input type="checkbox" name="settings[show_sharing_button]">
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <label class="mb-0"><?php echo language('SHOW_LIKE_BUTTON'); ?></label>
+                                <label class="switch">
+                                    <input type="hidden" name="settings[show_like_button]" value="" />
+                                    <input type="checkbox" name="settings[show_like_button]">
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div class="form-group mb-0">
+                                <label class="text-muted small text-uppercase"><?php echo language('DISCUSSION'); ?></label>
+                            </div>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <label class="mb-0"><?php echo language('ALLOW_COMMENTS'); ?></label>
+                                <label class="switch">
+                                    <input type="hidden" name="settings[allow_comments]" value="" />
+                                    <input type="checkbox" name="settings[allow_comments]">
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div class="form-group d-flex justify-content-between align-items-center mb-0">
+                                <label class="mb-0"><?php echo language('ALLOW_PINGBACK_TRACKBACK'); ?></label>
+                                <label class="switch">
+                                    <input type="hidden" name="settings[allow_pingback_trackback]" value="" />
+                                    <input type="checkbox" name="settings[allow_pingback_trackback]">
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

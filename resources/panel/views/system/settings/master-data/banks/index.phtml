@@ -1,0 +1,194 @@
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <h3 class="mb-4"><?php echo language('BANKS'); ?></h3>
+                    </div>
+                    <div class="col-auto ml-auto">
+                        <a href="<?php echo current_url('form');?>" class="btn btn-primary btn-md mb-4">
+                            <?php echo language('ADD_NEW_BANK'); ?>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <form action="">
+                                    <div class="form-row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <select name="" id="" class="form-control custom-select">
+                                                    <option value="">Option</option>
+                                                    <option value="">Option</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-auto">
+                                            <button class="btn btn-default" type="submit">Apply</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-row justify-content-end">
+                                    <div class="col-auto">
+                                        <a href="#" class="btn btn-link" data-toggle="search">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="dropdown">
+                                            <a href="#" class="btn btn-link dropdown-toggle remove-caret" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-filter"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right p-0 stop-propagation">
+                                                <div class="dropdown-head">
+                                                    <h6 class="font-weight-bold">Filters</h6>
+                                                </div>
+                                                <div class="dropdown-body">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <div class="custom-control custom-control-sm custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="hasBalance">
+                                                                    <label class="custom-control-label" for="hasBalance"> Have Balance</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <div class="custom-control custom-control-sm custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="hasKYC">
+                                                                    <label class="custom-control-label" for="hasKYC"> KYC Verified</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label>Role</label>
+                                                                <select class="form-select custom-select">
+                                                                    <option value="any">Any Role</option>
+                                                                    <option value="investor">Investor</option>
+                                                                    <option value="seller">Seller</option>
+                                                                    <option value="buyer">Buyer</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label>Status</label>
+                                                                <select class="form-select custom-select">
+                                                                    <option value="any" data-select2-id="9">Any Status</option>
+                                                                    <option value="active">Active</option>
+                                                                    <option value="pending">Pending</option>
+                                                                    <option value="suspend">Suspend</option>
+                                                                    <option value="deleted">Deleted</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <button type="button" class="btn btn-primary">Filter</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="dropdown-foot justify-content-between">
+                                                    <a class="clickable" href="#">Reset Filter</a>
+                                                    <a href="#">Save Filter</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-search mb-2">
+                            <form action="<?= current_url(); ?>" method="get">
+                                <div class="form-row">
+                                    <div class="col-auto">
+                                        <a href="#" class="btn btn-link" data-toggle="search"><i class="fas fa-arrow-left"></i></a>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" name="keyword" class="form-control" placeholder="Search...">
+                                    </div>
+                                    <div class="col-auto">
+                                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i>Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th width="5%">
+                                        <div class="custom-control custom-control-sm custom-checkbox ml-2">
+                                            <input type="checkbox" class="custom-control-input" id="uid">
+                                            <label class="custom-control-label" for="uid">&nbsp;</label>
+                                        </div>
+                                    </th>
+                                    <th>Name</th>
+                                    <th>Alias</th>
+                                    <th>company</th>
+                                    <th>Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($banks as $bank) :?>
+                                    <tr>
+                                        <td>
+                                            <div class="custom-control custom-control-sm custom-checkbox ml-2">
+                                                <input type="checkbox" class="custom-control-input" id="uid-1">
+                                                <label class="custom-control-label" for="uid-1">&nbsp;</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <?= $bank->name; ?>
+                                        </td>
+                                        <td>
+                                            <?= $bank->alias; ?>
+                                        </td>
+                                        <td>
+                                            <?= $bank->company; ?>
+                                        </td>
+                                        <td>
+                                            <?= $bank->code; ?>
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a href="#" class="dropdown-toggle remove-caret" data-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-h"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a href="<?= base_url('system/settings/master-data/banks/detail/' . $bank->id); ?>" class="dropdown-item">
+                                                        <i class="fas fa-eye"></i> View
+                                                    </a>
+                                                    <a href="<?= base_url('system/settings/master-data/banks/form/'. $bank->id); ?>" class="dropdown-item">
+                                                        <i class="fas fa-pencil-alt"></i> Edit
+                                                    </a>
+                                                    <a href="<?= base_url('system/settings/master-data/banks/delete/'. $bank->id); ?>" class="dropdown-item">
+
+                                                        <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach;?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <?php $banks->pagination(); ?>
+                
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+<!-- The Modal -->
+<div class="modal" id="fileManagerModal">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title"><?php echo language('MEDIA'); ?></h4>
+                <button type="button" class="close btnClose" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="embed-responsive embed-responsive-16by9 file-manager-body"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="file_manager_url" value="<?php echo base_url('media/popup');?>">
+
+<script>
+/**
+ * Picker Views
+ *
+ * Embed view component ini jika ingin ada sebuah media popup pada sebuah input text.
+ * 
+ * @author Gemblue
+ */
+var media;
+
+console.log('Media popup/picker is loaded ..');
+
+$('.btn-file-manager').click(function(){
+    
+    console.log('File manager is loaded.');
+
+    $('#fileManagerModal').toggle('show');
+
+    var target = $(this).attr('data-target');
+    var file_manager_url = $('#file_manager_url').val() + '?field=' + target;
+    var iframe = `<iframe class="embed-responsive-item" src="${file_manager_url}"></iframe>`;
+    
+    $('.file-manager-body').html(iframe);
+});
+
+function bindEvent(element, eventName, eventHandler) {
+    if (element.addEventListener){
+        element.addEventListener(eventName, eventHandler, false);
+    } else if (element.attachEvent) {
+        element.attachEvent('on' + eventName, eventHandler);
+    }
+}
+
+/** Listen to message from child window */
+bindEvent(window, 'message', function (e) {
+    var result = JSON.parse(e.data);
+    
+    $('#fileManagerModal').hide();
+    
+    console.log(result);
+
+    /** Show image */
+    $('.' + result.field + '-image').html(`
+        <img src="${result.url}" class="img-responsive img-thumbnail" style="height:100%;width:100%;" />
+    `);
+
+    /** Inject value */
+    $('.' + result.field + '-value').val(result.url);
+    
+    return false;
+});
+
+$('.btnClose').click(function(){
+    $('#fileManagerModal').hide();
+})
+</script>

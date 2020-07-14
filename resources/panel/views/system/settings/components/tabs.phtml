@@ -1,0 +1,27 @@
+<ul class="nav">
+    <li class="nav-item">
+        <a class="nav-link" href="<?=base_url('system/settings');?>">
+            <?php echo language('SITE'); ?>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link <?php echo($page->uri->segments->has('master-data') ? 'active' : ''); ?>" href="<?=base_url('system/settings/master-data');?>">
+            <?php echo language('MASTER_DATA'); ?>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link <?php echo($page->uri->segments->has('users') ? 'active' : ''); ?>" href="<?=base_url('system/settings/users');?>">
+            <?php echo language('USERS'); ?>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link <?php echo($page->uri->segments->has('roles') ? 'active' : ''); ?>" href="<?=base_url('system/settings/roles');?>">
+            <?php echo language('ROLES'); ?>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link <?php echo($page->uri->segments->has('server') ? 'active' : ''); ?>" href="<?=base_url('system/settings/server');?>">
+            <?php echo language('SERVER'); ?>
+        </a>
+    </li>
+</ul>

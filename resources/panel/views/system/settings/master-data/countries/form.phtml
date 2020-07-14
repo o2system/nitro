@@ -1,0 +1,50 @@
+<div class="page-form">
+    <div class="container-fluid">
+        <form action="<?= current_url();?>" method="post">
+            <input type="hidden" name="id" value="<?= $country->id; ?>">
+            <div class="card">
+                <h5 class="card-header d-flex justify-content-between align-items-center">
+                    <?php echo $page->title; ?>
+
+                    <div class="card-options">
+                        <button type="button" class="btn btn-default btn-md" data-action="cancel">
+                            CANCEL
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-md">
+                            SAVE
+                        </button>
+                    </div>
+                </h5>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input class="form-control" name="name" type="text" value="<?= $country->name;?>" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Code String</label>
+                        <input class="form-control" name="code_string" type="text" value="<?= $country->code_string;?>" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Code Num</label>
+                        <input class="form-control" name="code_num" type="text" value="<?= $country->code_num;?>" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Code Iso</label>
+                        <input class="form-control" name="code_iso" type="text" value="<?= $country->code_iso;?>" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Code Iso3</label>
+                        <input class="form-control" name="code_iso3" type="text" value="<?= $country->code_iso3;?>" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Code Phone</label>
+                        <input class="form-control" name="code_phone" type="text" value="<?= $country->code_phone;?>" required="">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

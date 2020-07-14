@@ -1,0 +1,76 @@
+<div class="card nav-pagination">
+    <div class="card-body">
+        <div class="row justify-content-between">
+            <div class="col-sm-6 col-md-6">
+                <?php if($result->info->num_pages > 0): ?>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-default disabled">
+                            <?php echo language('BTN_PREV'); ?>
+                        </a>
+                        <a href="#" class="btn btn-default disabled">
+                            <?php echo language('BTN_NEXT'); ?>
+                        </a>
+                    </div>
+                <?php else: ?>
+                    <div class="btn-group">
+                        <?php $pageActive = input()->get('page'); ?>
+
+                        <?php if($pageActive > 1): ?>
+                            <a href="<?php echo base_url('pages', ['page' => $pageActive - 1], $_GET); ?>" class="btn btn-default">
+                                <?php echo language('BTN_PREV'); ?>
+                            </a>
+                        <?php else: ?>
+                            <a href="#" class="btn btn-default disabled">
+                                <?php echo language('BTN_PREV'); ?>
+                            </a>
+                        <?php endif; ?>
+
+                        <?php if($pageActive < $result->info->num_pages && ($pageActive + 1) != $result->info->num_pages): ?>
+                            <a href="<?php echo base_url('pages', ['page' => $pageActive + 1], $_GET); ?>" class="btn btn-default">
+                                <?php echo language('BTN_NEXT'); ?>
+                            </a>
+                        <?php else: ?>
+                            <a href="#" class="btn btn-default disabled">
+                                <?php echo language('BTN_NEXT'); ?>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <form action="<?php current_url(); ?>" method="get">
+                    <?php if($keyword = input()->get('keyword')): ?>
+                        <input type="hidden" name="keyword" value="<?php echo $keyword; ?>">
+                    <?php endif; ?>
+
+                    <?php if($status = input()->get('status')): ?>
+                        <input type="hidden" name="status" value="<?php echo $status; ?>">
+                    <?php endif; ?>
+
+                    <div class="input-group">
+                        <?php if($result->info->num_pages == 0): ?>
+                            <select class="custom-select disabled" name="page" disabled>
+
+                            </select>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary"><?php echo language('BTN_GO'); ?></button>
+                            </div>
+                        <?php else: ?>
+                            <select class="custom-select " name="page">
+                                <?php $i = 1; ?>
+                                <?php for($i; $i < $result->info->num_pages; $i++): ?>
+                                    <option value="<?php echo $i; ?>" <?php echo(input()->get('page') === $i ? 'selected' : ''); ?>><?php echo $i; ?></option>
+                                <?php endfor; ?>
+                            </select>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary disabled" disabled>
+                                    <?php echo language('BTN_GO'); ?>
+                                </button>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

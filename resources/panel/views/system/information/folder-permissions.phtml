@@ -1,0 +1,41 @@
+<div class="page-system">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <?php echo $tabs; ?>
+                <div class="card">
+                    <div class="card-body with-table">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped mb-0">
+                                <thead>
+                                <tr>
+                                    <th><?php echo language('FOLDER'); ?></th>
+                                    <th><?php echo language('PERMISSION'); ?></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach( $folderPermissions as $folder => $permission ): ?>
+                                    <tr>
+                                        <td><?php echo $folder; ?></td>
+                                        <td>
+                                            <?php if( $permission === true ): ?>
+                                                <span class="badge badge-success">
+                                                    <?php echo language('WRITABLE'); ?>
+                                                </span>
+                                            <?php else: ?>
+                                                <span class="badge badge-danger">
+                                                    <?php echo language('NOT_WRITABLE'); ?>
+                                                </span>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

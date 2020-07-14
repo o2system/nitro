@@ -1,0 +1,170 @@
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-10">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <h3 class="mb-4"><?php echo language('MODULES'); ?></h3>
+                    </div>
+                    <div class="col-auto ml-auto">
+                        <a href="#module-install" data-toggle="modal" class="btn btn-primary btn-md mb-4">
+                            <?php echo language('INSTALL_MODULE'); ?>
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="nav-pages">
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link <?php echo(input()->get('status') === '' ? 'active': ''); ?>>" href="<?php echo base_url('system/modules');?>">
+                                        <?php echo language('ALL'); ?>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link <?php echo(input()->get('status') === 'DRAFT' ? 'active': ''); ?>" href="<?php echo base_url('system/modules/settings');?>">
+                                        <?php echo language('SETTINGS'); ?>
+                                    </a>
+                                </li>
+                            </ul>
+                            <form class="nav-search" action="<?php echo current_url(); ?>" method="get">
+                                <div class="search-icon open-search">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <div class="search-input">
+                                    <input type="search" name="keyword" placeholder="<?php echo language('SEARCH'); ?>..." value="<?php echo input()->get('keyword'); ?>">
+                                </div>
+                                <div class="search-icon close-search">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <?php if($message = session()->getFlash('success')): ?>
+                    <div class="alert alert-fill alert-success alert-icon">
+                        <i class="fas fa-check-circle"></i>  <p><?php echo $message; ?></p>
+                    </div>
+                <?php elseif($message = session()->getFlash('danger')): ?>
+                    <div class="alert alert-fill alert-danger alert-icon">
+                        <i class="fas fa-exclamation-circle"></i>  <p><?php echo $message; ?></p>
+                    </div>
+                <?php endif; ?>
+
+                <div class="post-list">
+                    <div class="list-group mb-3">
+                        <?php foreach($modules as $module): ?>
+                            <div class="list-group-item">
+                                <div class="post-item">
+                                    <div class="post-item-detail">
+                                        <a href="<?php echo base_url('system/modules/detail/' . $module->key); ?>">
+                                            <h1 class="<?php echo($module->active ? 'text-primary' : 'text-muted'); ?>">
+                                                <?php echo $module->name; ?>
+                                            </h1>
+                                        </a>
+                                        <div class="post-item-meta">
+                                            <span class="post-time">
+                                                <i class="fas fa-clock"></i> <?php echo date('M j, Y H:i a', strtotime($module->created)); ?> &middot; <i class="fas fa-code-branch"></i> v<?php echo $module->version; ?> &middot; <i class="fas fa-copyright"></i>
+                                                <?php if(isset($module->author['website'])): ?>
+                                                    <a href="<?php echo $module->author['website']; ?>" target="_blank"><?php echo $module->author['name']; ?></a>
+                                                <?php elseif(isset($module->author['email'])): ?>
+                                                    <a href="mailto:<?php echo $module->author['email']; ?>"><?php echo $module->author['name']; ?></a>
+                                                <?php else: ?>
+                                                    <?php echo $module->author['name']; ?>
+                                                <?php endif; ?>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <?php if(!empty($module->image)): ?>
+                                        <div class="post-thumbnail">
+                                            <a href="#">
+                                                <img src="<?php echo $module->image_url; ?>">
+                                            </a>
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="post-action">
+                                        <div class="dropdown">
+                                            <a class="dropdown-toggle dropdown-ellipsis" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <?php if($module->active === false): ?>
+                                                    <a class="dropdown-item" href="<?php echo base_url('system/modules/activate/' . $module->key); ?>" data-action="activate">
+                                                        <i class="fas fa-check-circle"></i>
+                                                        <?php echo language('ACTIVATE'); ?>
+                                                    </a>
+                                                    <div class="dropdown-divider"></div>
+                                                <?php endif; ?>
+                                                <a class="dropdown-item" href="<?php echo base_url('system/modules/uninstall/' . $module->key); ?>" data-action="uninstall">
+                                                    <i class="fa fa-trash"></i>
+                                                    <?php echo language('UNINSTALL'); ?>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="module-install" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body m-0 p-0">
+                <div class="card card mb-0 pb-0 border-0">
+                    <div class="card-header d-flex flex-wrap align-items-center justify-content-between p-0">
+                        <div class="nav-pages nav-pages-tab">
+                            <ul class="nav" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#install-computer" role="tab" aria-selected="true">Install From Computer</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#install-folder" role="tab" aria-selected="false">Install From Folder</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#install-url" role="tab" aria-selected="false">Install From URL</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content tabs p-0 border-0 mb-0">
+                            <div class="tab-pane active" id="install-computer" role="tabpanel">
+                                <form method="post" action="<?php echo current_url('install', ['file' => 'true']); ?>" enctype="multipart/form-data">
+                                    <div class="form-group form-group-upload text-center mb-0">
+                                        <input type="file" class="form-control form-control-upload" name="filePackage"  onchange="form.submit()">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="install-folder" role="tabpanel">
+                                <form method="post" action="<?php echo current_url('install', ['folder' => 'true']); ?>">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="var/www/" type="text" name="filePath">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-primary">Check &amp; Install</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="install-url" role="tabpanel">
+                                <form method="post" action="<?php echo current_url('install', ['url' => 'true']); ?>">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="https://" type="url" name="fileUrl">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-primary">Check &amp; Install</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

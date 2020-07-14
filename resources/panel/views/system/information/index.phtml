@@ -1,0 +1,146 @@
+<div class="page-system">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <?php echo $tabs; ?>
+                <div class="card">
+                    <div class="card-body with-table">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped mb-0">
+                                <thead>
+                                <tr>
+                                    <th colspan="2" class="text-info"><?php echo language('COMMONS'); ?></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th><?php echo language('CHARSET'); ?></th>
+                                    <td><?php echo $configurations->charset; ?></td>
+                                </tr>
+                                <thead>
+                                <tr>
+                                    <th colspan="2" class="text-info"><?php echo language('LANGUAGE'); ?></th>
+                                </tr>
+                                </thead>
+                                <tr>
+                                    <th><?php echo language('DEFAULT'); ?></th>
+                                    <td><?php echo $configurations->language['default']; ?></td>
+                                </tr>
+                                <tr>
+                                    <th><?php echo language('OPTIONS'); ?></th>
+                                    <td>
+                                        <ol class="list-unstyled p-0 m-0">
+                                            <?php foreach($configurations->language['options'] as $languageIdeom => $languageLabel): ?>
+                                                <li><?php echo $languageIdeom; ?> &mdash; <?php echo $languageLabel; ?></li>
+                                            <?php endforeach; ?>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><?php echo language('LOGGING_THRESHOLD_LEVEL'); ?></th>
+                                    <td><?php echo $configurations->logger['threshold']; ?></td>
+                                </tr>
+                                </tbody>
+                                <thead>
+                                <tr>
+                                    <th colspan="2" class="text-info"><?php echo language('DATE_TIME'); ?></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th><?php echo language('TIMEZONE'); ?></th>
+                                    <td><?php echo $configurations->datetime['timezone']; ?></td>
+                                </tr>
+                                <tr>
+                                    <th><?php echo language('REFERENCES'); ?></th>
+                                    <td><?php echo $configurations->datetime[ 'reference' ]; ?></td>
+                                </tr>
+                                <tr>
+                                    <th><?php echo language('FORMAT'); ?></th>
+                                    <td><?php echo $configurations->datetime[ 'format' ]; ?></td>
+                                </tr>
+                                </tbody>
+                                <thead>
+                                <tr>
+                                    <th colspan="2" class="text-info"><?php echo language('UNITS'); ?></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th><?php echo language('CURRENCY'); ?></th>
+                                    <td><?php echo $configurations->units['currency']; ?></td>
+                                </tr>
+                                <tr>
+                                    <th><?php echo language('WEIGHT'); ?></th>
+                                    <td><?php echo $configurations->units[ 'weight' ]; ?></td>
+                                </tr>
+                                </tbody>
+                                <thead>
+                                <tr>
+                                    <th colspan="2" class="text-info"><?php echo language('URI'); ?></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th><?php echo language('PROTOCOL'); ?></th>
+                                    <td><?php echo $configurations->uri['protocol']; ?></td>
+                                </tr>
+                                <tr>
+                                    <th><?php echo language('PERMITTED_CHARACTERS'); ?></th>
+                                    <td><?php echo $configurations->uri['permittedChars']; ?></td>
+                                </tr>
+                                <tr>
+                                    <th><?php echo language('SUFFIX'); ?></th>
+                                    <td><?php echo $configurations->uri['suffix']; ?></td>
+                                </tr>
+                                </tbody>
+                                <thead>
+                                <tr>
+                                    <th colspan="2" class="text-info"><?php echo language('IP_ADDRESSES'); ?></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th><?php echo language('PROXY'); ?></th>
+                                    <td><?php echo implode( ',', $configurations->ipAddresses['proxy']); ?></td>
+                                </tr>
+                                <tr>
+                                    <th><?php echo language('DEBUG'); ?></th>
+                                    <td><?php echo implode( ',', $configurations->ipAddresses[ 'debug' ]); ?></td>
+                                </tr>
+                                </tbody>
+                                <thead>
+                                <tr>
+                                    <th colspan="2" class="text-info"><?php echo language('SECURITY'); ?></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th><?php echo language('XSS_PROTECTION'); ?></th>
+                                    <td>
+                                        <?php if($configurations->security['protection']['xss'] === true): ?>
+                                            <span class="badge badge-success"><?php echo language('ENABLED'); ?></span>
+                                        <?php else: ?>
+                                            <span class="badge badge-danger"><?php echo language('DISABLED'); ?></span>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><?php echo language('CSRF_PROTECTION'); ?></th>
+                                    <td>
+                                        <?php if($configurations->security['protection']['csrf'] === true): ?>
+                                            <span class="badge badge-success"><?php echo language('ENABLED'); ?></span>
+                                        <?php else: ?>
+                                            <span class="badge badge-danger"><?php echo language('DISABLED'); ?></span>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

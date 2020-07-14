@@ -1,0 +1,438 @@
+<div class="card">
+    <div class="card-header p-0 border-bottom-0">
+        <div class="row align-items-center">
+            <div class="col-md-auto">
+                <nav class="navbar navbar-expand-sm navbar-light p-0">
+                    <p class="mb-0 d-md-none d-block" href="#"><?php echo language('NAVBAR'); ?></p>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-modal-documents" aria-controls="navbar-modal-documents" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse nav-pages" id="navbar-modal-documents">
+                        <ul class="navbar-nav nav">
+                            <li class="nav-item">
+                                <a class="nav-link <?php echo(input()->get('type') === '' || input()->get('type') === '' ? 'active': ''); ?>>" href="<?php echo base_url('media' . $segment);?>">
+                                    <?php echo language('ALL'); ?>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link <?php echo(input()->get('type') === '' || input()->get('type') === 'IMAGE' ? 'active': ''); ?>>" href="<?php echo base_url('media' . $segment, ['type' => 'IMAGE']);?>">
+                                    <?php echo language('IMAGES'); ?>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link <?php echo(input()->get('type') === 'DOCUMENT' ? 'active': ''); ?>>" href="<?php echo base_url('media' . $segment, ['type' => 'DOCUMENT']);?>">
+                                    <?php echo language('DOCUMENTS'); ?>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link <?php echo(input()->get('type') === 'VIDEO' ? 'active': ''); ?>>" href="<?php echo base_url('media' . $segment, ['type' => 'VIDEO']);?>">
+                                    <?php echo language('VIDEOS'); ?>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link <?php echo(input()->get('type') === 'AUDIO' ? 'active': ''); ?>>" href="<?php echo base_url('media' . $segment, ['type' => 'AUDIO']);?>">
+                                    <?php echo language('AUDIOS'); ?>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-md-2 ml-auto pr-5">
+                <div class="progress mb-1" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: <?php echo ($space->percentage < 1 ? 1 : $space->percentage); ?>%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mb-0 small text-right">
+                    <?php echo $space->percentage; ?>% of <?php echo byte_format($space->total); ?> used
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header border-bottom-0">
+        <form action="<?php echo current_url('upload');?>" method="post" enctype="multipart/form-data">
+            <?php if (input()->get('type') == 'DOCUMENT') :?>
+                <input type="hidden" name="record_type" value="DOCUMENT" />
+
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <?php echo language('LABEL'); ?>
+                                </span>
+                            </div>
+                            <input type="text" placeholder="Label here .." name="label" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col"> 
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <?php echo language('FILE'); ?>
+                                </span>
+                            </div>
+                            <input type="text" placeholder="Url here .." name="url" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary"><?php echo language('BTN_SAVE'); ?></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php elseif (input()->get('type') == 'VIDEO') : ?>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <?php echo language('LABEL'); ?>
+                                </span>
+                            </div>
+                            <input type="text" placeholder="Label here .." name="label" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col"> 
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <?php echo language('VIDEO'); ?>
+                                </span>
+                            </div>
+                            <input type="text" placeholder="Video ID here .." name="videoID" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary"><?php echo language('BTN_SAVE'); ?></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php elseif (input()->get('type') == 'AUDIO') : ?>
+                <input type="hidden" name="record_type" value="AUDIO" />
+                
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <?php echo language('LABEL'); ?>
+                                </span>
+                            </div>
+                            <input type="text" placeholder="Label here .." name="label" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col"> 
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <?php echo language('AUDIO'); ?>
+                                </span>
+                            </div>
+                            <input type="text" placeholder="URL here .." name="url" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary"><?php echo language('BTN_SAVE'); ?></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php else : ?>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <?php echo language('IMAGE'); ?>
+                        </span>
+                    </div>
+                    <input type="file" placeholder="" name="userFile" class="form-control">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary"><?php echo language('BTN_UPLOAD'); ?></button>
+                    </div>
+                </div>
+            <?php endif;?>            
+        </form>
+    </div>
+</div>
+<form>
+    <div id="dropzone-cards-documents" data-action-url="http://localhost:8080/" data-allowed="" data-max-files="" data-max-size="">
+        <div class="media-list">
+            <div class="dropzone-form row" id="dropzone-cards-documents-form" style="cursor: pointer;">
+                <div class="dropzone-previews" id="dropzone-previews">
+                    <div class="col-md-3 col-sm-6" id="dropzone-cards-documents-template">
+                        <div class="item-document uploading">
+                            <input type="checkbox" id="">
+                            <label for="">
+                                <div class="card">
+                                    <div class="action">
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="#" class="btn btn-default"><i class="fas fa-eye"></i></a>
+                                            <a href="#" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>
+                                            <a href="#" class="btn btn-danger" data-dz-remove><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="card-img-top">
+                                        <img data-dz-thumbnail>
+                                        <div class="documents-icon">
+                                            <i class="fas fa-file-pdf fa-3x"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-row align-items-center">
+                                            <div class="col">
+                                                <a href="#">
+                                                    <h6 class="mb-0"><span data-dz-name></span> <span class="documents-file-extension"></span></h6>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <p class="small text-muted mb-0">
+                                            <?php echo language('UPLOADED_AT'); ?>
+                                            <span class="documents-timestamp"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="upload-progress">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                             role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                                             aria-valuemax="100" style="width: 0%" data-dz-uploadprogress></div>
+                                    </div>
+                                </div>
+                                <div class="documents-file-error">
+                                    <div class="documents-icon-error">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                    </div>
+                                    <div class="documents-file-name-error" data-dz-errormessage></div>
+                                    <div class="documents-file-extension-error d-flex justify-content-center">
+                                        <button type="button" class="btn btn-outline-light btn-sm" data-dz-remove>
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Existing Files Loop Here-->
+                <?php if($medias->count()): ?>
+                    <?php foreach($medias as $media): ?>
+                        <div class="col-md-3 col-sm-6">
+                            <!-- DOCS/PDF -->
+                            <div class="item-document">
+                                <input type="checkbox" id="<?php echo $media->id;?>">
+                                <label for="<?php echo $media->id;?>">
+                                    <div class="card">
+                                        <div class="action">
+                                            <div class="btn-group btn-group-sm">
+                                                <?php if($media->record->type === 'DOCUMENT'): ?>
+                                                    <a class="btn btn-default" data-fancybox href="<?php echo $media->url; ?>">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                <?php elseif ($media->record->type === 'VIDEO') : ?>
+                                                    <a class="btn btn-default" target="_blank" href="<?php echo 'https://www.youtube.com/watch?v=' . $media->filepath; ?>">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                <?php elseif ($media->record->type === 'AUDIO') : ?>
+                                                    <a class="btn btn-default" target="_blank" href="<?php echo $media->filepath; ?>">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                <?php else: ?>
+                                                    <a class="btn btn-default" data-fancybox data-type="iframe" href="https://docs.google.com/gview?url=https://www.tutorialspoint.com/java/java_tutorial.pdf&embedded=true&pop-out=false">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                <?php endif; ?>
+                                                
+                                                <a href="#" class="btn btn-info btn-edit" data-id="<?php echo $media->id;?>" data-label="<?php echo $media->label?>" data-mime="<?php echo $media->mime?>" data-size="<?php echo $media->size?>"><i class="fas fa-pencil-alt"></i></a>
+                                                <a href="<?php echo current_url('delete/' . $media->id)?>" class="btn btn-danger" onclick="return confirm('Sure?');" data-action="delete" data-id="<?php echo $media->id;?>"><i class="fas fa-trash"></i></a>
+                                                <a href="#" class="btn btn-default btn-choose" data-id="<?php echo $media->id;?>" data-label="<?php echo $media->label;?>" data-url="<?php echo $media->url;?>" data-filepath="<?php echo $media->filepath;?>"><i class="fas fa-check"></i></a>
+                                            </div>
+                                        </div>
+                                        
+                                        <?php if($media->record->type === 'IMAGE'): ?>
+                                            <div class="card-img-top">
+                                                <img src="<?php echo $media->url; ?>?width=345&height=215" alt="<?php echo $media->label; ?>">
+                                            </div>
+                                        <?php elseif ($media->record->type === 'VIDEO'): ?>
+                                            <div class="card-img-top">
+                                                <img src="https://img.youtube.com/vi/<?php echo $media->filepath; ?>/0.jpg" alt="<?php echo $media->label; ?>">
+                                            </div>
+                                        <?php elseif ($media->record->type === 'AUDIO'): ?>
+                                            <div class="card-img-top">
+                                                <i class="fas fa-volume-up fa-3x"></i>
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="card-img-top">
+                                                <i class="fas fa-file-pdf fa-3x"></i>
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <div class="card-body">
+                                            <div class="form-row align-items-center">
+                                                <div class="col">
+                                                    <?php if($media->record->type === 'IMAGE'): ?>
+                                                        <a data-fancybox href="<?php echo $media->url; ?>">
+                                                            <h6 class="mb-0"><?php echo $media->label; ?></h6>
+                                                        </a>
+                                                    <?php else: ?>
+                                                        <a data-fancybox data-type="iframe" href="https://docs.google.com/gview?url=<?php echo $media->url; ?>&embedded=true&pop-out=false">
+                                                            <h6 class="mb-0"><?php echo $media->label; ?></h6>
+                                                        </a>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                            <p class="small text-muted mb-0"><?php echo language('UPLOADED_AT'); ?> <?php echo $media->record->upload->timestamp->format('M j, Y H:i a'); ?></p>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                <!-- End Existing Files -->
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="modal" id="edit-media" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><?php echo language('EDIT_MEDIA'); ?></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?php echo current_url('form')?>" method="POST">
+                
+                <input type="hidden" id="id" name="id" />
+                
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for=""><?php echo language('LABEL'); ?></label>
+                        <input type="text" name="label" id="label" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for=""><?php echo language('SIZE'); ?></label>
+                        <input type="text" name="size" id="size" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for=""><?php echo language('MIME'); ?></label>
+                        <input type="text" name="mime" id="mime" class="form-control"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"><?php echo language('BTN_SAVE'); ?></button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><?php echo language('BTN_CLOSE'); ?></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="field" value="<?php echo input()->get('field')?>" />
+
+<script>
+$(document).ready(function(){
+
+    /** Edit metadata handler */
+    $('.btn-edit').click(function(){
+        
+        let id = $(this).attr('data-id');
+        let label = $(this).attr('data-label');
+        let size = $(this).attr('data-size');
+        let mime = $(this).attr('data-mime');
+
+        $('#id').val(id);
+        $('#label').val(label);
+        $('#size').val(size);
+        $('#mime').val(mime);
+        
+        $('#edit-media').modal('show');
+
+        return false;
+    });
+
+    /** Btn choose handler */
+    $('.btn-choose').click(function() {
+        let field = $("#field").val();
+        let id = $(this).attr('data-id');
+        let label = $(this).attr('data-label');
+        let filepath = $(this).attr('data-filepath');
+        let url = $(this).attr('data-url');
+
+        var payload = '{"id": "'+id+'", "field": "'+field+'", "label": "'+label+'", "filepath": "'+filepath+'", "url": "'+url+'"}';
+		console.log(payload);
+        parent.postMessage(payload, "*");
+    });
+});
+</script>
+
+<script type="application/javascript">
+    // Cards version
+    const dropzoneCards = $('#dropzone-cards-documents');
+    if(dropzoneCards.length) {
+
+        let dropzoneCardsActionUrl = dropzoneCards.data('action-url');
+        let dropzoneCardsDataAllowed = dropzoneCards.data('allowed');
+        let dropzoneCardsDataMaxFile = dropzoneCards.data('max-file');
+        let dropzoneCardsDataMaxSize = dropzoneCards.data('max-size');
+
+        let dropzoneCardsFilePreview = dropzoneCards.find('#dropzone-cards-documents-template');
+        dropzoneCardsFilePreview.removeAttr('id');
+
+        let dropzoneCardsFilePreviewTemplate = dropzoneCardsFilePreview.parent().html();
+        dropzoneCardsFilePreview.parent().remove();
+
+        let dropzoneCardsForm = new Dropzone('#dropzone-cards-documents-form', {
+            url: dropzoneCardsActionUrl,
+            acceptedFiles: dropzoneCardsDataAllowed,
+            maxFiles: dropzoneCardsDataMaxFile,
+            maxFilesize: dropzoneCardsDataMaxSize,
+            autoProcessQueue: true,
+            thumbnailWidth: null,
+            thumbnailHeight: null,
+            previewTemplate: dropzoneCardsFilePreviewTemplate
+        });
+
+        dropzoneCardsForm.on("addedfile", function (file) {
+            var fileId = 'media' + document.querySelectorAll('.item-document').length;
+            file.previewElement.getElementsByTagName('input')[0].setAttribute('id', fileId);
+            file.previewElement.getElementsByTagName('label')[0].setAttribute('for', fileId);
+
+            var imagesFileTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
+            if (imagesFileTypes.indexOf(file.type) != -1) {
+                file.previewElement.querySelector('.documents-icon').style.display = 'none';
+            } else if (file.type === 'application/pdf') {
+                file.previewElement.querySelector('.documents-icon').style.display = 'block';
+                file.previewElement.querySelector('.documents-icon').innerHTML = '<i class="fas fa-file-pdf fa-3x"></i>';
+            } else if (file.type === 'application/doc' | 'application/docx') {
+                file.previewElement.querySelector('.documents-icon').style.display = 'block';
+                file.previewElement.querySelector('.documents-icon').innerHTML = '<i class="fas fa-file-word fa-3x"></i>';
+            } else if (file.type === 'application/ppt' | 'application/pptx') {
+                file.previewElement.querySelector('.documents-icon').style.display = 'block';
+                file.previewElement.querySelector('.documents-icon').innerHTML = '<i class="fas fa-file-powerpoint fa-3x"></i>';
+            } else if (file.type === 'video/mp4' | 'video/webm' | 'video/mkv') {
+                file.previewElement.querySelector('.documents-icon').style.display = 'block';
+                file.previewElement.querySelector('.documents-icon').innerHTML = '<i class="fas fa-file-video fa-3x"></i>';
+            } else if (file.type === 'audio/mpeg') {
+                file.previewElement.querySelector('.documents-icon').style.display = 'block';
+                file.previewElement.querySelector('.documents-icon').innerHTML = '<i class="fas fa-file-audio fa-3x"></i>';
+            } else {
+                file.previewElement.querySelector('.documents-icon').style.display = 'block';
+                file.previewElement.querySelector('.documents-icon').innerHTML = '<i class="fas fa-file fa-3x"></i>';
+            }
+        });
+
+        dropzoneCardsForm.on("success", function (file, resp) {
+            file.previewElement.querySelector(".item-document").classList.remove('uploading');
+            file.previewElement.querySelector(".upload-progress").style.display = 'none';
+            file.previewElement.querySelector(".documents-file-extension").innerHTML = file.type;
+            file.previewElement.querySelector(".documents-timestamp").innerHTML = moment().format('D MMM YYYY, h:mm:ss a');
+        });
+
+        dropzoneCardsForm.on("error", function (file) {
+            file.previewElement.querySelector(".item-document").classList.remove('uploading');
+            file.previewElement.querySelector(".upload-progress").style.display = 'none';
+            file.previewElement.querySelector(".documents-file-extension").innerHTML = file.type;
+            file.previewElement.querySelector(".documents-timestamp").innerHTML = moment().format('D MMM YYYY, h:mm:ss a');
+        });
+    }
+</script>

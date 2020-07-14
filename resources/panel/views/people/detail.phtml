@@ -1,0 +1,139 @@
+<div class="page-table">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-auto">
+                <h3 class="mb-1 font-weight-bold"><?= $people->fullname; ?></h3>
+                <div class="row">
+                    <div class="col-auto">
+                        <p><?php echo language('USER_ID'); ?>: <strong>UD003054</strong></p>
+                    </div>
+                    <div class="col-auto">
+                        <p><?php echo language('LAST_LOGIN'); ?>: <strong>15 Feb, 2019 01:02 PM</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header p-0">
+                <div class="nav-pages">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="fas fa-user-circle"></i> <?php echo language('PERSONAL'); ?>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-retweet"></i> <?php echo language('TRANSACTIONS'); ?>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-file"></i> <?php echo language('DOCUMENTS'); ?>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-bell"></i> <?php echo language('NOTIFICATIONS'); ?>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-heartbeat"></i> <?php echo language('ACTIVITIES'); ?>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="mb-3 font-weight-bold"><?php echo language('PERSONAL_INFORMATION'); ?></h5>
+
+                <div class="row justify-content-between">
+                    <div class="col-lg-5 col-md-5">
+                        <div class="row">
+                            <div class="col-sm-6 col-12">
+                                <p class="text-muted"><?php echo language('FULL_NAME'); ?></p>
+                            </div>
+                            <div class="col-sm-6 col-12 text-md-right text-sm-right text-left">
+                                <p>
+                                    <strong><?= $people->fullname; ?></strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="col-lg-5 col-md-5">
+                        <div class="row">
+                            <div class="col-sm-6 col-12">
+                                <p class="text-muted"><?php echo language('AVATAR'); ?></p>
+                            </div>
+                            <div class="col-sm-6 col-12 text-md-right text-sm-right text-left">
+                                <p>
+                                    <strong><?= $people->avatar; ?></strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="col-lg-5 col-md-5">
+                        <div class="row">
+                            <div class="col-sm-6 col-12">
+                                <p class="text-muted"><?php echo language('COVER'); ?></p>
+                            </div>
+                            <div class="col-sm-6 col-12 text-md-right text-sm-right text-left">
+                                <p>
+                                    <strong><?= $people->cover; ?></strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="col-lg-5 col-md-5">
+                        <div class="row">
+                            <div class="col-sm-6 col-12">
+                                <p class="text-muted"><?php echo language('GENDER'); ?></p>
+                            </div>
+                            <div class="col-sm-6 col-12 text-md-right text-sm-right text-left">
+                                <p>
+                                    <strong><?= $people->gender; ?></strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="col-lg-5 col-md-5">
+                        <div class="row">
+                            <div class="col-sm-6 col-12">
+                                <p class="text-muted"><?php echo language('RECORD_STATUS'); ?></p>
+                            </div>
+                            <div class="col-sm-6 col-12 text-md-right text-sm-right text-left">
+                                <p>
+                                    <strong><?= $people->record_status; ?></strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="col-lg-5 col-md-5">
+                        <div class="row">
+                            <div class="col-sm-6 col-12">
+                                <p class="text-muted"><?php echo language('DATE_CREATED'); ?></p>
+                            </div>
+                            <div class="col-sm-6 col-12 text-md-right text-sm-right text-left">
+                                <p>
+                                    <strong><?= $people->record_create_timestamp; ?></strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

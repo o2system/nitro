@@ -1,0 +1,417 @@
+<div class="page-wrapper">
+    <div class="container-fluid">
+
+        <?php if ($flash = session()->getFlash('success')) :?>
+            <div class="alert alert-success"><?php echo $flash;?></div>
+        <?php endif;?>
+        
+        <form id="form-post" method="post" action="<?= current_url() ?>" enctype="multipart/form-data">
+            <?php if($post->id):?>
+                <input type="hidden" name="id" value="<?=$post->id;?>">
+            <?php endif;?>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <h6 class="card-header font-bold text-uppercase"><?php echo language('TITLE'); ?></h6>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input class="form-control" type="text" name="title" value="<?php echo $post->title; ?>" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-link"></i>
+                                            </span>
+                                        </div>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <?php echo domain_url('posts'); ?>
+                                            </span>
+                                        </div>
+                                        <input class="form-control" name="slug" value="<?php echo $post->slug; ?>" type="text" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div id="toolbar-container">
+                            <span class="ql-formats">
+                                <select class="ql-font"></select>
+                                <select class="ql-size"></select>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-bold"></button>
+                                <button class="ql-italic"></button>
+                                <button class="ql-underline"></button>
+                                <button class="ql-strike"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <select class="ql-color"></select>
+                                <select class="ql-background"></select>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-script" value="sub"></button>
+                                <button class="ql-script" value="super"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-header" value="1"></button>
+                                <button class="ql-header" value="2"></button>
+                                <button class="ql-blockquote"></button>
+                                <button class="ql-code-block"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-list" value="ordered"></button>
+                                <button class="ql-list" value="bullet"></button>
+                                <button class="ql-indent" value="-1"></button>
+                                <button class="ql-indent" value="+1"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-direction" value="rtl"></button>
+                                <select class="ql-align"></select>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-link"></button>
+                                <button class="ql-image"></button>
+                                <button class="ql-video"></button>
+                                <button class="ql-formula"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-clean"></button>
+                            </span>
+                        </div>
+                        <div class="card-body p-0 post-editor">
+                            <div id="content-editor"><?php echo $post->content; ?></div>
+                            <textarea class="d-none" name="content"><?php echo $post->content; ?></textarea>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h6 class="font-bold text-uppercase mb-0"><?php echo language('IMAGES'); ?></h6>
+                            <a href="#" class="btn btn-default btn-sm ml-auto btn-file-manager">
+                                <i class="fas fa-images"></i> <?= language('INSERT')?>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <!--If Empty-->
+                            <div class="text-center py-4">
+                                <div class="media align-items-center justify-content-center mb-3">
+                                    <i class="fas fa-cloud-upload-alt fa-2x mr-3"></i>
+                                    <h5 class="mb-0"><?= language('INSERT_IMAGES')?></h5>
+                                </div>
+                                <a href="#" class="btn btn-default btn-file-manager">
+                                    <i class="fas fa-images"></i> <?= language('INSERT_UPLOAD')?>
+                                </a>
+                            </div>
+                            <!--Endif-->
+                            
+                            <?php if ($post->images) :?>
+                                <div class="row image-content">
+                                    <!-- Dynamic content -->
+                                    <?php foreach($post->images as $image) :?>
+                                        <div class="col-md-3">
+                                            <div class="item-image mb-3">
+                                                <div class="image-container">
+                                                    <img src="<?php echo $image->url;?>" class="img-responsive img-thumbnail" style="height:150px;" />
+                                                </div>
+                                                <div class="action mt-3">
+                                                    <div class="btn-group btn-group-sm">
+                                                        <a href="#" class="btn btn-danger btn-sm btn-remove">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <input type="hidden" name="media[]" value="<?php echo $image->id;?>" />
+                                    <?php endforeach;?>
+                                </div>
+                            <?php endif;?>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="font-bold text-uppercase mb-0">
+                                <?php echo language('EMBED_CODE'); ?>
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <textarea name="metadata[embed_code]" class="form-control" rows="5"><?php echo ($post->metadata->embed_code) ? $post->metadata->embed_code : ''; ?></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <h6 class="card-header font-bold text-uppercase"><?php echo language('PUBLISHING'); ?></h6>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="record_language"><?php echo language('LANGUAGE'); ?></label>
+                                <select id="record_language" class="custom-select form-control" name="record_language">
+                                    <?php foreach ($options->languages as $value => $label): ?>
+                                        <option value="<?php echo $value; ?>" <?php echo($value === $post->record->language ? 'selected' : ''); ?>>
+                                            <?php echo $label; ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="record_type"><?php echo language('TYPE'); ?></label>
+                                <select id="record_type" class="custom-select form-control" name="record_type">
+                                    <?php foreach ($options->types as $value => $label): ?>
+                                        <option value="<?php echo $value; ?>" <?php echo($value === $post->record->format ? 'selected' : ''); ?>><?php echo $label; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="record_status"><?php echo language('STATUS'); ?></label>
+                                <select id="record_status" class="custom-select form-control" name="record_status">
+                                    <?php foreach ($options->status as $value => $label): ?>
+                                        <option value="<?php echo $value; ?>" <?php echo($value === $post->record->status ? 'selected' : ''); ?>><?php echo $label; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="record_visibility"><?php echo language('VISIBILITY'); ?></label>
+                                <select id="record_visibility" class="custom-select form-control" name="record_visibility">
+                                    <?php foreach ($options->visibilities as $value => $label): ?>
+                                        <option value="<?php echo $value; ?>" <?php echo($value === $post->record->visibility ? 'selected' : ''); ?>><?php echo $label; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="publish_start"><?php echo language('PUBLISH_START'); ?></label>
+                                <input id="publish_start" type="datetime-local" name="publish_start" class="form-control" value="<?php echo $post->publish_start; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="publish_end"><?php echo language('PUBLISH_END'); ?></label>
+                                <input id="publish_end" type="datetime-local" name="publish_end" class="form-control" value="<?php echo $post->publish_end; ?>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="metadata_robot"><?php echo language('ROBOTS'); ?></label>
+                                <select id="metadata_robot" class="form-control custom-select" name="metadata[robot]">
+                                    <?php foreach ($options->metarobots as $value => $label): ?>
+                                        <option value="<?php echo $value; ?>" <?php echo($post->metadata->robot === $value ? 'selected': ''); ?>><?php echo $label; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="metadata_description"><?php echo language('META_DESCRIPTION'); ?></label>
+                                <textarea id="metadata_description" class="form-control" cols="5" name="metadata[description]"><?php echo $post->metadata->description; ?></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="metadata_keywords"><?php echo language('META_KEYWORDS'); ?></label>
+                                <input id="metadata_keywords" class="tagsinput form-control" data-role="tagsinput" name="metadata[keywords]" value="<?php echo $post->metadata->keywords; ?>" type="text">
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="float-right">
+                                <button type="button" class="btn btn-default btn-md" data-action="cancel">
+                                    <?php echo language('BTN_CANCEL'); ?>
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-md">
+                                    <?php echo language('BTN_SAVE'); ?>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h6 class="card-header font-bold text-uppercase"><?php echo language('CATEGORIES'); ?></h6>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <select class="form-control custom-select selectize-single" name="categories" multiple>
+                                    <option value="" selected>Test</option>
+                                    <option>First</option>
+                                    <option>Second</option>
+                                    <option>Third</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h6 class="card-header font-bold text-uppercase"><?php echo language('TAGS'); ?></h6>
+                        <div class="card-body">
+                            <div class="form-group mb-0">
+                                <input type="text" name="tags" data-role="tagsinput" value="<?php echo implode(',', $post->tags); ?>" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h6 class="card-header font-bold text-uppercase"><?php echo language('MORE_OPTIONS'); ?></h6>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label><?php echo language('EXCERPT'); ?></label>
+                                <textarea name="excerpt" class="form-control"><?php echo $post->excerpt; ?></textarea>
+                            </div>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <label class="mb-0"><?php echo language('FEATURED'); ?></label>
+                                <label class="switch">
+                                    <input type="hidden" name="metadata[featured]" value="NO">
+                                    <input type="checkbox" name="metadata[featured]" value="YES" <?php echo ($post->metadata->featured === 'YES' ? 'checked' : ''); ?>>
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div class="form-group mb-0">
+                                <label class="text-muted small text-uppercase"><?php echo language('SOCIAL_MEDIA'); ?></label>
+                            </div>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <label class="mb-0"><?php echo language('SHOW_SHARING_BUTTON'); ?></label>
+                                <label class="switch">
+                                    <input type="hidden" name="metadata[show_sharing_button]" value="NO">
+                                    <input type="checkbox" name="metadata[show_sharing_button]" value="YES" <?php echo ($post->metadata->show_sharing_button === 'YES' ? 'checked' : ''); ?>>
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <label class="mb-0"><?php echo language('SHOW_LIKE_BUTTON'); ?></label>
+                                <label class="switch">
+                                    <input type="hidden" name="metadata[show_like_button]" value="NO">
+                                    <input type="checkbox" name="metadata[show_like_button]" value="YES" <?php echo ($post->metadata->show_like_button === 'YES' ? 'checked' : ''); ?>>
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div class="form-group mb-0">
+                                <label class="text-muted small text-uppercase"><?php echo language('DISCUSSION'); ?></label>
+                            </div>
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <label class="mb-0"><?php echo language('ALLOW_COMMENTS'); ?></label>
+                                <label class="switch">
+                                    <input type="hidden" name="metadata[allow_comments]" value="NO">
+                                    <input type="checkbox" name="metadata[allow_comments]" value="YES" <?php echo ($post->metadata->allow_comments === 'YES' ? 'checked' : ''); ?>>
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div class="form-group d-flex justify-content-between align-items-center mb-0">
+                                <label class="mb-0"><?php echo language('ALLOW_PINGBACK_TRACKBACK'); ?></label>
+                                <label class="switch">
+                                    <input type="hidden" name="metadata[allow_pingback_trackback]" value="NO">
+                                    <input type="checkbox" name="metadata[allow_pingback_trackback]" value="YES" <?php echo ($post->metadata->allow_pingback_trackback === 'YES' ? 'checked' : ''); ?>>
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="fileManagerModal">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title"><?php echo language('MEDIA'); ?></h4>
+                <button type="button" class="close btnClose" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="embed-responsive embed-responsive-16by9 file-manager-body"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="file_manager_url" value="<?php echo base_url('media/popup');?>">
+
+<script>
+/** Media / File manager Handler */
+var media;
+
+$('.btn-file-manager').click(function(){
+    
+    $('#fileManagerModal').toggle('show');
+
+    var target = $(this).attr('data-target');
+    var file_manager_url = $('#file_manager_url').val() + '?field=' + target;
+    var iframe = `<iframe class="embed-responsive-item" src="${file_manager_url}"></iframe>`;
+    
+    $('.file-manager-body').html(iframe);
+});
+
+function bindEvent(element, eventName, eventHandler) {
+    if (element.addEventListener){
+        element.addEventListener(eventName, eventHandler, false);
+    } else if (element.attachEvent) {
+        element.attachEvent('on' + eventName, eventHandler);
+    }
+}
+
+/** Listen to message from child window */
+bindEvent(window, 'message', function (e) {
+    var result = JSON.parse(e.data);
+    $('#fileManagerModal').hide();
+
+    let content = `
+        <div class="col-md-3">
+            <div class="item-image mb-3">
+                <div class="image-container">
+                    <img src="${result.url}" class="img-responsive img-thumbnail" style="height:150px;" />
+                </div>
+                <div class="action mt-3">
+                    <div class="btn-group btn-group-sm">
+                        <a href="#" class="btn btn-danger btn-sm btn-remove">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" name="media[]" value="${result.id}" />            
+    `;
+
+    $('.image-content').append(content);
+});
+
+$('.btnClose').click(function(){
+    $('#fileManagerModal').hide();
+})
+</script>
+
+<script>
+/** Other */
+$('.media-list').addClass('px-3');
+
+const editor = new Quill('#content-editor', {
+    modules: {
+        toolbar: '#toolbar-container'
+    },
+    placeholder: '<?php echo language('WRITE_CONTENT_HERE'); ?>',
+    theme: 'snow'
+});
+
+$(document).ready(function(){
+    $('#form-post').on('keyup', '[name="title"]', function(){
+        var slug = $(this).val();
+        slug = slug.trim().replace(/\s+/g, '-').replace(/[&\/\\#,+_()$~%.'":*?<>{}]/g, '').replace(/-+/g, '-').toLowerCase();
+
+        $('[name="slug"]').val(slug);
+    });
+
+    $('#form-post').submit(function(e){
+        $('[name="content"]').val(editor.getText());
+    });
+});
+</script>
+<style>
+#content-editor{
+    height: 350px;
+}
+</style>

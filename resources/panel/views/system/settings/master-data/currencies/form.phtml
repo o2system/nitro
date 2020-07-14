@@ -1,0 +1,47 @@
+<div class="page-form">
+    <div class="container-fluid">
+        <form action="<?= current_url();?>" method="post">
+            <input type="hidden" name="id" value="<?= $currency->id; ?>">
+            <div class="card">
+                <h5 class="card-header d-flex justify-content-between align-items-center">
+                    <?php echo $page->title; ?>
+
+                    <div class="card-options">
+                        <button type="button" class="btn btn-default btn-md" data-action="cancel">
+                            CANCEL
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-md">
+                            SAVE
+                        </button>
+                    </div>
+                </h5>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Iso</label>
+                        <input class="form-control" name="iso" type="text" value="<?= $currency->iso;?>" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input class="form-control" name="name" type="text" value="<?= $currency->name;?>" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Record Status</label>
+                        <select name="record_status" class="form-control">
+                            <option value="<?= $currency->record_status; ?>">
+                                <?= $currency->record_status; ?>
+                            </option>
+                            <option value="PUBLISH">PUBLISH</option>
+                            <option value="UNPUBLISH">UNPUBLISH</option>
+                            <option value="ARCHIVED">ARCHIVED</option>
+                            <option value="DRAFT">DRAFT</option>
+                            <option value="DELETED">DELETED</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

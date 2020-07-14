@@ -1,0 +1,417 @@
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="nav-pages">
+                            <?php echo $tabs; ?>
+                        </div>
+                    </div>
+                </div>
+                <form method="post" action="<?php echo current_url('process'); ?>" enctype="multipart/form-data">
+                    <div class="card">
+                        <h5 class="card-header d-flex align-items-center justify-content-between">
+                            <?php echo language('SITE'); ?>
+                            <div class="card-options">
+                                <button type="submit" class="btn btn-primary btn-md">
+                                    <?php echo language('BTN_SAVE'); ?>
+                                </button>
+                            </div>
+                        </h5>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <div class="form-group">
+                                                <label for="site_title"><?php echo language('SITE_TITLE'); ?></label>
+                                                <input type="text" class="form-control" id="site_title" name="settings[site_title]" value="<?php echo $post->site_title; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label for="site_name_page_title"><?php echo language('SITE_NAME_PAGE_TITLE'); ?></label>
+                                                <select id="site_name_page_title" class="form-control custom-select" name="settings[site_name_page_title]">
+                                                    <option value="AFTER" <?php echo ($post->site_name_page_title === 'AFTER' ? 'selected' : ''); ?>><?php echo language('OPTION_AFTER'); ?></option>
+                                                    <option value="BEFORE" <?php echo ($post->site_name_page_title === 'BEFORE' ? 'selected' : ''); ?>><?php echo language('OPTION_BEFORE'); ?></option>
+                                                    <option value="NONE" <?php echo ($post->site_name_page_title === 'NONE' ? 'selected' : ''); ?>><?php echo language('OPTION_NONE'); ?></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="site_tagline"><?php echo language('SITE_TAGLINE'); ?></label>
+                                        <input id="site_tagline" type="text" class="form-control" name="settings[site_tagline]" value="<?= $post->site_tagline; ?>">
+                                        <span class="form-text text-muted">
+                                            <?php echo language('ALERT_SITE_TAGLINE'); ?>
+                                            </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <hr class="mb-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="site_language"><?php echo language('LANGUAGE'); ?></label>
+                                        <select id="site_language" name="settings[site_language]" class="custom-select form-control">
+                                            <?php foreach ($options->languages as $option => $label) : ?>
+                                                <option value="<?php echo $option; ?>" <?php echo ($post->site_language === $option ? 'selected' : ''); ?>><?php echo $label; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                        <span class="form-text text-muted">
+                                            <?php echo language('ALERT_LANGUAGE'); ?>
+                                            </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group mb-0">
+                                        <label for="site_timezone"><?php echo language('TIMEZONE'); ?></label>
+                                        <select id="site_timezone" name="settings[site_timezone]" class="form-control custom-select">
+                                            <?php foreach ($options->timezones as $group => $timezones) : ?>
+                                                <optgroup label="<?php echo $group; ?>">
+                                                    <?php foreach ($timezones as $option => $label) : ?>
+                                                        <option value="<?php echo $option; ?>" <?php echo ($post->site_timezone === $option ? 'selected' : ''); ?>><?php echo $label; ?></option>
+                                                    <?php endforeach; ?>
+                                                </optgroup>
+                                            <?php endforeach; ?>
+                                        </select>
+                                        <span class="form-text text-muted">
+                                            <?php echo language('ALERT_TIMEZONE'); ?>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="mb-3">
+
+                            <div class="form-group d-flex align-items-center">
+                                <label class="switch">
+                                    <input type="hidden" name="settings[site_offline]" value="NO">
+                                    <input type="checkbox" name="settings[site_offline]" value="YES" <?php echo ($post->site_offline == 'YES') ? 'checked' : ''; ?> data-toggle="collapse" data-target="#site-offline">
+                                    <span></span>
+                                </label>
+                                <label class="mb-0 ml-3"><?php echo language('SITE_OFFLINE'); ?></label>
+                            </div>
+                            <div id="site-offline" class="collapse">
+                                <div class="form-group">
+                                    <label for="site_offline_message"><?php echo language('OFFLINE_MESSAGE'); ?></label>
+                                    <select name="settings[site_offline_message]" class="form-control custom-select" id="site_offline_message">
+                                        <option value="HIDE" <?php echo ($post->site_offline_message === 'HIDE' ? 'selected' : ''); ?>><?php echo language('HIDE'); ?></option>
+                                        <option value="MAINTENANCE" <?php echo ($post->site_offline_message === 'MAINTENANCE' ? 'selected' : ''); ?>><?php echo language('MAINTENANCE'); ?></option>
+                                        <option value="CUSTOM" <?php echo ($post->site_offline_message === 'CUSTOM' ? 'selected' : ''); ?> data-toggle="collapse" data-target="#custom-message" id="custom-message-select" class="collapsed" aria-expanded="false"><?php echo language('CUSTOM_MESSAGE'); ?></option>
+                                        <option value="DEFAULT" <?php echo ($post->site_offline_message === 'DEFAULT' ? 'selected' : ''); ?>><?php echo language('USE_DEFAULT_SYSTEM'); ?></option>
+                                    </select>
+                                </div>
+                                <div id="custom-message" class="collapse">
+                                    <label for="site_offline_message_custom"><?php echo language('CUSTOM_MESSAGE'); ?></label>
+                                    <textarea id="site_offline_message_custom" name="settings[site_offline_message_custom]" class="form-control"><?= $post->site_offline_message_custom; ?></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="logo_rectangle_white" class="form-control-label d-flex justify-content-between align-items-center">
+                                            <?php echo $language->getLine('LOGO_RECTANGLE_WHITE'); ?>
+                                            <a href="<?php echo empty($metadata->logo_rectangle_color) ? images_url('default/logo-rectangle-color.png') : storage_url('download/images/companies/logo/' . $metadata->logo_rectangle_color); ?>" class="btn btn-xs btn-default">
+                                                <i class="fas fa-download"></i>
+                                            </a>
+                                        </label>
+                                        <div class="form-group">
+                                            <div class="item-image item-image-landscape">
+                                                <label class="image-label" data-target="#modal-media" data-toggle="modal">
+                                                    <?php echo language('LOGO_RECTANGLE_WHITE'); ?>
+                                                </label>
+
+                                                <!--<div class="image-container">
+                                                    <img src="" alt="">
+                                                </div>-->
+
+                                                <div class="action">
+                                                    <div class="btn-group btn-group-sm">
+                                                        <a href="#" class="btn btn-default btn-sm btn-file-manager">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <a href="#" class="btn btn-danger btn-sm">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="form-group mb-0">
+                                        <label for="logo_rectangle_color" class="form-control-label d-flex justify-content-between align-items-center">
+                                            <?php echo $language->getLine('LOGO_RECTANGLE_COLOR'); ?>
+                                            <a href="<?php echo empty($metadata->logo_rectangle_white) ? images_url('default/logo-rectangle-white.png') : storage_url('download/images/companies/logo/' . $metadata->logo_rectangle_white); ?>" class="btn btn-xs btn-default">
+                                                <i class="fas fa-download"></i>
+                                            </a>
+                                        </label>
+                                        <div class="form-group">
+                                            <div class="item-image item-image-landscape">
+                                                <label class="image-label" data-target="#modal-media" data-toggle="modal">
+                                                    <?php echo language('LOGO_RECTANGLE_COLOR'); ?>
+                                                </label>
+
+                                                <!--<div class="image-container">
+                                                    <img src="" alt="">
+                                                </div>-->
+
+                                                <div class="action">
+                                                    <div class="btn-group btn-group-sm">
+                                                        <a href="#" class="btn btn-default btn-sm btn-file-manager">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <a href="#" class="btn btn-danger btn-sm">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="form-group mb-0">
+                                        <label for="logo_square_white" class="form-control-label d-flex justify-content-between align-items-center">
+                                            <?php echo $language->getLine('LOGO_SQUARE_WHITE'); ?>
+                                            <a href="<?php echo empty($metadata->logo_square_color) ? images_url('default/logo-square-color.png') : storage_url('download/images/companies/logo/' . $metadata->logo_square_color); ?>" class="btn btn-xs btn-default">
+                                                <i class="fas fa-download"></i>
+                                            </a>
+                                        </label>
+                                        <div class="form-group">
+                                            <div class="item-image">
+                                                <label class="image-label" data-target="#modal-media" data-toggle="modal">
+                                                    <?php echo $language->getLine('LOGO_SQUARE_WHITE'); ?>
+                                                </label>
+
+                                                <!--<div class="image-container">
+                                                    <img src="" alt="">
+                                                </div>-->
+
+                                                <div class="action">
+                                                    <div class="btn-group btn-group-sm">
+                                                        <a href="#" class="btn btn-default btn-sm btn-file-manager">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <a href="#" class="btn btn-danger btn-sm">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="logo_square_color" class="form-control-label d-flex justify-content-between align-items-center">
+                                            <?php echo $language->getLine('LOGO_SQUARE_COLOR'); ?>
+                                            <a href="<?php echo empty($metadata->logo_square_white) ? images_url('default/logo-square-white.png') : storage_url('download/images/companies/logo/' . $metadata->logo_square_white); ?>" class="btn btn-xs btn-default">
+                                                <i class="fas fa-download"></i>
+                                            </a>
+                                        </label>
+                                        <div class="form-group">
+                                            <div class="item-image">
+                                                <label class="image-label" data-target="#modal-media" data-toggle="modal">
+                                                    <?php echo $language->getLine('LOGO_SQUARE_COLOR'); ?>
+                                                </label>
+
+                                                <!--<div class="image-container">
+                                                    <img src="" alt="">
+                                                </div>-->
+
+                                                <div class="action">
+                                                    <div class="btn-group btn-group-sm">
+                                                        <a href="#" class="btn btn-default btn-sm btn-file-manager">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <a href="#" class="btn btn-danger btn-sm">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4">
+                                    <h5><?php echo language('ICON'); ?></h5>
+                                    <div class="form-group">
+                                        <div class="item-image">
+                                            <label class="image-label" data-target="#modal-media" data-toggle="modal">
+                                                500 x 500px
+                                            </label>
+
+                                            <!--<div class="image-container">
+                                                <img src="" alt="">
+                                            </div>-->
+
+                                            <div class="action">
+                                                <div class="btn-group btn-group-sm">
+                                                    <a href="#" class="btn btn-default btn-sm btn-file-manager">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <a href="#" class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-md">
+                                    <h5><?php echo language('APPLICATION'); ?></h5>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="pwa_name"><?php echo language('NAME'); ?></label>
+                                                <input id="pwa_name" class="form-control" type="text" name="settings[pwa_name]" value="<?= $post->pwa_name; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="pwa_shortname"><?php echo language('SHORT_NAME'); ?></label>
+                                                <input id="pwa_shortname" class="form-control" type="text" name="settings[pwa_shortname]" value="<?= $post->pwa_shortname; ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="pwa_themecolor"><?php echo language('THEME_COLOR'); ?></label>
+                                                <input id="pwa_themecolor" class="form-control color-picker" type="text" name="settings[pwa_themecolor]" value="<?= $post->pwa_themecolor; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="pwa_backgroundcolor"><?php echo language('BACKGROUND_COLOR'); ?></label>
+                                                <input id="pwa_backgroundcolor" class="form-control color-picker" type="text" name="settings[pwa_backgroundcolor]" value="<?= $post->pwa_backgroundcolor; ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="privacy1" name="settings[site_privacy]" class="custom-control-input" value="1" <?php echo ($post->site_privacy == 1 ? 'checked' : ''); ?>>
+                                    <label class="custom-control-label" for="privacy1">
+                                        <?php echo language('PUBLIC'); ?><br>
+                                        <span class="form-text text-muted">
+                                            <?php echo language('ALERT_PUBLIC'); ?>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="privacy2" name="settings[site_privacy]" class="custom-control-input" value="2" <?php echo ($post->site_privacy == 2 ? 'checked' : ''); ?>>
+                                    <label class="custom-control-label" for="privacy2">
+                                        <?php echo language('HIDDEN'); ?><br>
+                                        <span class="form-text text-muted">
+                                            <?php echo language('ALERT_HIDDEN'); ?>
+                                            </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="privacy3" name="settings[site_privacy]" class="custom-control-input" value="3" <?php echo ($post->site_privacy == 3 ? 'checked' : ''); ?>>
+                                    <label class="custom-control-label" for="privacy3">
+                                        <?php echo language('PRIVATE'); ?><br>
+                                        <span class="form-text text-muted">
+                                            <?php echo language('ALERT_PRIVATE'); ?>
+                                            </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="meta_robot"><?php echo language('META_ROBOT'); ?></label>
+                                <select id="meta_robot" class="form-control custom-select" name="settings[meta_robot]">
+                                    <option value="INDEX_FOLLOW" <?php echo ($post->meta_robot === 'INDEX_FOLLOW' ? 'selected' : ''); ?>><?php echo language('INDEX_FOLLOW'); ?></option>
+                                    <option value="NOINDEX_FOLLOW" <?php echo ($post->meta_robot === 'NOINDEX_FOLLOW' ? 'selected' : ''); ?>> <?php echo language('NOINDEX_FOLLOW'); ?></option>
+                                    <option value="INDEX_NOFOLLOW" <?php echo ($post->meta_robot === 'INDEX_NOFOLLOW' ? 'selected' : ''); ?>><?php echo language('INDEX_NOFOLLOW'); ?></option>
+                                    <option value="NOINDEX_NOFOLLOW" <?php echo ($post->meta_robot === 'NOINDEX_NOFOLLOW' ? 'selected' : ''); ?>><?php echo language('NOINDEX_NOFOLLOW'); ?></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="meta_title"><?php echo language('META_TITLE'); ?></label>
+                                <input id="meta_title" class="form-control" name="settings[meta_title]" type="text" value="<?= $post->meta_title; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="meta_description"><?php echo language('META_DESCRIPTION'); ?></label>
+                                <textarea id="meta_description" class="form-control" cols="5" name="settings[meta_description]"><?= $post->meta_description; ?></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="meta_keywords" class="d-block"><?php echo language('META_KEYWORDS'); ?></label>
+                                <input id="meta_keywords" name="settings[meta_keywords]" class="tagsinput form-control" data-role="tagsinput" value="<?= $post->meta_keywords; ?>" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label for="content_rights"><?php echo language('CONTENT_RIGHTS'); ?></label>
+                                <textarea id="content_rights" name="settings[content_rights]" class="form-control"><?= $post->content_rights; ?></textarea>
+                            </div>
+                            <div class="form-group d-flex align-items-center">
+                                <label class="switch">
+                                    <input type="hidden" name="settings[site_author]" value="NO">
+                                    <input type="checkbox" name="settings[site_author]" value="YES" <?php echo ($post->site_author == 'YES') ? 'checked' : ''; ?> data-toggle="collapse" data-target="#site-author">
+                                    <span></span>
+                                </label>
+                                <label class="mb-0 ml-3"><?php echo language('SHOW_AUTHOR_META'); ?></label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-media" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body m-0 p-0">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo language('BTN_CLOSE'); ?></button>
+                <button type="button" class="btn btn-primary"><?php echo language('BTN_INSERT'); ?></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('[name="site_offline_message"]').on('change', function() {
+        if ($(this).val() !== 'CUSTOM') {
+            $('#custom-message').collapse('hide');
+        } else {
+            $('#custom-message').collapse('show');
+        }
+    });
+</script>

@@ -1,0 +1,546 @@
+<!-- Page Content-->
+<!-- Hero slider-->
+<section class="cz-carousel cz-controls-lg">
+    <div class="cz-carousel-inner" data-carousel-options='{
+   "mode":"gallery",
+   "responsive":{
+      "0":{
+         "nav":"true",
+         "controls":"false"
+      },
+      "992":{
+         "nav":"false",
+         "controls":"true"
+      }
+   }
+}'>
+        <?php foreach ($sliders as $slider): ?>
+            <!-- Item-->
+            <div class="px-lg-5" style="background-color: #3aafd2;">
+                <div class="d-lg-flex justify-content-between align-items-center pl-lg-4">
+                    <img class="d-block order-lg-2 mr-lg-n5 flex-shrink-0" src="assets/img/home/hero-slider/01.jpg" alt="Summer Collection">
+                    <div class="position-relative mx-auto mr-lg-n5 py-5 px-4 mb-lg-5 order-lg-1"
+                         style="max-width: 42rem; z-index: 10;">
+                        <div class="pb-lg-5 mb-lg-5 text-center text-lg-left text-lg-nowrap">
+                            <h2 class="text-light font-weight-light pb-1 from-left"><?= $slider->excerpt ?></h2>
+                            <h1 class="text-light display-4 from-left delay-1"><?= $slider->title ?></h1>
+                            <p class="font-size-lg text-light pb-3 from-left delay-2">
+                                Swimwear, Tops, Shorts, Sunglasses
+                                &amp; much more...
+                            </p>
+                            <a class="btn btn-primary scale-up delay-4" href="shop-grid-ls.html">
+                                Shop
+                                Now
+                                <i class="czi-arrow-right ml-2 mr-n1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Item-->
+        <?php endforeach; ?>
+
+    </div>
+</section>
+<!-- Popular categories-->
+<section class="container position-relative pt-3 pt-lg-0 pb-5 mt-lg-n10" style="z-index: 10;">
+    <div class="row">
+        <div class="col-xl-8 col-lg-9">
+            <div class="card border-0 box-shadow-lg">
+                <div class="card-body px-3 pt-grid-gutter pb-0">
+                    <div class="row no-gutters pl-1">
+                        <?php for ($i = 1; $i < 4; $i++): ?>
+                        <div class="col-sm-4 px-2 mb-grid-gutter">
+                            <a class="d-block text-center text-decoration-none mr-1" href="#">
+                                <img class="d-block rounded mb-3" src="assets/img/home/categories/cat-sm01.jpg" alt="Men">
+                                <h3 class="font-size-base pt-1 mb-0">
+                                    Men
+                                </h3>
+                            </a>
+                        </div>
+                        <?php endfor; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Products grid (Trending products)-->
+<section class="container pt-md-3 pb-5 mb-md-3">
+    <h2 class="h3 text-center"><?= language('TRENDING_PRODUCTS') ?></h2>
+    <div class="row pt-4 mx-n2">
+        <?php if ($products): ?>
+            <?php foreach ($products as $product): ?>
+                <!-- Product-->
+                <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                    <div class="card product-card">
+                        <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip" data-placement="left" title="Add to wishlist">
+                            <i class="czi-heart"></i>
+                        </button>
+                        <a class="card-img-top d-block overflow-hidden" href="<?= $product->url ?>">
+                            <img src="<?= $product->image ?>" alt="<?= $product->title ?>">
+                        </a>
+                        <div class="card-body py-2">
+                            <a class="product-meta d-block font-size-xs pb-1" href="#">
+                                <?= $product->category; ?>
+                            </a>
+                            <h3 class="product-title font-size-sm"><a href="<?= $product->url; ?>">
+                                    <?= $product->title; ?>
+                                </a>
+                            </h3>
+                            <div class="d-flex justify-content-between">
+                                <div class="product-price">
+                                    <span class="text-accent">
+                                        <?= $product->metadata->price; ?>.<small>00</small>
+                                    </span>
+                                </div>
+                                <div class="star-rating">
+                                    <i class="sr-star czi-star-filled active"></i>
+                                    <i class="sr-star czi-star-filled active"></i>
+                                    <i class="sr-star czi-star-filled active"></i>
+                                    <i class="sr-star czi-star-filled active"></i>
+                                    <i class="sr-star czi-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body card-body-hidden">
+                            <div class="text-center pb-2">
+                                <div class="custom-control custom-option custom-control-inline mb-2">
+                                    <input class="custom-control-input" type="radio" name="size1" id="s-75">
+                                    <label class="custom-option-label" for="s-75">7.5</label>
+                                </div>
+                                <div class="custom-control custom-option custom-control-inline mb-2">
+                                    <input class="custom-control-input" type="radio" name="size1" id="s-80" checked>
+                                    <label class="custom-option-label" for="s-80">8</label>
+                                </div>
+                                <div class="custom-control custom-option custom-control-inline mb-2">
+                                    <input class="custom-control-input" type="radio" name="size1" id="s-85">
+                                    <label class="custom-option-label" for="s-85">8.5</label>
+                                </div>
+                                <div class="custom-control custom-option custom-control-inline mb-2">
+                                    <input class="custom-control-input" type="radio" name="size1" id="s-90">
+                                    <label class="custom-option-label" for="s-90">9</label>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-sm btn-block mb-2" type="button" data-toggle="toast"
+                                    data-target="#cart-toast">
+                                <i class="czi-cart font-size-sm mr-1"></i><?= language('ADD_CART') ?>
+                            </button>
+                            <div class="text-center">
+                                <a class="nav-link-style font-size-ms" href="#quick-view" data-toggle="modal">
+                                    <i class="czi-eye align-middle mr-1"></i>
+                                    <?= language('QUICK_VIEW') ?>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="d-sm-none">
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+    <div class="text-center pt-3">
+        <a class="btn btn-outline-accent" href="#">
+            <?= language('MORE_PRODUCTS') ?>
+            <i class="czi-arrow-right ml-1"></i>
+        </a>
+    </div>
+</section>
+<!-- Banners-->
+<section class="container pb-4 mb-md-3">
+    <div class="row">
+        <div class="col-md-8 mb-4">
+            <div class="d-sm-flex justify-content-between align-items-center bg-secondary overflow-hidden rounded-lg">
+                <div class="py-4 my-2 my-md-0 py-md-5 px-4 ml-md-3 text-center text-sm-left">
+                    <h4 class="font-size-lg font-weight-light mb-2">Hurry up! Limited time offer</h4>
+                    <h3 class="mb-4">Converse All Star on Sale</h3><a class="btn btn-primary btn-shadow btn-sm"
+                                                                      href="#">Shop Now</a>
+                </div>
+                <img class="d-block ml-auto" src="assets/img/shop/catalog/banner.jpg" alt="Shop Converse">
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="d-flex flex-column h-100 justify-content-center bg-size-cover bg-position-center rounded-lg"
+                 style="background-image: url(assets/img/blog/banner-bg.jpg);">
+                <div class="py-4 my-2 px-4 text-center">
+                    <div class="py-1">
+                        <h5 class="mb-2">Your Add Banner Here</h5>
+                        <p class="font-size-sm text-muted">Hurry up to reserve your spot</p><a
+                                class="btn btn-primary btn-shadow btn-sm" href="#">Contact us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Featured category (Hoodie)-->
+<section class="container mb-4 pb-3 pb-sm-0 mb-sm-5">
+    <div class="row">
+        <!-- Banner with controls-->
+        <div class="col-md-5">
+            <div class="d-flex flex-column h-100 overflow-hidden rounded-lg" style="background-color: #e2e9ef;">
+                <div class="d-flex justify-content-between px-grid-gutter py-grid-gutter">
+                    <div>
+                        <h3 class="mb-1">Hoodie day</h3><a class="font-size-md" href="shop-grid-ls.html">Shop hoodies<i
+                                    class="czi-arrow-right font-size-xs align-middle ml-1"></i></a>
+                    </div>
+                    <div class="cz-custom-controls" id="hoodie-day">
+                        <button type="button"><i class="czi-arrow-left"></i></button>
+                        <button type="button"><i class="czi-arrow-right"></i></button>
+                    </div>
+                </div>
+                <a class="d-none d-md-block mt-auto" href="shop-grid-ls.html"><img class="d-block w-100"
+                                                                                   src="assets/img/home/categories/cat-lg04.jpg"
+                                                                                   alt="For Women"></a>
+            </div>
+        </div>
+        <!-- Product grid (carousel)-->
+        <div class="col-md-7 pt-4 pt-md-0">
+            <div class="cz-carousel">
+                <div class="cz-carousel-inner" data-carousel-options='{"nav":false","controlsContainer":"#hoodie-day"}'>
+                    <!-- Carousel item-->
+                    <div>
+                        <div class="row mx-n2">
+                            <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
+                                <div class="card product-card card-static">
+                                    <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip"
+                                            data-placement="left" title="Add to wishlist"><i class="czi-heart"></i>
+                                    </button>
+                                    <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
+                                                src="assets/img/shop/catalog/20.jpg" alt="Product"></a>
+                                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1"
+                                                                   href="#">Hoodies &amp; Sweatshirts</a>
+                                        <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">Block-colored
+                                                Hooded Top</a></h3>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="product-price"><span
+                                                        class="text-accent">$24.<small>99</small></span></div>
+                                            <div class="star-rating"><i class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
+                                <div class="card product-card card-static">
+                                    <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip"
+                                            data-placement="left" title="Add to wishlist"><i class="czi-heart"></i>
+                                    </button>
+                                    <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
+                                                src="assets/img/shop/catalog/21.jpg" alt="Product"></a>
+                                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1"
+                                                                   href="#">Hoodies &amp; Sweatshirts</a>
+                                        <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">Block-colored
+                                                Hooded Top</a></h3>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="product-price"><span
+                                                        class="text-accent">$26.<small>99</small></span></div>
+                                            <div class="star-rating"><i class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
+                                <div class="card product-card card-static"><span
+                                            class="badge badge-danger badge-shadow">Sale</span>
+                                    <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip"
+                                            data-placement="left" title="Add to wishlist"><i class="czi-heart"></i>
+                                    </button>
+                                    <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
+                                                src="assets/img/shop/catalog/23.jpg" alt="Product"></a>
+                                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1"
+                                                                   href="#">Hoodies &amp; Sweatshirts</a>
+                                        <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">Block-colored
+                                                Hooded Top</a></h3>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="product-price"><span
+                                                        class="text-accent">$17.<small>99</small></span>
+                                                <del class="font-size-sm text-muted">24.<small>99</small></del>
+                                            </div>
+                                            <div class="star-rating"><i class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star"></i><i class="sr-star czi-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
+                                <div class="card product-card card-static">
+                                    <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip"
+                                            data-placement="left" title="Add to wishlist"><i class="czi-heart"></i>
+                                    </button>
+                                    <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
+                                                src="assets/img/shop/catalog/51.jpg" alt="Product"></a>
+                                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1"
+                                                                   href="#">Hoodies &amp; Sweatshirts</a>
+                                        <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">Mono Color
+                                                Hooded Top</a></h3>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="product-price"><span
+                                                        class="text-accent">$21.<small>99</small></span></div>
+                                            <div class="star-rating"><i class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4 d-none d-lg-block">
+                                <div class="card product-card card-static">
+                                    <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip"
+                                            data-placement="left" title="Add to wishlist"><i class="czi-heart"></i>
+                                    </button>
+                                    <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
+                                                src="assets/img/shop/catalog/24.jpg" alt="Product"></a>
+                                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1"
+                                                                   href="#">Hoodies &amp; Sweatshirts</a>
+                                        <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">Block-colored
+                                                Hooded Top</a></h3>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="product-price"><span
+                                                        class="text-accent">$24.<small>99</small></span></div>
+                                            <div class="star-rating"><i class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4 d-none d-lg-block">
+                                <div class="card product-card card-static">
+                                    <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip"
+                                            data-placement="left" title="Add to wishlist"><i class="czi-heart"></i>
+                                    </button>
+                                    <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
+                                                src="assets/img/shop/catalog/54.jpg" alt="Product"></a>
+                                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1"
+                                                                   href="#">Hoodies &amp; Sweatshirts</a>
+                                        <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">Mono Color
+                                                Hooded Top</a></h3>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="product-price"><span
+                                                        class="text-accent">$21.<small>99</small></span></div>
+                                            <div class="star-rating"><i class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Carousel item-->
+                    <div>
+                        <div class="row mx-n2">
+                            <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4 d-none d-lg-block">
+                                <div class="card product-card card-static">
+                                    <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip"
+                                            data-placement="left" title="Add to wishlist"><i class="czi-heart"></i>
+                                    </button>
+                                    <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
+                                                src="assets/img/shop/catalog/53.jpg" alt="Product"></a>
+                                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1"
+                                                                   href="#">Hoodies &amp; Sweatshirts</a>
+                                        <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">Mono Color
+                                                Hooded Top</a></h3>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="product-price"><span
+                                                        class="text-accent">$21.<small>99</small></span></div>
+                                            <div class="star-rating"><i class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4 d-none d-lg-block">
+                                <div class="card product-card card-static">
+                                    <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip"
+                                            data-placement="left" title="Add to wishlist"><i class="czi-heart"></i>
+                                    </button>
+                                    <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
+                                                src="assets/img/shop/catalog/52.jpg" alt="Product"></a>
+                                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1"
+                                                                   href="#">Hoodies &amp; Sweatshirts</a>
+                                        <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">Printed
+                                                Hooded Top</a></h3>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="product-price"><span
+                                                        class="text-accent">$25.<small>99</small></span></div>
+                                            <div class="star-rating"><i class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
+                                <div class="card product-card card-static">
+                                    <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip"
+                                            data-placement="left" title="Add to wishlist"><i class="czi-heart"></i>
+                                    </button>
+                                    <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
+                                                src="assets/img/shop/catalog/22.jpg" alt="Product"></a>
+                                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1"
+                                                                   href="#">Hoodies &amp; Sweatshirts</a>
+                                        <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">Block-colored
+                                                Hooded Top</a></h3>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="product-price"><span
+                                                        class="text-accent">$24.<small>99</small></span></div>
+                                            <div class="star-rating"><i class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
+                                <div class="card product-card card-static">
+                                    <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip"
+                                            data-placement="left" title="Add to wishlist"><i class="czi-heart"></i>
+                                    </button>
+                                    <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
+                                                src="assets/img/shop/catalog/56.jpg" alt="Product"></a>
+                                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1"
+                                                                   href="#">Hoodies &amp; Sweatshirts</a>
+                                        <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">Printed
+                                                Hooded Top</a></h3>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="product-price"><span
+                                                        class="text-accent">$25.<small>99</small></span></div>
+                                            <div class="star-rating"><i class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
+                                <div class="card product-card card-static">
+                                    <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip"
+                                            data-placement="left" title="Add to wishlist"><i class="czi-heart"></i>
+                                    </button>
+                                    <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
+                                                src="assets/img/shop/catalog/55.jpg" alt="Product"></a>
+                                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1"
+                                                                   href="#">Hoodies &amp; Sweatshirts</a>
+                                        <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">Block-colored
+                                                Hooded Top</a></h3>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="product-price"><span
+                                                        class="text-accent">$24.<small>99</small></span></div>
+                                            <div class="star-rating"><i class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-6 px-0 px-sm-2 mb-sm-4">
+                                <div class="card product-card card-static">
+                                    <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip"
+                                            data-placement="left" title="Add to wishlist"><i class="czi-heart"></i>
+                                    </button>
+                                    <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
+                                                src="assets/img/shop/catalog/57.jpg" alt="Product"></a>
+                                    <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1"
+                                                                   href="#">Hoodies &amp; Sweatshirts</a>
+                                        <h3 class="product-title font-size-sm"><a href="shop-single-v1.html">Block-colored
+                                                Hooded Top</a></h3>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="product-price"><span
+                                                        class="text-accent">$23.<small>99</small></span></div>
+                                            <div class="star-rating"><i class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star-filled active"></i><i
+                                                        class="sr-star czi-star"></i><i class="sr-star czi-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shop by brand-->
+<section class="container py-lg-4 mb-4">
+    <h2 class="h3 text-center pb-4"><?= language('SHOP_BRAND') ?></h2>
+    <div class="row">
+        <?php foreach ($brands as $brand): ?>
+            <div class="col-md-3 col-sm-4 col-6">
+                <a class="d-block bg-white box-shadow-sm rounded-lg py-3 py-sm-4 mb-grid-gutter" href="<?= $brand->url ?>">
+                    <img class="d-block mx-auto" src="<?= $brand->image ?>" style="width: 150px;" alt="<?= $brand->name ?>">
+                </a>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</section>
+<!-- Blog + Instagram info cards-->
+<section class="container-fluid px-0">
+    <div class="row no-gutters">
+        <div class="col-md-6"><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-primary"
+                                 href="blog-list-sidebar.html">
+                <div class="card-body text-center"><i class="czi-edit h3 mt-2 mb-4 text-primary"></i>
+                    <h3 class="h5 mb-1">Read the blog</h3>
+                    <p class="text-muted font-size-sm">Latest store, fashion news and trends</p>
+                </div>
+            </a></div>
+        <div class="col-md-6"><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-accent" href="#">
+                <div class="card-body text-center"><i class="czi-instagram h3 mt-2 mb-4 text-accent"></i>
+                    <h3 class="h5 mb-1">Follow on Instagram</h3>
+                    <p class="text-muted font-size-sm">#ShopWithCartzilla</p>
+                </div>
+            </a></div>
+    </div>
+</section>
+<!-- Toast: Added to Cart-->
+<div class="toast-container toast-bottom-center">
+    <div class="toast mb-3" id="cart-toast" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-white"><i class="czi-check-circle mr-2"></i>
+            <h6 class="font-size-sm text-white mb-0 mr-auto">Added to cart!</h6>
+            <button class="close text-white ml-2 mb-1" type="button" data-dismiss="toast" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="toast-body">This item has been added to your cart.</div>
+    </div>
+</div>

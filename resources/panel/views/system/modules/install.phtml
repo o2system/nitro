@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header d-flex flex-wrap align-items-center justify-content-between p-0">
+                    <div class="nav-pages nav-pages-tab">
+                        <ul class="nav" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#install-computer" role="tab" aria-selected="true">Install From Computer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#install-folder" role="tab" aria-selected="false">Install From Folder</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#install-url" role="tab" aria-selected="false">Install From URL</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content tabs p-0 border-0 mb-0">
+                        <div class="tab-pane active" id="install-computer" role="tabpanel">
+                            <form method="post" action="<?php echo current_url(null, ['file' => 'true']); ?>">
+                                <div class="form-group files">
+                                    <input type="file" class="form-control" name="filePackage">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="install-folder" role="tabpanel">
+                            <form method="post" action="<?php echo current_url(null, ['folder' => 'true']); ?>">
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="var/www/" type="text" name="filePath">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-primary">Check &amp; Install</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="install-url" role="tabpanel">
+                            <form method="post" action="<?php echo current_url(null, ['url' => 'true']); ?>">
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="https://" type="url" name="fileUrl">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-primary">Check &amp; Install</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .files input {
+        outline: 2px dashed #92b0b3 !important;
+        outline-offset: -10px;
+        -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        padding: 120px 0px 85px 35%;
+        text-align: center !important;
+        margin: 0;
+        width: 100% !important;
+    }
+
+    .files .form-control {
+        display: block !important;
+    }
+
+    .files input:focus{     outline: 2px dashed #92b0b3;  outline-offset: -10px;
+        -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #92b0b3;
+    }
+    .files {position:relative}
+    .files:after {  pointer-events: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 50px;
+        right: 0;
+        height: 56px;
+        content: "";
+        background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png);
+        display: block;
+        margin: 0 auto;
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+    .files:before {
+        position: absolute;
+        bottom: 10px;
+        left: 0;  pointer-events: none;
+        width: 100%;
+        right: 0;
+        height: 57px;
+        content: " or drag it here. ";
+        display: block;
+        margin: 0 auto;
+        color: #2ea591;
+        font-weight: 600;
+        text-transform: capitalize;
+        text-align: center;
+    }
+</style>

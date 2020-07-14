@@ -1,0 +1,28 @@
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="nav-pages">
+                            <?php echo $tabs; ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list-group mb-3">
+                    <?php foreach($masters as $slug => $master): ?>
+                    <a href="<?php echo base_url('system/settings/master-data/' . $slug); ?>" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1"><?php echo $master->label; ?></h6>
+                        </div>
+                        <p class="mb-0 text-muted">
+                            <span class="fa fa-tag"></span> <?php echo $master->numOfRecords; ?> <?php echo language('Records'); ?>
+                        </p>
+                    </a>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

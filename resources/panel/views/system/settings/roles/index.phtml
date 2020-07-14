@@ -1,0 +1,85 @@
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="nav-pages">
+                            <?php echo $tabs; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+
+                            </div>
+                            <div class="col-auto">
+                                <a href="<?=base_url('system/settings/roles/form');?>" class="btn btn-primary">
+                                    <?php echo language('ADD_NEW_ROLE'); ?>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body with-table">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        Code
+                                    </th>
+                                    <th>
+                                        Label
+                                    </th>
+                                    <th>
+                                        Description
+                                    </th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($roles as $role) : ?>
+                                <tr>
+                                    <td>
+                                        <a href="<?=base_url('system/settings/roles/detail');?>">
+                                            <span class="btn btn-default btn-xs text-uppercase"><?= $role->code; ?></span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="<?=base_url('system/settings/roles/detail');?>">
+                                            <?= $role->label; ?>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <?= $role->description; ?>
+                                    </td>
+                                    <td>
+                                        <div class="btn btn-group btn-group-sm">
+                                            <a href="<?=base_url('system/settings/roles/detail/' . $role->id);?>" class="btn btn-default btn-sm">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="<?=base_url('system/settings/roles/form/' . $role->id);?>" class="btn btn-default btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="<?=base_url('system/settings/roles/delete/' . $role->id);?>" class="btn btn-default btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

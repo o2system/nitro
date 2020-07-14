@@ -1,0 +1,37 @@
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="nav-pages">
+                            <?php echo $tabs; ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <h3 class="mb-4"><?php echo $page->title; ?></h3>
+                            </div>
+                            <div class="col-auto ml-auto">
+                                <a href="<?php echo current_url('add');?>" class="btn btn-primary btn-md mb-4">
+                                    Add New
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body card-dashboard">
+                            <div class="table-responsive">
+                                <?php echo $table; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
