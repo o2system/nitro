@@ -11,7 +11,7 @@
     },
     "devDependencies": {
         "cross-env": "^5.1",
-        "lodash": "^4.17.13",
+        "lodash": "^4.17.19",
         "o2system-blender": "^2.0.0",
         "o2system-venus-admin": "^1.1.3",
         "o2system-venus-ui": "^1.5.0",
