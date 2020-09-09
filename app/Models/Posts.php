@@ -19,9 +19,11 @@ use O2System\Framework\Models\Sql\Model;
 use O2System\Framework\Models\Sql\System\Calendars;
 use O2System\Framework\Models\Sql\System\Media;
 use O2System\Framework\Models\Sql\System\Relationships;
+use O2System\Framework\Models\Sql\System\Taxonomies;
 use O2System\Framework\Models\Sql\System\Users;
 use O2System\Framework\Models\Sql\Traits\MetadataTrait;
 use O2System\Framework\Models\Sql\Traits\SettingsTrait;
+use O2System\Kernel\DataStructures\Input\Data;
 use O2System\Spl\DataStructures\SplArrayStorage;
 
 /**
@@ -68,6 +70,7 @@ class Posts extends Model
      */
     public $appendColumns = [
         'tags',
+        'categories',
         'images',
         'metadata',
         'settings',
@@ -197,10 +200,10 @@ class Posts extends Model
         $data->slug = dash($data->slug);
 
         /** Clean up media relation first */
-        // models(Relationships::class)->deleteManyBy([
-        //     'ownership_id' => implode('-', [$data->id, $data->record_language]),
-        //     'ownership_model' => Posts::class
-        // ]);
+        /* models(Relationships::class)->deleteManyBy([
+            'ownership_id' => implode('-', [$data->id, $data->record_language]),
+            'ownership_model' => Posts::class
+        ]); */
     }
 
     // ------------------------------------------------------------------------
@@ -215,46 +218,60 @@ class Posts extends Model
     {
         /** Categories handler */
         if (!empty($data['categories'])) {
+
+            // Remove old relations
+            /* models(Relationships::class)->deleteManyBy([
+                'ownership_id' => implode('-', [$data->id, $data->record_language]),
+                'ownership_model' => Posts::class,
+                'relation_id' => $data['categories'],
+                'relation_model' => Taxonomies::class,
+                'relation_role' => 'CATEGORY'
+            ]); */
+
+            /** Insert new relations */
+            $relationshipData = new Data([
+                'ownership_id' => implode('-', [$data->id, $data->record_language]),
+                'ownership_model' => Posts::class,
+                'relation_id' => $data['categories'],
+                'relation_model' => Taxonomies::class,
+                'relation_role' => 'CATEGORY'
+            ]);
+
+            models(Relationships::class)->insertIfNotExists($relationshipData);
         }
 
         /** Media handler */
         if (!empty($data['media'])) {
 
             /** Insert new relations */
-            foreach($data['media'] as $key => $value) {
-                $relationshipData = new SplArrayStorage();
-                
-                $param = [
+            foreach ($data['media'] as $key => $value) {
+                $relationshipData = new Data([
                     'ownership_id' => implode('-', [$data->id, $data->record_language]),
                     'ownership_model' => Posts::class,
                     'relation_id' => $value,
                     'relation_model' => Media::class,
                     'relation_role' => 'GALLERY'
-                ];
-
-                $relationshipData->append($param);
+                ]);
 
                 models(Relationships::class)->insertIfNotExists($relationshipData);
-           }
+            }
         }
 
         /** Tags handler */
         if (!empty($data['tags'])) {
             $tags = explode(',', $data['tags']);
             $tags = array_map('trim', $tags);
-            
-            foreach($tags as $tag) {
-                if($result = models(Tags::class)->findWhere(['title' => $tag])) {
-                    if($result->count() == 0) {
-                        $tagData = new SplArrayStorage();
-                        $tagData->append([
+
+            foreach ($tags as $tag) {
+                if ($result = models(Tags::class)->findWhere(['title' => $tag])) {
+                    if ($result->count() == 0) {
+                        $tagData = new Data([
                             'id_space' => globals()->space->id,
                             'title' => $tag
                         ]);
 
-                        if(models(Tags::class)->insert($tagData)) {
-                            $relationshipData = new SplArrayStorage();
-                            $relationshipData->append([
+                        if (models(Tags::class)->insert($tagData)) {
+                            $relationshipData = new Data([
                                 'ownership_id' => implode('-', [$data->id, $data->record_language]),
                                 'ownership_model' => Posts::class,
                                 'relation_id' => $tagData->id,
@@ -269,8 +286,7 @@ class Posts extends Model
                             return false;
                         }
                     } else {
-                        $relationshipData = new SplArrayStorage();
-                        $relationshipData->append([
+                        $relationshipData = new Data([
                             'ownership_id' => implode('-', [$data->id, $data->record_language]),
                             'ownership_model' => Posts::class,
                             'relation_id' => $result->first()->id,
@@ -285,46 +301,42 @@ class Posts extends Model
         }
 
         /** Calendar Handler */
-        if(!empty($data->publish_start)) {
-            $calendar = new SplArrayStorage();
-            $calendar->append([
+        if (!empty($data->publish_start)) {
+            $calendar = new Data([
                 'ownership_id' => implode('-', [$data->id, $data->record_language]),
                 'ownership_model' => Posts::class,
                 'start_date' => date('Y-m-d', strtotime($data->publish_start)),
                 'start_time' => date('H:i:s', strtotime($data->publish_start))
             ]);
 
-            if( ! models(Calendars::class)->insertOrUpdate($calendar, [
+            if (! models(Calendars::class)->insertOrUpdate($calendar, [
                 'ownership_id' => implode('-', [$data->id, $data->record_language]),
                 'ownership_model' => Posts::class,
             ])) {
                 return false;
-            } else {
-                $this->addError(models(Calendars::class)->getLastErrorCode(), models(Calendars::class)->getLastErrorMessage());
-
-                return false;
             }
+            $this->addError(models(Calendars::class)->getLastErrorCode(), models(Calendars::class)->getLastErrorMessage());
+
+            return false;
         }
 
-        if(!empty($data->publish_end)) {
-            $calendar = new SplArrayStorage();
-            $calendar->append([
+        if (!empty($data->publish_end)) {
+            $calendar = new Data([
                 'ownership_id' => implode('-', [$data->id, $data->record_language]),
                 'ownership_model' => Posts::class,
                 'end_date' => date('Y-m-d', strtotime($data->publish_end)),
                 'end_time' => date('H:i:s', strtotime($data->publish_end))
             ]);
 
-            if( ! models(Calendars::class)->insertOrUpdate($calendar, [
+            if (! models(Calendars::class)->insertOrUpdate($calendar, [
                 'ownership_id' => implode('-', [$data->id, $data->record_language]),
                 'ownership_model' => Posts::class,
             ])) {
                 return false;
-            } else {
-                $this->addError(models(Calendars::class)->getLastErrorCode(), models(Calendars::class)->getLastErrorMessage());
-
-                return false;
             }
+            $this->addError(models(Calendars::class)->getLastErrorCode(), models(Calendars::class)->getLastErrorMessage());
+
+            return false;
         }
 
         return true;
@@ -377,6 +389,48 @@ class Posts extends Model
 
         return $tags;
     }
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Posts::categories
+     *
+     * @return array
+     */
+    public function categories()
+    {
+        $categories = [];
+        $i = 0;
+        if ($result = $this->morphToManyThrough(Taxonomies::class, Relationships::class, 'relation')) {
+            if ($result->count()) {
+                foreach ($result as $row) {
+                    $categories[]= $row->id;
+
+                    $i++;
+                }
+            }
+        }
+
+        return $categories;
+    }
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Posts::category
+     *
+     */
+    public function category()
+    {
+        if ($result = $this->morphToManyThrough(Taxonomies::class, Relationships::class, 'relation')) {
+            if ($result->count()) {
+                return $result[0]->name;
+            }
+        }
+
+        return 'No Category';
+    }
+
     // ------------------------------------------------------------------------
 
     /**
@@ -388,13 +442,31 @@ class Posts extends Model
     {
         return $this->morphToManyThrough(Media::class, Relationships::class, 'relation');
     }
-    
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Posts::image
+     *
+     * @return bool|\O2System\Framework\Models\Sql\DataObjects\Result
+     */
+    public function image()
+    {
+        if ($result = $this->morphToManyThrough(Media::class, Relationships::class, 'relation')) {
+            if ($result->count()) {
+                return $result[0]->filepath;
+            }
+        }
+
+        return 'https://via.placeholder.com/300';
+    }
+
     // ------------------------------------------------------------------------
 
     /**
      * Posts::author
      *
-     * @return bool|mixed|\O2System\Framework\Models\Sql\DataObjects\Result||\O2System\Framework\Models\Sql\DataObjects\Result\Row
+     * @return bool|mixed|\O2System\Framework\Models\Sql\DataObjects\Result
      */
     public function author()
     {
@@ -406,7 +478,7 @@ class Posts extends Model
     /**
      * Posts::comments
      *
-     * @return array|bool|\O2System\Database\DataObjects\Result|\O2System\Framework\Models\Sql\DataObjects\Result
+     * @return array|bool|\O2System\Database\DataObjects\Result
      */
     public function comments()
     {

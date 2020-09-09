@@ -27,5 +27,5 @@ class Tags extends Model
      *
      * @var string
      */
-    public $table = 'tags';
+    public $table = 'post_tags';
 }

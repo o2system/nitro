@@ -32,6 +32,69 @@ class Banks extends Model
     // ------------------------------------------------------------------------
 
     /**
+     * Banks::$createValidationRules
+     *
+     * @var array
+     */
+    public $insertValidationRules = [
+        'name' => 'optional',
+        'alias' => 'optional',
+        'company' => 'required',
+        'code' => 'required',
+    ];
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Banks::$createValidationCustomErrors
+     *
+     * @var array
+     */
+    public $insertValidationCustomErrors = [
+        'company' => [
+            'required' => 'Company cannot be empty!',
+        ],
+        'code' => [
+            'required' => 'Code cannot be empty!',
+        ],
+
+    ];
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Banks::$updateValidationRules
+     *
+     * @var array
+     */
+    public $updateValidationRules = [
+        'id' => 'required|integer',
+        'name' => 'optional',
+        'alias' => 'optional',
+        'company' => 'required',
+        'code' => 'required',
+    ];
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Banks::$updateValidationCustomErrors
+     *
+     */
+    public $updateValidationCustomErrors = [
+        'id' => [
+            'required' => 'Bank id cannot be empty!',
+            'integer' => 'Bank id data must be an integer'
+        ],
+        'company' => [
+            'required' => 'Company cannot be empty!',
+        ],
+        'code' => [
+            'required' => 'Code cannot be empty!',
+        ],
+    ];
+
+    /**
      * Banks::logo
      *
      * @return string

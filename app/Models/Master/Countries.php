@@ -28,4 +28,80 @@ class Countries extends Model
      * @var string
      */
     public $table = 'tm_countries';
+
+    // ------------------------------------------------------------------------
+    /**
+     * Countries::$createValidationRules
+     *
+     * @var array
+     */
+    public $insertValidationRules = [
+        'name' => 'required',
+        'code_string' => 'required',
+        'code_iso' => 'required',
+        'code_phone' => 'required'
+    ];
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Countries::$createValidationCustomErrors
+     *
+     * @var array
+     */
+    public $insertValidationCustomErrors = [
+        'name' => [
+            'required' => 'Iso cannot be empty!',
+        ],
+        'code_string' => [
+            'required' => 'String Code cannot be empty!',
+        ],
+        'code_iso' => [
+            'required' => 'ISO Code cannot be empty!',
+        ],
+        'code_phone' => [
+            'required' => 'Phone Code cannot be empty!',
+        ],
+
+    ];
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Countries::$updateValidationRules
+     *
+     * @var array
+     */
+    public $updateValidationRules = [
+        'id' => 'required|integer',
+        'name' => 'required',
+        'code_string' => 'required',
+        'code_iso' => 'required',
+        'code_phone' => 'required'
+    ];
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Countries::$updateValidationCustomErrors
+     *
+     */
+    public $updateValidationCustomErrors = [
+        'id' => [
+            'required' => 'Country id cannot be empty!',
+            'integer' => 'Country id data must be an integer'
+        ],
+        'name' => [
+            'required' => 'Iso cannot be empty!',
+        ],
+        'code_string' => [
+            'required' => 'String Code cannot be empty!',
+        ],
+        'code_iso' => [
+            'required' => 'ISO Code cannot be empty!',
+        ],
+        'code_phone' => [
+            'required' => 'Phone Code cannot be empty!',
+        ],
+    ];
 }

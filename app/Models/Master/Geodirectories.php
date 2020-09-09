@@ -35,6 +35,95 @@ class Geodirectories extends Model
     // ------------------------------------------------------------------------
 
     /**
+     * Geodirectories::$createValidationRules
+     *
+     * @var array
+     */
+    public $insertValidationRules = [
+        'id_parent' => 'required|integer',
+        'id_source' => 'optional|integer',
+        'name' => 'required',
+        'type' => 'required|listed[CONTINENT, COUNTRY, STATE, CITY, DISTRICT, SUBDISTRICT, VILLAGE]',
+        'postal' => 'optional'
+    ];
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Geodirectories::$createValidationCustomErrors
+     *
+     * @var array
+     */
+    public $insertValidationCustomErrors = [
+        'id_parent' => [
+            'required' => 'Geodirectory parent id cannot be empty!',
+            'integer' => 'Geodirectory parent id data must be an integer'
+        ],
+        'id_source' => [
+            'integer' => 'Geodirectory id source data must be an integer'
+        ],
+        'iso' => [
+            'required' => 'Iso cannot be empty!',
+        ],
+        'name' => [
+            'required' => 'Name cannot be empty!',
+        ],
+        'type' => [
+            'required' => 'Name cannot be empty!',
+            'listed' => 'Record status must be listed: CONTINENT, COUNTRY, STATE, CITY, DISTRICT, SUBDISTRICT VILLAGE'
+        ],
+
+    ];
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Geodirectories::$updateValidationRules
+     *
+     * @var array
+     */
+    public $updateValidationRules = [
+        'id' => 'required|integer',
+        'id_parent' => 'required|integer',
+        'id_source' => 'optional|integer',
+        'name' => 'required',
+        'type' => 'required|listed[CONTINENT, COUNTRY, STATE, CITY, DISTRICT, SUBDISTRICT, VILLAGE]',
+        'postal' => 'optional'
+    ];
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Geodirectories::$updateValidationCustomErrors
+     *
+     */
+    public $updateValidationCustomErrors = [
+        'id' => [
+            'required' => 'Geodirectory id cannot be empty!',
+            'integer' => 'Geodirectory id data must be an integer'
+        ],
+        'id_parent' => [
+            'required' => 'Geodirectory parent id cannot be empty!',
+            'integer' => 'Geodirectory parent id data must be an integer'
+        ],
+        'id_source' => [
+            'integer' => 'Geodirectory id source data must be an integer'
+        ],
+        'iso' => [
+            'required' => 'Iso cannot be empty!',
+        ],
+        'name' => [
+            'required' => 'Name cannot be empty!',
+        ],
+        'type' => [
+            'required' => 'Name cannot be empty!',
+            'listed' => 'Record status must be listed: CONTINENT, COUNTRY, STATE, CITY, DISTRICT, SUBDISTRICT VILLAGE'
+        ],
+    ];
+
+    // ------------------------------------------------------------------------
+
+    /**
      * Geodirectories::cities
      *
      * @throws \O2System\Spl\Exceptions\RuntimeException
