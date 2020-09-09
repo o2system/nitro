@@ -13,25 +13,11 @@
 
 namespace O2System\Spl\Patterns\Structural\Composite;
 
-use O2System\Spl\Traits\Collectors\OptionsCollectorTrait;
-
 /**
  * Class AbstractBuilder
  * @package O2System\Spl\Patterns\Builder
  */
 abstract class AbstractComposite implements RenderableInterface
 {
-    use OptionsCollectorTrait;
 
-    // ------------------------------------------------------------------------
-
-    /**
-     * AbstractComposite::__toString
-     *
-     * @return mixed
-     */
-    public function __toString()
-    {
-        return $this->render($this->options);
-    }
 }

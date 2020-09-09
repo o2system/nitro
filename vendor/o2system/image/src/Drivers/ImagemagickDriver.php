@@ -207,6 +207,18 @@ class ImagemagickDriver extends AbstractDriver
         $sourceDimension = $this->sourceImageFile->getDimension();
         $resampleDimension = $this->resampleImageFile->getDimension();
 
+        //try max width first...
+        $resizeRatio = $resampleDimension->getWidth() / $sourceDimension->getWidth();
+        $resizeWidth = $resampleDimension->getWidth();
+        $resizeHeight = $sourceDimension->getHeight() * $resizeRatio;
+
+        //if that didn't work
+        if ($resizeHeight > $resampleDimension->getHeight()) {
+            $resizeRatio = $resampleDimension->getHeight() / $sourceDimension->getHeight();
+            $resizeHeight = $resampleDimension->getHeight();
+            $resizeWidth = $sourceDimension->getWidth() * $resizeRatio;
+        }
+
         $resampleImageResource =& $this->getResampleImageResource();
 
         if ($resampleDimension->getOrientation() === 'SQUARE') {
@@ -606,7 +618,7 @@ class ImagemagickDriver extends AbstractDriver
                 DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $filename . '.' . $extension,
             $quality)
         ) {
-            $imageBlob = readfile($tempImageFilePath);
+            $imageBlob = file_get_contents($tempImageFilePath);
             unlink($tempImageFilePath);
         }
 

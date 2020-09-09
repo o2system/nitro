@@ -21,6 +21,7 @@ use O2System\Framework\Libraries\Ui\Contents\Lists\Unordered;
 use O2System\Framework\Models\Sql\DataObjects\Result;
 use O2System\Framework\Models\Sql\DataObjects\Result\Row;
 use O2System\Kernel\DataStructures\Input\Abstracts\AbstractInput;
+use O2System\Kernel\DataStructures\Input\Data;
 use O2System\Kernel\Http\Message\UploadFile;
 use O2System\Spl\DataStructures\SplArrayObject;
 use O2System\Spl\DataStructures\SplArrayStorage;
@@ -109,6 +110,7 @@ trait ModifierTrait
      *
      * @param array $files
      * @param mixed $uploadFilePaths
+     * @param array $data
      * @return array
      */
     private function getUploadedFiles(array $files, $uploadFilePaths, array &$data)
@@ -183,7 +185,7 @@ trait ModifierTrait
     /**
      * ModifierTrait::removeUploadedFiles
      *
-     * @param array $files
+     * @param array $row
      * @param mixed $uploadFilePaths
      * @return array
      */
@@ -256,7 +258,7 @@ trait ModifierTrait
                 }
             }
         }
-        
+
         if (count($data)) {
             if (method_exists($this, 'insertRecordData')) {
                 $this->insertRecordData($data);
@@ -288,7 +290,7 @@ trait ModifierTrait
             // Remove data metadata
             if ($this->hasMetadata === true) {
                 if (isset($data['metadata'])) {
-                    $temporaryData['metadata'] = new SplArrayStorage($data['metadata']);
+                    $temporaryData['metadata'] = new Data($data['metadata']);
                     unset($data['metadata']);
                 }
             }
@@ -296,7 +298,7 @@ trait ModifierTrait
             // Remove data settings
             if ($this->hasSettings === true) {
                 if (isset($data['settings'])) {
-                    $temporaryData['settings'] = new SplArrayStorage($data['settings']);
+                    $temporaryData['settings'] = new Data($data['settings']);
                     unset($data['settings']);
                 }
             }
@@ -333,7 +335,7 @@ trait ModifierTrait
                     }
 
                     foreach ($temporaryData['metadata'] as $field => $value) {
-                        models(Metadata::class)->insertOrUpdate(new SplArrayStorage([
+                        models(Metadata::class)->insertOrUpdate(new Data([
                             'ownership_id' => $ownershipId,
                             'ownership_model' => get_called_class(),
                             'name' => $field,
@@ -359,7 +361,7 @@ trait ModifierTrait
                     }
 
                     foreach ($temporaryData['settings'] as $field => $value) {
-                        models(Metadata::class)->insertOrUpdate(new SplArrayStorage([
+                        models(Metadata::class)->insertOrUpdate(new Data([
                             'ownership_id' => $ownershipId,
                             'ownership_model' => get_called_class(),
                             'key' => $field,
@@ -398,12 +400,22 @@ trait ModifierTrait
 
                 // After Insert Hook Process
                 if ($this->db->transactionSuccess()) {
-                    if (method_exists($this, 'afterInsertOrUpdate')) {
-                        $this->afterInsertOrUpdate($this->row);
-                    }
+                    foreach(['afterInsertOrUpdate', 'afterInsert'] as $afterInsertMethod) {
+                        if (method_exists($this, $afterInsertMethod)) {
+                            $parameterName = null;
+                            $reflectionMethod = new \ReflectionMethod($this, $afterInsertMethod);
 
-                    if (method_exists($this, 'afterInsert')) {
-                        $this->afterInsert($this->row);
+                            if(method_exists($reflectionMethod->getParameters()[0]->getType(), 'getName')) {
+                                $parameterName = $reflectionMethod->getParameters()[0]->getType()->getName();
+                            }
+
+
+                            if($parameterName === 'O2System\Database\DataObjects\Result\Row') {
+                                call_user_func_array([&$this, $afterInsertMethod], [$this->row]);
+                            } else {
+                                call_user_func_array([&$this, $afterInsertMethod], [$data]);
+                            }
+                        }
                     }
                 }
 
@@ -561,7 +573,7 @@ trait ModifierTrait
                             }
                         }
                     }
-                    
+
                     return $this->insert($data);
                 }
             }
@@ -682,7 +694,7 @@ trait ModifierTrait
                 }
             }
         }
-        
+
         if (empty($conditions)) {
             $conditions = $data->getArrayCopy();
         }
@@ -760,7 +772,7 @@ trait ModifierTrait
                 }
             }
         }
-        
+
         if (count($data)) {
             if (method_exists($this, 'updateRecordData')) {
                 $this->updateRecordData($data);
@@ -779,7 +791,6 @@ trait ModifierTrait
                     $data['record_ordering'] = $this->getRecordOrdering();
                 }
             }
-
             if ($result = $this->findWhere($conditions)) {
                 $this->row = null;
 
@@ -791,14 +802,15 @@ trait ModifierTrait
                     }
                 }
 
-                $this->row->merge($data->getArrayCopy());
-
                 if (empty($this->row)) {
                     if (services()->has('session') and $this->flashMessage) {
-                        session()->setFlash('danger', language('FAILED_UPDATE_INVALID_DATA'));
+                        session()->setFlash('danger', language('FAILED_DATA_NOT_FOUND'));
                     }
 
+                    $this->addError(__LINE__, language('FAILED_DATA_NOT_FOUND'));
                     return false;
+                } else {
+                    $this->row->merge($data->getArrayCopy());
                 }
 
                 // Process Images and Files
@@ -862,7 +874,7 @@ trait ModifierTrait
                         }
 
                         foreach ($temporaryData['metadata'] as $field => $value) {
-                            models(Metadata::class)->insertOrUpdate(new SplArrayStorage([
+                            models(Metadata::class)->insertOrUpdate(new Data([
                                 'ownership_id' => $ownershipId,
                                 'ownership_model' => get_called_class(),
                                 'name' => $field,
@@ -895,7 +907,7 @@ trait ModifierTrait
                         }
 
                         foreach ($temporaryData['settings'] as $field => $value) {
-                            models(Settings::class)->insertOrUpdate(new SplArrayStorage([
+                            models(Settings::class)->insertOrUpdate(new Data([
                                 'ownership_id' => $ownershipId,
                                 'ownership_model' => get_called_class(),
                                 'key' => $field,
@@ -910,13 +922,24 @@ trait ModifierTrait
 
                     unset($temporaryData);
 
+                    // After Insert Hook Process
                     if ($this->db->transactionSuccess()) {
-                        if (method_exists($this, 'afterInsertOrUpdate')) {
-                            $this->afterInsertOrUpdate($this->row);
-                        }
+                        foreach(['afterInsertOrUpdate', 'afterUpdate'] as $afterInsertMethod) {
+                            if (method_exists($this, $afterInsertMethod)) {
+                                $parameterName = null;
+                                $reflectionMethod = new \ReflectionMethod($this, $afterInsertMethod);
 
-                        if (method_exists($this, 'afterUpdate')) {
-                            $this->afterUpdate($this->row);
+                                if(method_exists($reflectionMethod->getParameters()[0]->getType(), 'getName')) {
+                                    $parameterName = $reflectionMethod->getParameters()[0]->getType()->getName();
+                                }
+
+
+                                if($parameterName === 'O2System\Database\DataObjects\Result\Row') {
+                                    call_user_func_array([&$this, $afterInsertMethod], [$this->row]);
+                                } else {
+                                    call_user_func_array([&$this, $afterInsertMethod], [$data]);
+                                }
+                            }
                         }
                     }
 

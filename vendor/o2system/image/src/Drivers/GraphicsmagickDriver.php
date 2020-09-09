@@ -662,7 +662,7 @@ class GraphicsmagickDriver extends AbstractDriver
                 DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $filename . '.' . $extension,
             $quality)
         ) {
-            $imageBlob = readfile($tempImageFilePath);
+            $imageBlob = file_get_contents($tempImageFilePath);
             unlink($tempImageFilePath);
         }
 

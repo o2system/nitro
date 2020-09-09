@@ -23,11 +23,5 @@ use O2System\Kernel\DataStructures\Input\Abstracts\AbstractInput;
  */
 class Session extends AbstractInput
 {
-    /**
-     * Session::__construct
-     */
-    public function __construct()
-    {
-        $this->storage =& $_SESSION;
-    }
+
 }

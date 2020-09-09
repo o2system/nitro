@@ -99,7 +99,7 @@ class Manipulation
      * @var string
      */
     const ORIENTATION_PORTRAIT = 'PORTRAIT';
-    
+
     /**
      * Manipulation::ORIENTATION_SQUARE
      *

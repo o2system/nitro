@@ -15,9 +15,9 @@ namespace O2System\Framework\Models\Sql\System;
 
 // ------------------------------------------------------------------------
 
-use App\Models\People;
 use O2System\Framework\Models\Sql\Model;
 use O2System\Framework\Models\Sql\Traits\SettingsTrait;
+use O2System\Spl\DataStructures\SplArrayStorage;
 
 /**
  * Class Users
@@ -35,6 +35,21 @@ class Users extends Model
     public $table = 'sys_users';
 
     /**
+     * Users::$fillableColumns
+     *
+     * @var array
+     */
+    public $fillableColumns = [
+        'email',
+        'msisdn',
+        'username',
+        'password',
+        'pin',
+        'record_status',
+        'record_insert_timestamp'
+    ];
+
+    /**
      * Users::$appendColumns
      *
      * @var array
@@ -43,12 +58,89 @@ class Users extends Model
         'profile'
     ];
 
+
     /**
-     * Users::$hideColumns
+     * Users::$insertValidationRules
      *
      * @var array
      */
-    public $hideColumns = [];
+    public $insertValidationRules = [
+        'email' => 'required|email',
+        'msisdn' => 'required|msisdn[0]',
+        'username' => 'required',
+        'password' => 'required|password',
+        'pin'   => 'required',
+    ];
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Users::$insertValidationCustomErrors
+     *
+     * @var array
+     */
+    public $insertValidationCustomErrors = [
+        'email' => [
+            'required' => 'Email cannot be empty!'
+        ],
+        'msisdn' => [
+            'required' => 'msisdn cannot be empty!'
+        ],
+        'username' => [
+            'required' => 'Username cannot be empty!'
+        ],
+        'password' => [
+            'required' => 'Password cannot be empty!'
+        ],
+    ];
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Users::$updateValidationRules
+     *
+     * @var array
+     */
+    public $updateValidationRules = [
+        'id' => 'required|integer',
+        'email' => 'required|email',
+        'msisdn' => 'required|msisdn[0]',
+        'username' => 'required',
+        'password' => 'required|password',
+        'pin'   => 'required',
+    ];
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Users::$updateValidationCustomErrors
+     *
+     * @var array
+     */
+    public $updateValidationCustomErrors = [
+        'id' => [
+            'required' => 'User id cannot be empty!',
+            'integer' => 'User id data must be an integer'
+        ],
+        'email' => [
+            'required' => 'Email cannot be empty!'
+        ],
+        'msisdn' => [
+            'required' => 'msisdn cannot be empty!'
+        ],
+        'username' => [
+            'required' => 'Username cannot be empty!'
+        ],
+        'password' => [
+            'required' => 'Password cannot be empty!'
+        ],
+        'pin'   =>  [
+            'required' => 'Pin cannot be empty!'
+        ],
+        'sso'   => [
+            'required' => 'Sso cannot be empty!'
+        ],
+    ];
 
     // ------------------------------------------------------------------------
 
@@ -59,7 +151,7 @@ class Users extends Model
      *
      * @return bool
      */
-    protected function beforeInsert(array &$sets)
+    protected function beforeInsert(SplArrayStorage &$sets)
     {
         if (key_exists('password_confirm', $sets)) {
             if ($sets[ 'password_confirm' ] !== $sets[ 'password' ]) {
@@ -109,6 +201,25 @@ class Users extends Model
     // ------------------------------------------------------------------------
 
     /**
+     * Users::afterInsert
+     *
+     * @param SplArrayStorage $sets
+     *
+     * @return void
+     * @throws \O2System\Spl\Exceptions\Logic\BadFunctionCall\BadDependencyCallException
+     */
+    protected function afterInsert(SplArrayStorage &$sets)
+    {
+        // Insert to people.
+        models(People::class)->insert(new SplArrayStorage([
+            'fullname'  =>  $sets['fullname'],
+            'gender'    => 'MALE'
+        ]));
+    }
+
+    // ------------------------------------------------------------------------
+
+    /**
      * Users::modules
      *
      * @return bool|\O2System\Framework\Models\Sql\DataObjects\Result
@@ -131,6 +242,11 @@ class Users extends Model
     }
     // ------------------------------------------------------------------------
 
+    /**
+     * Users::avatar
+     *
+     * @return string
+     */
     public function avatar()
     {
         return 'https://avatars.dicebear.com/v2/initials/' . preg_replace('/[^a-z0-9 _.-]+/i', '', $this->row->username) . '.svg';

@@ -31,9 +31,9 @@ class Logs extends Model
     public $table = 'sys_logs';
 
     // ------------------------------------------------------------------------
-
     /**
      * Logs::__construct
+     *
      * @throws \ReflectionException
      */
     public function __construct()
@@ -42,6 +42,85 @@ class Logs extends Model
 
         $this->qb->orderBy($this->primaryKey, 'DESC');
     }
+
+    // ------------------------------------------------------------------------
+    /**
+     * Logs::$insertValidationRules
+     *
+     * @var array
+     */
+    public $insertValidationRules = [
+        'ownership_id' => 'required',
+        'ownership_model' => 'required',
+        'timestamp' => 'required|date[Y-m-d h:i:s]',
+        'status' => 'required',
+        'message' => 'optional'
+    ];
+
+    // ------------------------------------------------------------------------
+    /**
+     * Logs::$insertValidationCustomErrors
+     *
+     * @var array
+     */
+    public $insertValidationCustomErrors = [
+        'ownership_id' => [
+            'required' => 'Log ownership id cannot be empty!',
+        ],
+        'ownership_model' => [
+            'required' => 'Log ownership model cannot be empty!',
+        ],
+        'timestamp' => [
+            'required' => 'Log timestamp cannot be empty!',
+            'date' => 'Log timestamp format must be Y-m-d H:i:s'
+        ],
+        'status' => [
+            'required' => 'Log status cannot be empty!'
+        ],
+    ];
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Logs::$updateValidationRules
+     *
+     * @var array
+     */
+    public $updateValidationRules = [
+        'id' => 'required|integer',
+        'ownership_id' => 'required',
+        'ownership_model' => 'required',
+        'timestamp' => 'required|date[Y-m-d h:i:s]',
+        'status' => 'required',
+        'message' => 'optional'
+    ];
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Logs::$updateValidationCustomErrors
+     *
+     * @var array
+     */
+    public $updateValidationCustomErrors = [
+        'id' => [
+            'required' => 'Log id cannot be empty!',
+            'integer' => 'Log id data must be an integer'
+        ],
+        'ownership_id' => [
+            'required' => 'Log ownership id cannot be empty!',
+        ],
+        'ownership_model' => [
+            'required' => 'Log ownership model cannot be empty!',
+        ],
+        'timestamp' => [
+            'required' => 'Log timestamp cannot be empty!',
+            'date' => 'Log timestamp format must be Y-m-d H:i:s'
+        ],
+        'status' => [
+            'required' => 'Log status cannot be empty!'
+        ],
+    ];
 
     // ------------------------------------------------------------------------
 
